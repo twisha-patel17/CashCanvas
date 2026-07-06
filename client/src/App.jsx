@@ -1,5 +1,11 @@
+import {Landing} from "./pages/Landing"
+
 function App() {
-  return <h1>CashCanvas</h1>;
+  return (
+    <div className="App">
+      <Landing />
+    </div>
+  );
 }
 
 export default App;
