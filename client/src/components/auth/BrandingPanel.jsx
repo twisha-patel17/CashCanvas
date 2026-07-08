@@ -1,7 +1,7 @@
 import logo from "../../assets/cashcanvas-logo.png";
 import { Link } from "react-router-dom";
 
-export const BrandingPanel = () => {
+export const BrandingPanel = ({quote, author}) => {
   return (
     <div className="bg-[#1F3F34] h-[calc(100vh-18px)] px-15 py-15 flex flex-col justify-between">
 
@@ -19,14 +19,13 @@ export const BrandingPanel = () => {
   {/* Middle */}
   <div>
 <p className="max-w-85 font-['Cormorant_Garamond'] text-[28px] font-semibold italic leading-[1.35] text-[#EDE7D6]">
-  "The budget is just a plan telling your money where to go — instead of
-  wondering where it went."
+  {quote}
 </p>
   </div>
 
   {/* Bottom */}
   <p className="text-[14px] text-[#CFC7B3]">
-    — every good ledger, eventually
+    {author}
   </p>
 
 </div>

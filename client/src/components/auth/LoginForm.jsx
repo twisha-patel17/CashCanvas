@@ -9,6 +9,8 @@ export const LoginForm = () => {
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,28 +20,53 @@ export const LoginForm = () => {
 
     let isValid = true;
 
-    if (!email) {
+    if (!email.trim()) {
       setEmailError("Email is required");
+      isValid = false;
+    } else if (!validateEmail(email.trim())) {
+      setEmailError("Please enter a valid email address");
       isValid = false;
     }
 
-    if (!password) {
+    if (!password.trim()) {
       setPasswordError("Password is required");
+      isValid = false;
+    } else if (!validatePassword(password.trim())) {
+      setPasswordError(
+  "Password must be at least 8 characters and include an uppercase letter, lowercase letter, number, and special character."
+);
       isValid = false;
     }
 
     if (!isValid) return;
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    setIsLoading(true);
 
+    setTimeout(() => {
+        console.log("Email:", email);
+        console.log("Password:", password);
+        console.log("Remember Me:", rememberMe);
+
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
   };
 
   return (
     <div className="min-h-screen bg-[#F7F5EF] flex items-center justify-center flex-col px-6 lg:px-0 py-12 lg:py-0">
       <div className="w-full max-w-97.5">
 
-        <h2 className="font-fraunces text-[33px] font-medium text-[#1C2321] mb-1.5">
+        <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] mb-1.5">
           Welcome back
         </h2>
 
@@ -67,9 +94,10 @@ export const LoginForm = () => {
       onChange={(e) => {setEmail(e.target.value);
         setEmailError("");
       }}
-      className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]" 
-    />
-
+      className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A] ${
+  emailError ? "border-red-500" : "border-[#DCD6C7]"
+}`}
+/>
    {emailError && (
      <p className="text-sm text-red-500 mt-1">{emailError}</p>
    )}
@@ -95,9 +123,10 @@ export const LoginForm = () => {
         setPassword(e.target.value);
         setPasswordError("");
       }}
-      className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9] px-3 pr-10 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]"
-    />
-
+      className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 pr-10 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A] ${
+  passwordError ? "border-red-500" : "border-[#DCD6C7]"
+}`}
+/>
     <button
       type="button"
       onClick={() => setShowPassword(!showPassword)}
@@ -114,12 +143,40 @@ export const LoginForm = () => {
   )}
 </div>
 
+  {/* Remember Me */}
+
+  <div className="flex items-center justify-between">
+  <label className="flex items-center gap-2 cursor-pointer">
+    <input
+      type="checkbox"
+      checked={rememberMe}
+      onChange={(e) => setRememberMe(e.target.checked)}
+      className="h-4 w-4 accent-[#2D5A4A]"
+    />
+    <span className="text-sm text-[#5B6360]">
+      Remember me
+    </span>
+  </label>
+
+  <Link
+    to="/forgot-password"
+    className="text-sm font-medium text-[#2D5A4A] hover:underline"
+  >
+    Forgot Password?
+  </Link>
+</div>
+
   {/* Login Button */}
   <button
     type="submit"
-    className="w-full rounded-[3px] bg-[#2D5A4A] py-3 text-[14px] font-semibold text-[#F3F0E6] transition-colors hover:bg-[#23483b]"
+    className={`w-full rounded-[3px] py-3 text-[14px] font-semibold text-[#F3F0E6] transition-colors ${
+  isLoading
+    ? "bg-[#6B8A7A] cursor-not-allowed"
+    : "bg-[#2D5A4A] hover:bg-[#23483b]"
+}`}
+    disabled={isLoading}
   >
-    Log in
+    {isLoading ? "Logging in..." : "Log in"}
   </button>
 
 </form>

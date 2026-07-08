@@ -1,0 +1,124 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+export const ForgotPasswordForm = () => {
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setEmailError("");
+    setSuccessMessage("");
+
+    let isValid = true;
+
+    if (!email.trim()) {
+      setEmailError("Email is required");
+      isValid = false;
+    } else if (!validateEmail(email.trim())) {
+      setEmailError("Please enter a valid email address");
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    setIsLoading(true);
+
+    // Fake API call
+    setTimeout(() => {
+      setIsLoading(false);
+      setSuccessMessage(
+        "A password reset link has been sent to your email."
+      );
+
+      console.log(email);
+    }, 1500);
+  };
+
+  return (
+    <div className="w-full max-w-md">
+      <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321]">
+        Forgot password?
+      </h2>
+
+      <p className="mt-2 mb-8 text-[#5B6360] text-[15px] leading-6">
+        Enter the email on your account and we'll send a link to reset it.
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+
+        {/* Email */}
+
+        <div>
+          <label
+            htmlFor="email"
+            className="block mb-2 text-[12px] font-semibold text-[#5B6360]"
+          >
+            Email
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            placeholder="you@email.com"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError("");
+            }}
+            className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-3 outline-none focus:border-[#2D5A4A] ${
+              emailError ? "border-red-500" : "border-[#DCD6C7]"
+            }`}
+          />
+
+          {emailError && (
+            <p className="mt-1 text-sm text-red-500">
+              {emailError}
+            </p>
+          )}
+        </div>
+
+        {/* Success */}
+
+        {successMessage && (
+          <p className="text-sm text-green-700">
+            {successMessage}
+          </p>
+        )}
+
+        {/* Button */}
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`w-full rounded-[3px] py-3 text-[14px] font-semibold text-[#F3F0E6] transition-colors ${
+            isLoading
+              ? "bg-[#6B8A7A] cursor-not-allowed"
+              : "bg-[#2D5A4A] hover:bg-[#23483b]"
+          }`}
+        >
+          {isLoading ? "Sending..." : "Send reset link"}
+        </button>
+
+      </form>
+
+      <p className="mt-8 text-center text-[14px] text-[#5B6360]">
+        Remembered it after all?{" "}
+        <Link
+          to="/login"
+          className="font-semibold text-[#2D5A4A] hover:underline"
+        >
+          Back to login
+        </Link>
+      </p>
+    </div>
+  );
+};
