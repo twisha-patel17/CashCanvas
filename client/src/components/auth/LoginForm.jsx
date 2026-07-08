@@ -1,4 +1,40 @@
+import { useState } from "react";
+import {Link} from "react-router-dom";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+
 export const LoginForm = () => {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    setEmailError("");
+    setPasswordError("");
+
+    let isValid = true;
+
+    if (!email) {
+      setEmailError("Email is required");
+      isValid = false;
+    }
+
+    if (!password) {
+      setPasswordError("Password is required");
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    console.log("Email:", email);
+    console.log("Password:", password);
+
+  };
+
   return (
     <div className="min-h-screen bg-[#F7F5EF] flex items-center justify-center flex-col px-6 lg:px-0 py-12 lg:py-0">
       <div className="w-full max-w-97.5">
@@ -12,7 +48,7 @@ export const LoginForm = () => {
         </p>
       </div>
 
-      <form className="space-y-5 w-full max-w-97.5">
+      <form onSubmit={handleSubmit} className="space-y-5 w-full max-w-97.5">
 
   {/* Email */}
   <div>
@@ -27,46 +63,56 @@ export const LoginForm = () => {
       id="email"
       type="email"
       placeholder="you@email.com"
-      className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]"
+      value={email}
+      onChange={(e) => {setEmail(e.target.value);
+        setEmailError("");
+      }}
+      className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]" 
     />
+
+   {emailError && (
+     <p className="text-sm text-red-500 mt-1">{emailError}</p>
+   )}
+
   </div>
 
   {/* Password */}
-  <div>
-    <label
-      htmlFor="password"
-      className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
-    >
-      Password
-    </label>
+<div>
+  <label
+    htmlFor="password"
+    className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+  >
+    Password
+  </label>
 
+  <div className="relative">
     <input
       id="password"
-      type="password"
+      type={showPassword ? "text" : "password"}
       placeholder="••••••••"
-      className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]"
+      value={password}
+      onChange={(e) => {
+        setPassword(e.target.value);
+        setPasswordError("");
+      }}
+      className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9] px-3 pr-10 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]"
     />
-  </div>
 
-  {/* Remember me + Forgot password */}
-  <div className="flex items-center justify-between">
-
-    <label className="flex items-center gap-2 text-[13px] text-[#1C2321] cursor-pointer">
-      <input
-        type="checkbox"
-        className="h-4 w-4 accent-[#2D5A4A]"
-      />
-      Remember me
-    </label>
-
-    <a
-      href="#"
-      className="text-[13px] font-semibold text-[#2D5A4A] hover:underline"
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] hover:text-[#2D5A4A]"
     >
-      Forgot password?
-    </a>
-
+      {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+    </button>
   </div>
+
+  {passwordError && (
+    <p className="mt-1 text-sm text-red-500">
+      {passwordError}
+    </p>
+  )}
+</div>
 
   {/* Login Button */}
   <button
@@ -82,12 +128,12 @@ export const LoginForm = () => {
 
 <div className="mt-5.5 text-center text-[13px] text-[#5B6360]">
   Don't have an account?{" "}
-  <a
-    href="#"
+  <Link
+    to="/signup"
     className="font-semibold text-[#2D5A4A] hover:underline"
   >
     Sign up
-  </a>
+  </Link>
 </div>
 
     </div>
