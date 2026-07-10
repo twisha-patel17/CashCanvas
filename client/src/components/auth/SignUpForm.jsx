@@ -1,5 +1,6 @@
+import api from "../../api/axios";
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 export const SignUpForm = () => {
@@ -16,6 +17,8 @@ export const SignUpForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -27,14 +30,13 @@ export const SignUpForm = () => {
     return passwordRegex.test(password);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setEmailError("");
     setPasswordError("");
     setNameError("");
     setConfirmPasswordError("");
-    setIsLoading(false);
 
     let isValid = true;
 
@@ -76,17 +78,41 @@ export const SignUpForm = () => {
     }
 
     if (!isValid) {
-  setIsLoading(false);
   return;
 }
 
-    setTimeout(() => {
-      console.log("Name: ", name);
-      console.log("Email: ", email);
-      console.log("Password: ", password);
-      console.log("Confirm Password: ", confirmPassword);
     setIsLoading(true);
-}, 1000);
+
+try {
+
+  await api.post("/auth/register", {
+    name,
+    email,
+    password,
+  });
+
+  alert("Account created successfully!");
+
+  setName("");
+setEmail("");
+setPassword("");
+setConfirmPassword("");
+
+navigate("/login");
+
+} catch (error) {
+
+  if (error.response) {
+    alert(error.response.data.message);
+  } else {
+    alert("Something went wrong");
+  }
+
+} finally {
+
+  setIsLoading(false);
+
+}
 
   };
 
@@ -178,7 +204,7 @@ ${emailError ? "border-red-500" : "border-[#DCD6C7]"}`}
                 setPasswordError("");
               }}
               className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]
-${confirmPasswordError ? "border-red-500" : "border-[#DCD6C7]"}`}
+${passwordError ? "border-red-500" : "border-[#DCD6C7]"}`}
             />
             <button
                   type="button"

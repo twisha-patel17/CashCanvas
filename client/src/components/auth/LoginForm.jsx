@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../../api/axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 export const LoginForm = () => {
@@ -12,7 +13,9 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     setEmailError("");
@@ -42,13 +45,34 @@ export const LoginForm = () => {
 
     setIsLoading(true);
 
-    setTimeout(() => {
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Remember Me:", rememberMe);
+    try {
 
-      setIsLoading(false);
-    }, 1000);
+  const response = await api.post("/auth/login", {
+    email,
+    password,
+  });
+
+  localStorage.setItem("token", response.data.token);
+
+  alert("Login successful!");
+
+  navigate("/");
+
+} catch (error) {
+
+  if (error.response) {
+    alert(error.response.data.message);
+  } else {
+    alert("Something went wrong");
+  }
+
+} finally {
+
+  setIsLoading(false);
+
+}
+
+
   };
 
   const validateEmail = (email) => {
@@ -89,6 +113,7 @@ export const LoginForm = () => {
     <input
       id="email"
       type="email"
+      autoComplete="email"
       placeholder="you@email.com"
       value={email}
       onChange={(e) => {setEmail(e.target.value);
@@ -117,6 +142,7 @@ export const LoginForm = () => {
     <input
       id="password"
       type={showPassword ? "text" : "password"}
+      autoComplete="current-password"
       placeholder="••••••••"
       value={password}
       onChange={(e) => {

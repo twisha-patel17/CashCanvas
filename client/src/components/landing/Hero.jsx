@@ -1,7 +1,11 @@
 import { FeatureCards } from "./FeatureCards"
 import { ReceiptSummary } from "./ReceiptSummary"
+import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
+
+  const navigate = useNavigate();
+
   return (
     <section className="w-full pt-22.5 px-[6%] pb-17.5 bg-[repeating-linear-gradient(180deg,#F7F5EF,#F7F5EF_27px,#DCD6C7_28px)]">
         <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto' }}>
@@ -51,6 +55,7 @@ export const Hero = () => {
     hover:bg-[#23483b]
     transition-colors
   "
+  onClick={() => navigate("/signup")}
 >
   Get started free
 </button>
