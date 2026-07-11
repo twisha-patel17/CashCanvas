@@ -56,7 +56,7 @@ export const LoginForm = () => {
 
   alert("Login successful!");
 
-  navigate("/");
+  navigate("/dashboard");
 
 } catch (error) {
 
