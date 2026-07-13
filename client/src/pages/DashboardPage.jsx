@@ -1,6 +1,10 @@
 import { DashboardTopbar } from "../components/dashboard/DashboardTopbar";
 import { ExpenseChart } from "../components/dashboard/ExpenseChart";
 import { SummaryCard } from "../components/dashboard/SummaryCard";
+import { MonthlyExpenseChart } from "../components/dashboard/MonthlyExpenseChart";
+import { BudgetProgress } from "../components/dashboard/BudgetProgess";
+import { TopSpendingCategories } from "../components/dashboard/TopSpendingCategories";
+import { RecentTransactions } from "../components/dashboard/RecentTransactions";
 
 import {
   FiCreditCard,
@@ -8,6 +12,7 @@ import {
   FiTrendingDown,
   FiTarget,
 } from "react-icons/fi";
+
 
 export const DashboardPage = () => {
   return (
@@ -54,10 +59,16 @@ export const DashboardPage = () => {
 
      <div className="grid grid-cols-[1.1fr_1fr] gap-4 mt-6">
   <ExpenseChart />
+  <MonthlyExpenseChart />
+</div>
 
-  <div className="bg-white border border-[#DCD6C7] rounded-2xl p-5">
-    Monthly Expense
-  </div>
+    <div className="grid grid-cols-2 gap-4 mt-6">
+  <BudgetProgress />
+  <TopSpendingCategories />
+</div>
+
+<div className="mt-6">
+  <RecentTransactions />
 </div>
 
     </>
