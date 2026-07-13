@@ -8,7 +8,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { TransactionsPage } from "../pages/TransactionsPage";
 import { AnalyticsPage } from "../pages/AnalyticsPage";
 import { BudgetPage } from "../pages/BudgetPage"
-
+import { CategoriesPage } from "../pages/CategoriesPage";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 
 export const AppRoutes = () => {
@@ -26,6 +26,7 @@ export const AppRoutes = () => {
         <Route path="/transactions" element={<TransactionsPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/budget" element={<BudgetPage />} />
+        <Route path="/categories" element={<CategoriesPage />} />
       </Route>
     </Routes>
   );

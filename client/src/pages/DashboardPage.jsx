@@ -1,3 +1,4 @@
+
 import { DashboardTopbar } from "../components/dashboard/DashboardTopbar";
 import { ExpenseChart } from "../components/dashboard/ExpenseChart";
 import { SummaryCard } from "../components/dashboard/SummaryCard";
@@ -15,6 +16,7 @@ import {
 
 
 export const DashboardPage = () => {
+
   return (
     <>
       <DashboardTopbar />
