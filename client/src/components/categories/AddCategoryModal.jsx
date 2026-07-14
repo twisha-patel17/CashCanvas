@@ -28,7 +28,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
   const [categoryName, setCategoryName] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [selectedColor, setSelectedColor] = useState("#2D5A4A");
-  const [categoryType, setCategoryType] = useState("Expense");
+  const [categoryType, setCategoryType] = useState("expense");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [budget, setBudget] = useState("");
 
@@ -153,9 +153,9 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
               <button
                 type="button"
-                onClick={() => setCategoryType("Expense")}
+                onClick={() => setCategoryType("expense")}
                 className={`flex-1 rounded-xl py-2.5 font-medium ${
-                  categoryType === "Expense"
+                  categoryType === "expense"
                     ? "bg-[#2D5A4A] text-white"
                     : "border border-[#DCD6C7] text-[#1C2321]"
                 }`}
@@ -165,9 +165,9 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
               <button
                 type="button"
-                onClick={() => setCategoryType("Income")}
+                onClick={() => setCategoryType("income")}
                 className={`flex-1 rounded-xl py-2.5 font-medium ${
-                  categoryType === "Income"
+                  categoryType === "income"
                     ? "bg-[#2D5A4A] text-white"
                     : "border border-[#DCD6C7] text-[#1C2321]"
                 }`}

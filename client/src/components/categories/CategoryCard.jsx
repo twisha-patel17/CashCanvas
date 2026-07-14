@@ -15,7 +15,7 @@ export const CategoryCard = ({ category, onDelete }) => {
         </div>
 
         <button
-          onClick={() => onDelete(category.id)}
+          onClick={() => onDelete(category._id)}
           className="rounded-lg p-2 text-gray-400 transition hover:bg-red-50 hover:text-red-500"
         >
           <FiTrash2 size={18} />
