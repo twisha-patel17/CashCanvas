@@ -7,6 +7,7 @@ import { AddCategoryModal } from "../components/categories/AddCategoryModal";
 
 export const CategoriesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textSearch, setTextSearch] = useState("");
 
   const [categories, setCategories] = useState([
     {
@@ -30,13 +31,24 @@ export const CategoriesPage = () => {
   ]);
 
   const handleAddCategory = (newCategory) => {
-    setCategories((prevCategories) => [...prevCategories, {
-      id: Date.now(),
-      ...newCategory,
-    }]);
+    setCategories((prevCategories) => [
+      ...prevCategories,
+      {
+        id: Date.now(),
+        ...newCategory,
+      },
+    ]);
 
     setIsModalOpen(false);
+  };
+
+  const handleDeleteCategory = (id) => {
+    setCategories((prevCategories) => prevCategories.filter((category) => category.id !== id));
   }
+
+  const filteredCategories = categories.filter((category) =>
+    category.name.toLowerCase().includes(textSearch.toLowerCase())
+  );
 
   return (
     <>
@@ -44,18 +56,28 @@ export const CategoriesPage = () => {
         onAddCategory={() => setIsModalOpen(true)}
       />
 
-      <div className="p-8 space-y-6">
+      <div className="space-y-6 p-8">
 
-        <SearchCategory />
+        <SearchCategory
+          textSearch={textSearch}
+          setTextSearch={setTextSearch}
+        />
 
-        <div className="grid grid-cols-3 gap-5">
-          {categories.map((category) => (
-            <CategoryCard
-              key={category.id}
-              category={category}
-            />
-          ))}
-        </div>
+        {filteredCategories.length > 0 ? (
+          <div className="grid grid-cols-3 gap-5">
+            {filteredCategories.map((category) => (
+              <CategoryCard
+                key={category.id}
+                category={category}
+                onDelete={handleDeleteCategory}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="py-10 text-center text-[#7A7A7A]">
+            No categories found.
+          </p>
+        )}
 
       </div>
 

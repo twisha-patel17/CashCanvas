@@ -40,9 +40,14 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
       return;
     }
 
+    if (Number(budget) < 0) {
+   alert("Budget cannot be negative");
+   return;
+}
+
     const category = {
       name: categoryName,
-      emoji: selectedEmoji,
+      emoji: selectedEmoji || "📂",
       color: selectedColor,
       type: categoryType,
       monthlyBudget: Number(budget),
@@ -91,7 +96,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
             </label>
 
           <div className="relative">
-          </div>  
+            
 
             <button
               type="button"
@@ -111,6 +116,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
                   />
                   </div>
             )}
+          </div>  
 
           </div>
 

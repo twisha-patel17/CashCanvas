@@ -1,13 +1,26 @@
-export const CategoryCard = ({ category }) => {
+import { FiTrash2 } from "react-icons/fi";
+
+export const CategoryCard = ({ category, onDelete }) => {
   return (
     <div className="rounded-2xl border border-[#DCD6C7] bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
 
-      {/* Emoji */}
-      <div
-        className="flex h-14 w-14 items-center justify-center rounded-2xl text-3xl"
-        style={{ borderLeft: `6px solid ${category.color}` }}
-      >
-        {category.emoji}
+      {/* Header */}
+      <div className="flex items-start justify-between">
+
+        <div
+          className="flex h-14 w-14 items-center justify-center rounded-2xl text-3xl"
+          style={{ borderLeft: `6px solid ${category.color}` }}
+        >
+          {category.emoji}
+        </div>
+
+        <button
+          onClick={() => onDelete(category.id)}
+          className="rounded-lg p-2 text-gray-400 transition hover:bg-red-50 hover:text-red-500"
+        >
+          <FiTrash2 size={18} />
+        </button>
+
       </div>
 
       {/* Name */}

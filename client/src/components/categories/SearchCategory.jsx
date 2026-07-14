@@ -1,15 +1,17 @@
 import { FiSearch } from "react-icons/fi";
 
-export const SearchCategory = () => {
+export const SearchCategory = ({ textSearch, setTextSearch }) => {
   return (
-    <div className="relative max-w-sm">
+    <div className="relative w-full max-w-md">
 
-      <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+      <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-[#7A7A7A]" />
 
       <input
         type="text"
+        value={textSearch}
+        onChange={(e) => setTextSearch(e.target.value)}
         placeholder="Search categories..."
-        className="w-full rounded-xl border border-[#DCD6C7] bg-white py-3 pl-10 pr-4 outline-none focus:border-[#2D5A4A]"
+        className="h-12 w-full rounded-2xl border border-[#DCD6C7] bg-white pl-12 pr-4 text-sm text-[#1C2321] placeholder:text-[#9CA3AF] outline-none transition-all focus:border-[#2D5A4A] focus:ring-2 focus:ring-[#2D5A4A]/10"
       />
 
     </div>
