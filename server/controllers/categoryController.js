@@ -76,4 +76,5 @@ export const deleteCategory = async (req, res) => {
             message: "Something went wrong",
         });
     }
-}
+};
+
