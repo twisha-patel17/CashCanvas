@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-import { getMonthlyExpenses, getExpenseDistribution, getIncomeVsExpense, getTopSpendingCategories } from "../controllers/analyticsController";
+import { getMonthlyExpenses, getExpenseDistribution, getIncomeVsExpense, getTopSpendingCategories } from "../controllers/analyticsController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
 router.get("/monthly-expenses", authMiddleware, getMonthlyExpenses);
