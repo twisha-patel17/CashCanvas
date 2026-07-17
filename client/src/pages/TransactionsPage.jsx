@@ -8,7 +8,7 @@ import { Pagination } from "../components/transactions/Pagination";
 import { AddTransactionModal } from "../components/transactions/AddTransactionModal";
 import { DeleteTransactionModal } from "../components/transactions/DeleteTransactionModal";
 import { getCategories } from "../api/categoryApi";
-import { getTransactions, createTransaction } from "../api/transactionApi";
+import { getTransactions, createTransaction, updateTransaction } from "../api/transactionApi";
 
 
 export const TransactionsPage = () => {
@@ -24,14 +24,18 @@ export const TransactionsPage = () => {
   const [transactions, setTransactions] =
   useState([]);
 
+  const [selectedTransaction,
+setSelectedTransaction] = useState(null);
+
   const [currentPage, setCurrentPage] =
   useState(1);
 
   const [totalPages, setTotalPages] =
   useState(1);
 
-  const [categories,setCategories]
-= useState([]);
+  const [categories,setCategories] = useState([]);
+
+   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
 
 
   const fetchTransactions = async (page = 1) => {
@@ -75,13 +79,47 @@ async(data)=>{
 
     try{
 
+        console.log("DATA RECEIVED");
+
+        console.log(data);
+
         await createTransaction(data);
+
+        console.log("TRANSACTION CREATED");
+
+        await fetchTransactions(currentPage);
+
+        setIsModalOpen(false);
+
+    }
+
+    catch(error){
+
+        console.log("ERROR");
+
+        console.error(error);
+
+    }
+
+};
+
+const handleUpdateTransaction =
+async(id,data)=>{
+
+    try{
+
+        await updateTransaction(
+            id,
+            data
+        );
 
         await fetchTransactions(
             currentPage
         );
 
-        setIsModalOpen(false);
+        setIsEditModalOpen(
+            false
+        );
 
     }
 
@@ -147,13 +185,23 @@ useEffect(()=>{
         <TransactionTable
           transactions={transactions}
           
-          openDeleteModal={() =>
-            setIsDeleteModalOpen(true)
-          }
+          openDeleteModal={(id) => {
 
-          openEditModal={() =>
-            setIsEditModalOpen(true)
-          }
+          setSelectedTransactionId(id);
+
+          setIsDeleteModalOpen(true);
+
+          }}
+
+          openEditModal={(transaction)=>{
+
+    setSelectedTransaction(
+        transaction
+    );
+
+    setIsEditModalOpen(true);
+
+}}
         />
 
 
@@ -186,14 +234,25 @@ useEffect(()=>{
 
       {isEditModalOpen && (
 
-        <AddTransactionModal
-          mode="edit"
-          onClose={() =>
-            setIsEditModalOpen(false)
-          }
-        />
+    <AddTransactionModal
 
-      )}
+        mode="edit"
+
+        transaction={
+            selectedTransaction
+        }
+
+        categories={
+            categories
+        }
+        onSubmit={handleUpdateTransaction}
+        onClose={()=>
+            setIsEditModalOpen(false)
+        }
+
+    />
+
+)}
 
 
       {/* Delete Transaction */}
@@ -201,11 +260,20 @@ useEffect(()=>{
       {isDeleteModalOpen && (
 
         <DeleteTransactionModal
-          onClose={() =>
-            setIsDeleteModalOpen(false)
-          }
-        />
+    transactionId={selectedTransactionId}
 
+    onDelete={async()=>{
+
+        await fetchTransactions(
+            currentPage
+        );
+
+    }}
+
+    onClose={() =>
+        setIsDeleteModalOpen(false)
+    }
+/>
       )}
 
     </div>

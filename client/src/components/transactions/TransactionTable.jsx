@@ -95,14 +95,21 @@ export const TransactionTable = ({
 
           <div className="flex justify-end gap-3">
 
-            <button onClick={openEditModal}
+            <button onClick={()=>
+        openEditModal(
+            transaction
+        )
+    }
+
               className="text-sm font-medium text-[#2D5A4A] transition hover:underline"
             >
               Edit
             </button>
 
             <button
-    onClick={openDeleteModal}
+    onClick={() =>
+        openDeleteModal(transaction._id)
+    }
     className="
     text-sm
     font-medium

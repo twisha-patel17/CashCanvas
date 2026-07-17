@@ -1,9 +1,9 @@
 import { FiX } from "react-icons/fi";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export const AddTransactionModal = ({
   mode = "add",
-  onClose, onSubmit, categories,
+  onClose, onSubmit, categories, transaction = null,
 }) => {
 
   const [formData, setFormData] = useState({
@@ -14,7 +14,41 @@ export const AddTransactionModal = ({
     paymentMethod: "",
     description: "",
     receipt: "",
-  })
+  });
+
+  useEffect(() => {
+
+    if(mode === "edit" && transaction){
+
+        setFormData({
+
+            amount:
+                transaction.amount,
+
+            type:
+                transaction.type,
+
+            category:
+                transaction.category._id,
+
+            date:
+                transaction.date
+                ?.split("T")[0],
+
+            paymentMethod:
+                transaction.paymentMethod,
+
+            description:
+                transaction.description,
+
+            receipt:
+                transaction.receipt || "",
+
+        });
+
+    }
+
+},[transaction,mode]);
 
   const handleChange = (e) => {
     setFormData({
@@ -31,9 +65,25 @@ export const AddTransactionModal = ({
   };
 
   const handleSubmit = async () => {
-    await onSubmit(formData);
-  }
 
+    if(mode === "edit"){
+
+        await onSubmit(
+            transaction._id,
+            formData
+        );
+
+    }
+
+    else{
+
+        await onSubmit(
+            formData
+        );
+
+    }
+
+};
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
 

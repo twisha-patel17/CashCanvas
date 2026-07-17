@@ -1,4 +1,41 @@
-export const DeleteTransactionModal = () => {
+import { deleteTransaction } from "../../api/transactionApi";
+import { useState } from "react";
+
+export const DeleteTransactionModal = ({transactionId,
+    onClose, onDelete}) => {
+
+      const [isDeleting,setIsDeleting] = useState(false);
+
+   const handleDelete = async()=>{
+
+    try{
+
+        setIsDeleting(true);
+
+        await deleteTransaction(
+            transactionId
+        );
+
+        await onDelete();
+
+        onClose();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+    finally{
+
+        setIsDeleting(false);
+
+    }
+
+};
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
 
@@ -29,6 +66,7 @@ export const DeleteTransactionModal = () => {
         <div className="mt-8 flex justify-center gap-4">
 
           <button
+            onClick={onClose}
             className="
             rounded-xl
             border
@@ -44,18 +82,23 @@ export const DeleteTransactionModal = () => {
 
 
           <button
-            className="
-            rounded-xl
-            bg-red-600
-            px-6
-            py-3
-            text-white
-            transition
-            hover:bg-red-700
-            "
-          >
-            Delete
-          </button>
+    onClick={handleDelete}
+    className="
+    rounded-xl
+    bg-red-600
+    px-6
+    py-3
+    text-white
+    transition
+    hover:bg-red-700
+    "
+>
+
+    {isDeleting
+        ? "Deleting..."
+        : "Delete"}
+
+</button>
 
         </div>
 

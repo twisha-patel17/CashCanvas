@@ -10,6 +10,7 @@ import { AnalyticsPage } from "../pages/AnalyticsPage";
 import { BudgetPage } from "../pages/BudgetPage"
 import { CategoriesPage } from "../pages/CategoriesPage";
 import { DashboardLayout } from "../layouts/DashboardLayout";
+import { ProfilePage } from "../pages/ProfilePage";
 
 export const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
         <Route path="/analytics" element={<AnalyticsPage />} />
         <Route path="/budget" element={<BudgetPage />} />
         <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Route>
     </Routes>
   );
