@@ -32,8 +32,8 @@ const transactionSchema = new mongoose.Schema({
         type: String, trim: true
     },
     status: {
-        type: String, default: "pending", trim: true, enum: {
-        values: ["pending", "cleared"],
+        type: String, default: "cleared", trim: true, enum: {
+        values: ["pending", "cleared", "failed"],
         message: "Invalid trasaction type."
     },
     },

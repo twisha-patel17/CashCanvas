@@ -22,29 +22,82 @@ export const createTransaction = async (req, res) => {
      transaction,
 });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-    success:false,
-    message:"Something went wrong."
+
+    console.error("ERROR IS:");
+
+    console.error(error);
+
+    console.error("BODY:");
+
+    console.log(req.body);
+
+    res.status(500).json({
+
+        success:false,
+
+        message:error.message
+
     });
-    }
+
+}
 };
 
 export const getTransactions = async (req, res) => {
     try {
-        const transactions = await Transaction.find({ user: req.user.id }).populate("category");
+
+        const page = Number(req.query.page) || 1;
+
+        const limit = Number(req.query.limit) || 10;
+
+        const skip = (page - 1) * limit;
+
+
+        const transactions = await Transaction.find({
+            user: req.user.id,
+        })
+            .populate("category")
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit);
+
+
+        const totalTransactions =
+            await Transaction.countDocuments({
+                user: req.user.id,
+            });
+
+
+        const totalPages = Math.ceil(
+            totalTransactions / limit
+        );
+
 
         res.status(200).json({
+
             success: true,
-            message: "Transactions fetched successfully.",
-            transactions
+
+            message:
+                "Transactions fetched successfully.",
+
+            transactions,
+
+            currentPage: page,
+
+            totalPages,
+
+            totalTransactions,
+
         });
+
     } catch (error) {
+
         console.error(error);
+
         res.status(500).json({
-            success:false,
+            success: false,
             message: "Something went wrong.",
         });
+
     }
 };
 
