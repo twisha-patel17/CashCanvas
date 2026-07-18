@@ -1,11 +1,13 @@
 import { FiX } from "react-icons/fi";
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 export const AddTransactionModal = ({
   mode = "add",
-  onClose, onSubmit, categories, transaction = null,
+  onClose,
+  onSubmit,
+  categories,
+  transaction = null,
 }) => {
-
   const [formData, setFormData] = useState({
     amount: "",
     type: "",
@@ -17,38 +19,19 @@ export const AddTransactionModal = ({
   });
 
   useEffect(() => {
-
-    if(mode === "edit" && transaction){
-
-        setFormData({
-
-            amount:
-                transaction.amount,
-
-            type:
-                transaction.type,
-
-            category:
-                transaction.category._id,
-
-            date:
-                transaction.date
-                ?.split("T")[0],
-
-            paymentMethod:
-                transaction.paymentMethod,
-
-            description:
-                transaction.description,
-
-            receipt:
-                transaction.receipt || "",
-
-        });
-
+    if (mode === "edit" && transaction) {
+      setFormData({
+        amount: transaction.amount,
+        type: transaction.type,
+        category: transaction.category._id,
+        date: transaction.date?.split("T")[0]
+        || "",
+        paymentMethod: transaction.paymentMethod,
+        description: transaction.description,
+        receipt: "",
+      });
     }
-
-},[transaction,mode]);
+  }, [transaction, mode]);
 
   const handleChange = (e) => {
     setFormData({
@@ -65,55 +48,32 @@ export const AddTransactionModal = ({
   };
 
   const handleSubmit = async () => {
-
-    if(mode === "edit"){
-
-        await onSubmit(
-            transaction._id,
-            formData
-        );
-
+    if (mode === "edit") {
+      await onSubmit(transaction._id, formData);
+    } else {
+      await onSubmit(formData);
     }
+  };
 
-    else{
-
-        await onSubmit(
-            formData
-        );
-
-    }
-
-};
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-
-      {/* Modal */}
-
       <div className="mx-4 w-full max-w-4xl rounded-2xl bg-white p-8 shadow-xl">
-
         {/* Header */}
 
         <div className="mb-8 flex items-center justify-between">
-
           <h2 className="text-3xl font-bold text-[#1C2321]">
-
             {mode === "add"
               ? "Add Transaction"
               : "Edit Transaction"}
-
           </h2>
 
           <button onClick={onClose}>
-
             <FiX
               size={28}
               className="text-[#5B6360] transition hover:text-black"
             />
-
           </button>
-
         </div>
-
 
         {/* Form */}
 
@@ -139,30 +99,52 @@ export const AddTransactionModal = ({
             "
           />
 
-
           {/* Type + Date */}
 
           <div className="grid grid-cols-2 gap-4">
 
-            <select
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              className="
-              rounded-xl
-              border
-              border-[#DCD6C7]
-              px-4
-              py-3
-              outline-none
-              focus:border-[#2D5A4A]
-              "
-            >
-              <option value="">Select Type</option>
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
-            </select>
+            {mode === "add" ? (
+              <select
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                className="
+                rounded-xl
+                border
+                border-[#DCD6C7]
+                px-4
+                py-3
+                outline-none
+                focus:border-[#2D5A4A]
+                "
+              >
+                <option value="">
+                  Select Type
+                </option>
 
+                <option value="income">
+                  Income
+                </option>
+
+                <option value="expense">
+                  Expense
+                </option>
+
+              </select>
+            ) : (
+              <input
+                value={formData.type}
+                disabled
+                className="
+                rounded-xl
+                border
+                border-[#DCD6C7]
+                bg-gray-100
+                px-4
+                py-3
+                "
+              />
+            )}
 
             <input
               type="date"
@@ -182,43 +164,37 @@ export const AddTransactionModal = ({
 
           </div>
 
-
           {/* Category + Payment Method */}
 
           <div className="grid grid-cols-2 gap-4">
 
             <select
-    name="category"
-    value={formData.category}
-    onChange={handleChange}
-    className="
-    rounded-xl
-    border
-    border-[#DCD6C7]
-    px-4
-    py-3
-    outline-none
-    focus:border-[#2D5A4A]
-    "
->
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="
+              rounded-xl
+              border
+              border-[#DCD6C7]
+              px-4
+              py-3
+              outline-none
+              focus:border-[#2D5A4A]
+              "
+            >
+              <option value="">
+                Select Category
+              </option>
 
-    <option value="">
-        Select Category
-    </option>
-
-    {categories.map((category) => (
-
-        <option
-            key={category._id}
-            value={category._id}
-        >
-          {category.emoji} {" "} {category.name}
-        </option>
-
-    ))}
-
-</select>
-
+              {categories.map((category) => (
+                <option
+                  key={category._id}
+                  value={category._id}
+                >
+                  {category.emoji} {category.name}
+                </option>
+              ))}
+            </select>
 
             <select
               name="paymentMethod"
@@ -234,33 +210,50 @@ export const AddTransactionModal = ({
               focus:border-[#2D5A4A]
               "
             >
-              <option value="">Select Payment Method</option>
-              <option value="Cash">Cash</option>
-              <option value="UPI">UPI</option>
-              <option value="Credit Card">Credit Card</option>
-              <option value="Debit Card">Debit Card</option>
-              <option value="Bank Transfer">Bank Transfer</option>
+              <option value="">
+                Select Payment Method
+              </option>
+
+              <option value="Cash">
+                Cash
+              </option>
+
+              <option value="UPI">
+                UPI
+              </option>
+
+              <option value="Credit Card">
+                Credit Card
+              </option>
+
+              <option value="Debit Card">
+                Debit Card
+              </option>
+
+              <option value="Bank Transfer">
+                Bank Transfer
+              </option>
+
             </select>
 
           </div>
 
-
           {/* Receipt */}
 
-          <input
-            placeholder="Receipt (Optional)"
-            onChange={handleFileChange}
-            type="file"
-            className="
-            w-full
-            rounded-xl
-            border
-            border-[#DCD6C7]
-            px-4
-            py-3
-            "
-          />
-
+          {mode === "add" && (
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="
+              w-full
+              rounded-xl
+              border
+              border-[#DCD6C7]
+              px-4
+              py-3
+              "
+            />
+          )}
 
           {/* Description */}
 
@@ -284,7 +277,6 @@ export const AddTransactionModal = ({
 
         </div>
 
-
         {/* Buttons */}
 
         <div className="mt-8 flex justify-end gap-4">
@@ -304,7 +296,6 @@ export const AddTransactionModal = ({
             Cancel
           </button>
 
-
           <button
             onClick={handleSubmit}
             className="
@@ -317,17 +308,13 @@ export const AddTransactionModal = ({
             hover:bg-[#23483A]
             "
           >
-
             {mode === "add"
               ? "Add Transaction"
               : "Save Changes"}
-
           </button>
 
         </div>
-
       </div>
-
     </div>
   );
 };

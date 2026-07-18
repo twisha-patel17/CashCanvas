@@ -9,6 +9,7 @@ import { AddTransactionModal } from "../components/transactions/AddTransactionMo
 import { DeleteTransactionModal } from "../components/transactions/DeleteTransactionModal";
 import { getCategories } from "../api/categoryApi";
 import { getTransactions, createTransaction, updateTransaction } from "../api/transactionApi";
+import { ViewReceiptModal } from "../components/transactions/ViewReceiptModal";
 
 
 export const TransactionsPage = () => {
@@ -37,10 +38,16 @@ setSelectedTransaction] = useState(null);
 
   const [searchTerm,setSearchTerm] = useState("");
   const [selectedType,setSelectedType] = useState("all");
-const [selectedCategory,setSelectedCategory] = useState("all");
-const [selectedPaymentMethod,setSelectedPaymentMethod]= useState("all");
-const [sortBy,setSortBy] = useState("newest");
-const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+  const [selectedCategory,setSelectedCategory] = useState("all");
+  const [selectedPaymentMethod,setSelectedPaymentMethod]= useState("all");
+  const [sortBy,setSortBy] = useState("newest");
+  const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+
+  const [selectedReceipt, setSelectedReceipt] = useState("");
+
+
+const [isReceiptModalOpen,setIsReceiptModalOpen] = useState(false);
+  
 
   const fetchTransactions = async (page = 1) => {
 
@@ -159,54 +166,160 @@ useEffect(()=>{
 
 },[]);
 
-const filteredTransactions =
-
-transactions.filter(
-
-    (transaction)=>{
-
-        const search =
-
-        searchTerm.toLowerCase();
+let filteredTransactions = [...transactions];
 
 
-        return(
+// SEARCH
 
-            transaction.description
+filteredTransactions =
 
-            ?.toLowerCase()
+filteredTransactions.filter(
 
-            .includes(search)
+(transaction)=>{
 
-            ||
+const search =
 
-            transaction.paymentMethod
+searchTerm.toLowerCase();
 
-            ?.toLowerCase()
+return(
 
-            .includes(search)
+transaction.description
+?.toLowerCase()
+.includes(search)
 
-            ||
+||
 
-            transaction.type
+transaction.paymentMethod
+?.toLowerCase()
+.includes(search)
 
-            ?.toLowerCase()
+||
 
-            .includes(search)
+transaction.type
+?.toLowerCase()
+.includes(search)
 
-            ||
+||
 
-            transaction.category.name
-
-            ?.toLowerCase()
-
-            .includes(search)
-
-        );
-
-    }
+transaction.category?.name
+?.toLowerCase()
+.includes(search)
 
 );
+
+}
+
+);
+
+
+// TYPE FILTER
+
+if(selectedType!=="all"){
+
+filteredTransactions=
+
+filteredTransactions.filter(
+
+(transaction)=>
+
+transaction.type===selectedType
+
+);
+
+}
+
+
+// CATEGORY FILTER
+
+if(selectedCategory!=="all"){
+
+filteredTransactions=
+
+filteredTransactions.filter(
+
+(transaction)=>
+
+transaction.category?.name===selectedCategory
+
+);
+
+}
+
+
+// PAYMENT METHOD FILTER
+
+if(selectedPaymentMethod!=="all"){
+
+filteredTransactions=
+
+filteredTransactions.filter(
+
+(transaction)=>
+
+transaction.paymentMethod===
+selectedPaymentMethod
+
+);
+
+}
+
+
+// SORTING
+
+if(sortBy==="newest"){
+
+filteredTransactions.sort(
+
+(a,b)=>
+
+new Date(b.date)-
+
+new Date(a.date)
+
+);
+
+}
+
+
+if(sortBy==="oldest"){
+
+filteredTransactions.sort(
+
+(a,b)=>
+
+new Date(a.date)-
+
+new Date(b.date)
+
+);
+
+}
+
+
+if(sortBy==="highest"){
+
+filteredTransactions.sort(
+
+(a,b)=>
+
+b.amount-a.amount
+
+);
+
+}
+
+
+if(sortBy==="lowest"){
+
+filteredTransactions.sort(
+
+(a,b)=>
+
+a.amount-b.amount
+
+);
+
+}
     
 
   return (
@@ -264,6 +377,26 @@ transactions.filter(
 
         <TransactionTable
           transactions={filteredTransactions}
+
+          openReceiptModal={
+
+(receipt)=>{
+
+setSelectedReceipt(
+
+receipt
+
+);
+
+setIsReceiptModalOpen(
+
+true
+
+);
+
+}
+
+}
           
           openDeleteModal={(id) => {
 
@@ -283,6 +416,30 @@ transactions.filter(
 
 }}
         />
+
+        {
+
+isReceiptModalOpen &&(
+
+<ViewReceiptModal
+
+receipt={selectedReceipt}
+
+onClose={()=>{
+
+setIsReceiptModalOpen(
+
+false
+
+);
+
+}}
+
+/>
+
+)
+
+}
 
 
         <Pagination 

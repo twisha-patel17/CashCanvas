@@ -44,6 +44,8 @@ export const TransactionFilters = ({selectedType,
 
       {/* Category */}
       <select
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
         className="
         rounded-xl
         border
@@ -59,14 +61,106 @@ export const TransactionFilters = ({selectedType,
         "
       >
         <option>All Categories</option>
-        <option>Food</option>
-        <option>Travel</option>
-        <option>Gym</option>
+        {
+
+    categories.map(
+
+        (category)=>(
+
+            <option
+
+                key={category._id}
+
+                value={category.name}
+
+            >
+
+                {category.name}
+
+            </option>
+
+        )
+
+    )
+
+}
       </select>
+
+      {/* Payment Method */}
+
+<select
+
+value={selectedPaymentMethod}
+
+onChange={(e)=>
+
+    setSelectedPaymentMethod(
+
+        e.target.value
+
+    )
+
+}
+
+className="
+rounded-xl
+border
+border-[#DCD6C7]
+bg-white
+px-4
+py-3
+text-sm
+text-[#1C2321]
+outline-none
+transition
+focus:border-[#2D5A4A]
+"
+
+>
+
+<option value="all">
+
+All Methods
+
+</option>
+
+<option value="UPI">
+
+UPI
+
+</option>
+
+<option value="Cash">
+
+Cash
+
+</option>
+
+<option value="Bank Transfer">
+
+Bank Transfer
+
+</option>
+
+<option value="Credit Card">
+
+Credit Card
+
+</option>
+
+<option value="Debit Card">
+
+Debit Card
+
+</option>
+
+</select>
 
 
       {/* Sort */}
       <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
         className="
         rounded-xl
         border
@@ -81,10 +175,10 @@ export const TransactionFilters = ({selectedType,
         focus:border-[#2D5A4A]
         "
       >
-        <option>Newest</option>
-        <option>Oldest</option>
-        <option>Highest Amount</option>
-        <option>Lowest Amount</option>
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="highest">Highest Amount</option>
+        <option value="lowest">Lowest Amount</option>
       </select>
 
     </div>

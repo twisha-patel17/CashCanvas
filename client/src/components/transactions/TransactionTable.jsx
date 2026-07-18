@@ -1,5 +1,5 @@
 export const TransactionTable = ({
-  openDeleteModal, openEditModal, transactions
+  openDeleteModal, openEditModal, transactions, openReceiptModal
 }) => {
 
   return (
@@ -46,9 +46,55 @@ export const TransactionTable = ({
           {/* Category */}
 
           <p className="flex items-center gap-2">
-            <span>{transaction.category.emoji}</span>
-            <span>{transaction.category.name}</span>
-          </p>
+
+    {
+
+        transaction.category ? (
+
+            <>
+
+            <span>
+
+                {
+                    transaction.category.emoji
+                }
+
+            </span>
+
+
+            <span>
+
+                {
+                    transaction.category.name
+                }
+
+            </span>
+
+            </>
+
+        )
+
+        :
+
+        (
+
+            <span
+            className="
+            text-sm
+            italic
+            text-[#5B6360]
+            "
+            >
+
+                (Category Deleted)
+
+            </span>
+
+        )
+
+    }
+
+</p>
 
 
           {/* Amount */}
@@ -94,6 +140,26 @@ export const TransactionTable = ({
           {/* Actions */}
 
           <div className="flex justify-end gap-3">
+
+            <button
+
+            onClick={() => {
+              openReceiptModal(transaction.receipt);
+            }}
+
+className="
+text-sm
+font-medium
+text-[#2D5A4A]
+transition
+hover:underline
+"
+
+>
+
+View
+
+</button>
 
             <button onClick={()=>
         openEditModal(
