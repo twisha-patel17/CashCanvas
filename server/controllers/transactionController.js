@@ -1,8 +1,35 @@
 import Transaction from "../models/Transaction.js";
+import cloudinary from "../config/cloudinary.js";
+
+import fs from "fs";
 
 export const createTransaction = async (req, res) => {
     try {
-        const { amount, category, type, date, paymentMethod, description, status, receipt } = req.body;
+        const { amount, category, type, date, paymentMethod, description, status } = req.body;
+
+        let receipt = "";
+
+     if (req.file) {
+
+    const result =
+
+    await cloudinary.uploader.upload(
+
+        req.file.path,
+
+        {
+
+            folder:"cashcanvas/receipts",
+
+        }
+
+    );
+
+    receipt = result.secure_url;
+
+    fs.unlinkSync(req.file.path);
+
+}
 
         const transaction = await Transaction.create({
             amount,

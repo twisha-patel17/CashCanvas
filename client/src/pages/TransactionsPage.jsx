@@ -35,8 +35,12 @@ setSelectedTransaction] = useState(null);
 
   const [categories,setCategories] = useState([]);
 
-   const [selectedTransactionId, setSelectedTransactionId] = useState(null);
-
+  const [searchTerm,setSearchTerm] = useState("");
+  const [selectedType,setSelectedType] = useState("all");
+const [selectedCategory,setSelectedCategory] = useState("all");
+const [selectedPaymentMethod,setSelectedPaymentMethod]= useState("all");
+const [sortBy,setSortBy] = useState("newest");
+const [selectedTransactionId, setSelectedTransactionId] = useState(null);
 
   const fetchTransactions = async (page = 1) => {
 
@@ -154,6 +158,55 @@ useEffect(()=>{
     fetchCategories();
 
 },[]);
+
+const filteredTransactions =
+
+transactions.filter(
+
+    (transaction)=>{
+
+        const search =
+
+        searchTerm.toLowerCase();
+
+
+        return(
+
+            transaction.description
+
+            ?.toLowerCase()
+
+            .includes(search)
+
+            ||
+
+            transaction.paymentMethod
+
+            ?.toLowerCase()
+
+            .includes(search)
+
+            ||
+
+            transaction.type
+
+            ?.toLowerCase()
+
+            .includes(search)
+
+            ||
+
+            transaction.category.name
+
+            ?.toLowerCase()
+
+            .includes(search)
+
+        );
+
+    }
+
+);
     
 
   return (
@@ -175,15 +228,42 @@ useEffect(()=>{
 
         <div className="flex items-center justify-between gap-4">
 
-          <SearchTransaction />
+          <SearchTransaction 
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
 
-          <TransactionFilters />
+          <TransactionFilters
+
+    selectedType={selectedType}
+
+    setSelectedType={setSelectedType}
+
+    selectedCategory={selectedCategory}
+
+    setSelectedCategory={setSelectedCategory}
+
+    selectedPaymentMethod={
+        selectedPaymentMethod
+    }
+
+    setSelectedPaymentMethod={
+        setSelectedPaymentMethod
+    }
+
+    sortBy={sortBy}
+
+    setSortBy={setSortBy}
+
+    categories={categories}
+
+/>
 
         </div>
 
 
         <TransactionTable
-          transactions={transactions}
+          transactions={filteredTransactions}
           
           openDeleteModal={(id) => {
 

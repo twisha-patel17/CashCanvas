@@ -1,10 +1,12 @@
-export const Pagination = () => {
+export const Pagination = ({ currentPage, totalPages, onPageChange}) => {
   return (
     <div className="mt-6 flex items-center justify-center gap-3">
 
       {/* Previous Button */}
 
       <button
+        disabled={currentPage === 1}
+        onClick={() => onPageChange(currentPage-1)}
         className="
         rounded-xl
         border
@@ -23,64 +25,73 @@ export const Pagination = () => {
       </button>
 
 
-      {/* Page Numbers */}
+      {
 
-      <button
-        className="
-        rounded-xl
-        bg-[#2D5A4A]
-        px-4
-        py-2
-        text-sm
-        font-semibold
-        text-white
-        "
-      >
-        1
-      </button>
+    [...Array(totalPages)].map(
 
+        (_,index)=>(
 
-      <button
-        className="
-        rounded-xl
-        border
-        border-[#DCD6C7]
-        bg-white
-        px-4
-        py-2
-        text-sm
-        font-medium
-        text-[#1C2321]
-        transition
-        hover:bg-[#F7F5EF]
-        "
-      >
-        2
-      </button>
+            <button
 
+                key={index}
 
-      <button
-        className="
-        rounded-xl
-        border
-        border-[#DCD6C7]
-        bg-white
-        px-4
-        py-2
-        text-sm
-        font-medium
-        text-[#1C2321]
-        transition
-        hover:bg-[#F7F5EF]
-        "
-      >
-        3
-      </button>
+                onClick={()=>
+
+                    onPageChange(
+
+                        index+1
+
+                    )
+
+                }
+
+                className={`
+
+                rounded-xl
+                px-4
+                py-2
+                text-sm
+                font-semibold
+                transition
+
+                ${
+
+                    currentPage===index+1
+
+                    ?
+
+                    "bg-[#2D5A4A] text-white"
+
+                    :
+
+                    `border
+                    border-[#DCD6C7]
+                    bg-white
+                    text-[#1C2321]
+                    hover:bg-[#F7F5EF]`
+
+                }
+
+                `}
+
+            >
+
+                {index+1}
+
+            </button>
+
+        )
+
+    )
+
+}
 
 
       {/* Next Button */}
 
       <button
+        disabled={currentPage === totalPages}
+        onChange={() => onPageChange(currentPage+1)}
         className="
         rounded-xl
         border

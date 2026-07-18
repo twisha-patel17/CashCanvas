@@ -1,6 +1,6 @@
 import { FiSearch } from "react-icons/fi";
 
-export const SearchTransaction = () => {
+export const SearchTransaction = ({ searchTerm, setSearchTerm }) => {
   return (
 
     <div className="relative flex-1">
@@ -12,6 +12,8 @@ export const SearchTransaction = () => {
     <input
     type="text"
     placeholder="Search transactions..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
     className="
     w-full
     rounded-xl

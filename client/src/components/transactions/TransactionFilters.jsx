@@ -1,9 +1,27 @@
-export const TransactionFilters = () => {
+export const TransactionFilters = ({selectedType,
+
+    setSelectedType,
+
+    selectedCategory,
+
+    setSelectedCategory,
+
+    selectedPaymentMethod,
+
+    setSelectedPaymentMethod,
+
+    sortBy,
+
+    setSortBy,
+
+    categories,}) => {
   return (
     <div className="flex items-center gap-3">
 
       {/* Type */}
       <select
+        value={selectedType}
+        onChange={(e) => setSelectedType(e.target.value)}
         className="
         rounded-xl
         border
@@ -18,9 +36,9 @@ export const TransactionFilters = () => {
         focus:border-[#2D5A4A]
         "
       >
-        <option>All Transactions</option>
-        <option>Income</option>
-        <option>Expense</option>
+        <option value="all">All Transactions</option>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
       </select>
 
 
