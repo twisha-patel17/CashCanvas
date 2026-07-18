@@ -7,4 +7,4 @@ export const AnalyticsTopbar = () => {
       </h1>
     </div>
   );
-};
+}; 

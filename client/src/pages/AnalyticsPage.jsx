@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { AnalyticsTopbar } from "../components/analytics/AnalyticsTopbar";
 import { MonthlyExpenseChart } from "../components/analytics/MonthlyExpenseChart";
+import { IncomeExpenseChart } from "../components/analytics/IncomeExpenseChart";
+import { ExpenseDistributionChart } from "../components/analytics/ExpenseDistributionChart";
+import { TopSpendingCategories } from "../components/analytics/TopSpendingCategories";
 
 import {
 
@@ -19,6 +22,10 @@ export const AnalyticsPage = () => {
     const [incomeVsExpense, setIncomeVsExpense] = useState([]);
 
     const [expenseDistribution, setExpenseDistribution] = useState([]);
+
+    console.log(
+    expenseDistribution
+);
 
     const [topCategories, setTopCategories] = useState([]);
 
@@ -88,7 +95,7 @@ export const AnalyticsPage = () => {
 <div>
 
     <AnalyticsTopbar />
-
+ 
 
     <section className="min-h-screen bg-[#F7F5EF] p-8">
 
@@ -119,13 +126,9 @@ export const AnalyticsPage = () => {
                     Income Vs Expense
                 </h2>
 
-                <pre>
-                    {JSON.stringify(
-                        incomeVsExpense,
-                        null,
-                        2
-                    )}
-                </pre>
+                <IncomeExpenseChart
+    data={incomeVsExpense}
+/>
 
             </div>
 
@@ -139,13 +142,9 @@ export const AnalyticsPage = () => {
                     Expense Distribution
                 </h2>
 
-                <pre>
-                    {JSON.stringify(
-                        expenseDistribution,
-                        null,
-                        2
-                    )}
-                </pre>
+                <ExpenseDistributionChart
+        data={expenseDistribution}
+    />
 
             </div>
 
@@ -159,13 +158,9 @@ export const AnalyticsPage = () => {
                     Top Spending Categories
                 </h2>
 
-                <pre>
-                    {JSON.stringify(
-                        topCategories,
-                        null,
-                        2
-                    )}
-                </pre>
+                <TopSpendingCategories
+    data={topCategories}
+/>
 
             </div>
 

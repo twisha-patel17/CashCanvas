@@ -84,20 +84,39 @@ export const getExpenseDistribution = async (req, res) => {
 
         const expenseDistribution = expense.reduce((acc, curr) => {
 
-            const category = curr.category.name;
+    const category = curr.category.name;
 
-            acc[category] = (acc[category] || 0) + curr.amount;
+    if (!acc[category]) {
 
-            return acc;
+        acc[category] = {
 
-        }, {});
+            amount: 0,
 
-        const graphData = Object.entries(expenseDistribution).map(
-            ([category, amount]) => ({
-                category,
-                amount,
-            })
-        );
+            color: curr.category.color,
+
+        };
+
+    }
+
+    acc[category].amount += curr.amount;
+
+    return acc;
+
+}, {});
+
+        const graphData = Object.entries(
+    expenseDistribution
+).map(
+    ([category, value]) => ({
+
+        category,
+
+        amount: value.amount,
+
+        color: value.color,
+
+    })
+);
 
         res.status(200).json({
             success: true,

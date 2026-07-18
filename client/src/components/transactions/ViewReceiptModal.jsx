@@ -54,7 +54,7 @@ alt="Receipt"
 
 className="
 mt-6
-max-h-[500px]
+max-h-125
 w-full
 rounded-xl
 object-contain

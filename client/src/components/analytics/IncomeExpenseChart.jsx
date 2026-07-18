@@ -8,8 +8,11 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
-export const MonthlyExpenseChart = ({ data }) => {
+
+export const IncomeExpenseChart = ({ data }) => {
+
     return (
+
         <div className="h-72">
 
             <ResponsiveContainer
@@ -17,24 +20,40 @@ export const MonthlyExpenseChart = ({ data }) => {
                 height="100%"
             >
 
-                <LineChart data={data}>
+                <LineChart
+                    data={data}
+                >
 
                     <CartesianGrid
                         strokeDasharray="3 3"
                     />
 
+
                     <XAxis
                         dataKey="month"
                     />
 
+
                     <YAxis />
+
 
                     <Tooltip />
 
+
                     <Line
                         type="monotone"
-                        dataKey="amount"
-                        stroke="#2D5A4A"
+                        dataKey="income"
+                        stroke="#3E8E7E"
+                        strokeWidth={3}
+                        dot={{ r: 5 }}
+                        activeDot={{ r: 7 }}
+                    />
+
+
+                    <Line
+                        type="monotone"
+                        dataKey="expense"
+                        stroke="#C1633D"
                         strokeWidth={3}
                         dot={{ r: 5 }}
                         activeDot={{ r: 7 }}
@@ -45,5 +64,7 @@ export const MonthlyExpenseChart = ({ data }) => {
             </ResponsiveContainer>
 
         </div>
+
     );
+
 };
