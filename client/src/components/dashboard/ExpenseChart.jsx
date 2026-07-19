@@ -1,65 +1,250 @@
-export const ExpenseChart = () => {
+import {
+    PieChart,
+    Pie,
+    Cell,
+    ResponsiveContainer,
+} from "recharts";
 
-  const categories = [
-  {
-    name: "Food",
-    percentage: 35,
-    color: "#2D5A4A",
-  },
-  {
-    name: "Bills",
-    percentage: 23,
-    color: "#3E8E7E",
-  },
-  {
-    name: "Shopping",
-    percentage: 20,
-    color: "#B8934A",
-  },
-  {
-    name: "Travel",
-    percentage: 22,
-    color: "#C1633D",
-  },
-];
 
-  return (
-    <div className="bg-white border border-[#DCD6C7] rounded-2xl p-5">
-      <h2 className="text-[15px] font-semibold text-[#1C2321]">
-        Expense by Category
-      </h2>
+export const ExpenseChart = ({
 
-      <div className="mt-8 flex items-center justify-center gap-12">
-  {/* Donut */}
-  <div className="relative h-37.5 w-37.5 rounded-full bg-[conic-gradient(#2D5A4A_0%_35%,#3E8E7E_35%_58%,#B8934A_58%_78%,#C1633D_78%_100%)]">
-    <div className="absolute inset-6.5 rounded-full bg-white"></div>
-  </div>
+    expenseChart = [],
 
-  {/* Legend */}
-  <div className="space-y-4">
-    {categories.map((category) => (
-      <div
-        key={category.name}
-        className="flex items-center justify-between gap-8"
-      >
-        <div className="flex items-center gap-2">
-          <span
-            className="h-3 w-3 rounded-full"
-            style={{ backgroundColor: category.color }}
-          ></span>
+    totalExpense = 0,
 
-          <p className="text-sm text-[#1C2321]">
-            {category.name}
-          </p>
+}) => {
+
+    const categories = expenseChart;
+
+
+    return (
+
+        <div
+            className="
+            rounded-2xl
+            border
+            border-[#DCD6C7]
+            bg-white
+            p-5
+            "
+        >
+
+            <h2
+                className="
+                text-[15px]
+                font-semibold
+                text-[#1C2321]
+                "
+            >
+                Expense by Category
+            </h2>
+
+
+
+            <div
+                className="
+                mt-8
+                flex
+                items-center
+                justify-center
+                gap-12
+                "
+            >
+
+                {/* Donut Chart */}
+
+                <div
+                    className="
+                    relative
+                    h-40
+                    w-40
+                    "
+                >
+
+                    <ResponsiveContainer
+                        width="100%"
+                        height="100%"
+                    >
+
+                        <PieChart>
+
+                            <Pie
+
+                                data={categories}
+
+                                dataKey="percentage"
+
+                                innerRadius={48}
+
+                                outerRadius={72}
+
+                                stroke="none"
+
+                                paddingAngle={3}
+
+                            >
+
+                                {
+
+                                    categories.map((entry) => (
+
+                                        <Cell
+
+                                            key={entry.name}
+
+                                            fill={entry.color}
+
+                                        />
+
+                                    ))
+
+                                }
+
+                            </Pie>
+
+                        </PieChart>
+
+                    </ResponsiveContainer>
+
+
+
+                    {/* Center Text */}
+
+                    <div
+                        className="
+                        absolute
+                        inset-0
+                        flex
+                        flex-col
+                        items-center
+                        justify-center
+                        "
+                    >
+
+                        <h3
+                            className="
+                            text-xl
+                            font-bold
+                            text-[#1C2321]
+                            "
+                        >
+                            ₹
+                            {totalExpense.toLocaleString()}
+                        </h3>
+
+
+                        <p
+                            className="
+                            text-xs
+                            text-[#5B6360]
+                            "
+                        >
+                            This Month
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+
+                {/* Legends */}
+
+                <div
+                    className="
+                    space-y-4
+                    "
+                >
+
+                    {
+
+                        categories.map((category) => (
+
+                            <div
+
+                                key={category.name}
+
+                                className="
+                                flex
+                                items-center
+                                justify-between
+                                gap-8
+                                "
+                            >
+
+                                <div>
+
+                                    <div
+                                        className="
+                                        flex
+                                        items-center
+                                        gap-2
+                                        "
+                                    >
+
+                                        <span
+
+                                            className="
+                                            h-3
+                                            w-3
+                                            rounded-full
+                                            "
+                                            style={{
+                                                backgroundColor:
+                                                category.color,
+                                            }}
+                                        />
+
+                                        <p
+                                            className="
+                                            text-sm
+                                            font-medium
+                                            text-[#1C2321]
+                                            "
+                                        >
+                                            {category.name}
+                                        </p>
+
+                                    </div>
+
+
+                                    <p
+                                        className="
+                                        ml-5
+                                        text-xs
+                                        text-[#5B6360]
+                                        "
+                                    >
+                                        ₹
+                                        {category.amount
+                                            .toLocaleString()}
+                                    </p>
+
+                                </div>
+
+
+                                <span
+                                    className="
+                                    font-medium
+                                    text-[#1C2321]
+                                    "
+                                >
+                                    {category.percentage}%
+                                </span>
+
+                            </div>
+
+                        ))
+
+                    }
+
+                </div>
+
+            </div>
+
         </div>
 
-        <span className="font-medium text-[#1C2321]">
-          {category.percentage}%
-        </span>
-      </div>
-    ))}
-  </div>
-</div>
-</div>
-  );
+    );
+
 };

@@ -44,7 +44,7 @@ export const getDashboard = async (req, res) => {
                     $gte: startOfMonth,
                     $lte: endOfMonth
                 }
-            }),
+            }).populate("category"),
 
             Category.find({
                 user: req.user.id
@@ -75,13 +75,146 @@ export const getDashboard = async (req, res) => {
         );
 
         const totalBudget = expenseCategories.reduce(
-            (acc, curr) => acc + curr.monthlyBudget,
+    (acc, curr) => acc + curr.monthlyBudget,
+    0
+);
+
+const balance = totalIncome - totalExpense;
+
+const budgetLeft = totalBudget - totalExpense;
+
+
+// Expense By Category
+
+const expenseByCategory = [];
+
+
+expenseCategories.forEach((category) => {
+
+    const amount = expenses
+
+        .filter(
+
+            (expense) =>
+
+                expense.category?._id.toString() ===
+
+                category._id.toString()
+
+        )
+
+        .reduce(
+
+            (acc, curr) =>
+
+                acc + curr.amount,
+
             0
+
         );
 
-        const balance = totalIncome - totalExpense;
 
-        const budgetLeft = totalBudget - totalExpense;
+    if (amount > 0) {
+
+        const percentage =
+
+            totalExpense === 0
+
+            ? 0
+
+            : Math.round(
+
+                (amount / totalExpense) * 100
+
+            );
+
+
+        expenseByCategory.push({
+
+            name: category.name,
+
+            amount,
+
+            percentage,
+
+            color: category.color,
+
+            emoji: category.emoji,
+
+        });
+
+    }
+
+});   
+        // Top Spending Categories
+
+const categoryTotals = {};
+
+
+expenses.forEach((expense) => {
+
+    const categoryName =
+        expense.category?.name;
+
+
+    if (!categoryName) return;
+
+
+    categoryTotals[categoryName] =
+
+        (categoryTotals[categoryName] || 0)
+
+        +
+
+        expense.amount;
+
+});
+
+
+const topCategories = Object.entries(
+
+    categoryTotals
+
+)
+
+    .map(([name, amount]) => {
+
+        const category =
+
+            expenseCategories.find(
+
+                (cat) =>
+
+                    cat.name === name
+
+            );
+
+
+        return {
+
+            category: name,
+
+            amount,
+
+            emoji:
+                category?.emoji,
+
+            color:
+                category?.color,
+
+        };
+
+    })
+
+    .sort(
+
+        (a, b) =>
+
+            b.amount - a.amount
+
+    )
+
+    .slice(0, 5);
 
         res.status(200).json({
             success: true,
@@ -92,7 +225,8 @@ export const getDashboard = async (req, res) => {
             totalBudget,
             balance,
             budgetLeft,
-
+            expenseByCategory,
+            topCategories,
             recentTransactions
         });
 
