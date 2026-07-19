@@ -22,7 +22,7 @@ const navItems = [
 
 export const Sidebar = () => {
   return (
-    <aside className="w-65 min-h-screen bg-[#1F3F34] px-4.5 py-6.5">
+    <aside className="w-65 h-screen fixed left-0 top-0 bg-[#1F3F34] px-4.5 py-6.5">
       <div className="flex items-center gap-3 mb-14">
       <img
       src={logo}

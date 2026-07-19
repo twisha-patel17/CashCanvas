@@ -105,3 +105,118 @@ export const getDashboard = async (req, res) => {
         });
     }
 };
+
+export const getWeeklyExpenses = async (req, res) => {
+    try {
+
+        const currentDate = new Date();
+        const startDate = new Date();
+
+        startDate.setDate(
+            currentDate.getDate() - 6
+        );
+
+        startDate.setHours(
+            0,
+            0,
+            0,
+            0
+        );
+
+
+        const expenses = await Transaction.find({
+
+            user: req.user.id,
+
+            type: "expense",
+
+            date: {
+
+                $gte: startDate,
+
+                $lte: currentDate,
+
+            },
+
+        });
+
+        const weeklyExpenses = [];
+
+
+        for (let i = 0; i < 7; i++) {
+
+            const date = new Date(startDate);
+
+            date.setDate(
+                startDate.getDate() + i
+            );
+
+
+            weeklyExpenses.push({
+
+                date: date.toISOString(),
+
+                amount: 0,
+
+            });
+
+        }
+
+        expenses.forEach((expense) => {
+
+            const expenseDate =
+                new Date(expense.date)
+                .toDateString();
+
+
+            const index =
+                weeklyExpenses.findIndex(
+
+                    (day) =>
+
+                        new Date(day.date)
+                        .toDateString() ===
+                        expenseDate
+
+                );
+
+
+            if (index !== -1) {
+
+                weeklyExpenses[index]
+                    .amount += expense.amount;
+
+            }
+
+        });
+
+
+        res.status(200).json({
+
+            success: true,
+
+            message:
+                "Weekly expenses fetched successfully.",
+
+            weeklyExpenses,
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+
+            success: false,
+
+            message:
+                "Something went wrong.",
+
+        });
+
+    }
+
+};

@@ -52,7 +52,7 @@ export const ProfilePage = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> 
 
       {/* Account Information */}
       <div className="rounded-2xl border border-[#DCD6C7] bg-white p-6 shadow-sm">

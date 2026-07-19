@@ -13,4 +13,4 @@ export const getProfile = async () => {
   );
 
   return response.data.user;
-};
+}; 
