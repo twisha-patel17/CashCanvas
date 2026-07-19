@@ -29,6 +29,8 @@ export const DashboardPage = () => {
 
     const [loading, setLoading] = useState(true);
 
+    console.log(dashboard);
+
 
     useEffect(() => {
 
@@ -212,13 +214,11 @@ export const DashboardPage = () => {
 
                 <BudgetProgress
 
-                    totalBudget={
-                        dashboard.totalBudget
-                    }
-
-                    budgetLeft={
-                        dashboard.budgetLeft
-                    }
+                    totalBudget={dashboard.totalBudget}
+    totalExpense={dashboard.totalExpense}
+    remainingBudget={dashboard.budgetLeft}
+    budgetUsedPercentage={dashboard.budgetUsedPercentage}
+    daysLeft={dashboard.daysLeft}
 
                 />
 

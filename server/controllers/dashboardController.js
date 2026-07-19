@@ -83,6 +83,49 @@ const balance = totalIncome - totalExpense;
 
 const budgetLeft = totalBudget - totalExpense;
 
+const startOfToday = new Date();
+
+startOfToday.setHours(
+    0,
+    0,
+    0,
+    0
+);
+
+const todaySpent = expenses
+
+    .filter(
+
+        (expense) =>
+
+            new Date(expense.date) >= startOfToday
+
+    )
+
+    .reduce(
+
+        (acc, curr) =>
+
+            acc + curr.amount,
+
+        0
+
+    );
+
+
+const lastDayOfMonth = new Date(
+
+    currentDate.getFullYear(),
+
+    currentDate.getMonth() + 1,
+
+    0
+
+);
+
+
+const daysLeft = lastDayOfMonth.getDate() - currentDate.getDate();
+
 
 // Expense By Category
 
@@ -212,9 +255,15 @@ const topCategories = Object.entries(
 
             b.amount - a.amount
 
-    )
+    ).slice(0, 5);
 
-    .slice(0, 5);
+       const budgetUsedPercentage =
+
+    totalBudget === 0
+    ? 0
+    : Math.round(
+        (totalExpense / totalBudget) * 100
+    );
 
         res.status(200).json({
             success: true,
@@ -224,7 +273,10 @@ const topCategories = Object.entries(
             totalExpense,
             totalBudget,
             balance,
+            budgetUsedPercentage,
             budgetLeft,
+            todaySpent,
+            daysLeft,
             expenseByCategory,
             topCategories,
             recentTransactions

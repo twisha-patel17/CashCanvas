@@ -18,6 +18,22 @@ import {
 
 export const BudgetPage = () => {
 
+    const currentDate = new Date();
+
+
+    const [selectedMonth, setSelectedMonth] = useState(
+
+        currentDate.getMonth() + 1
+
+    );
+
+    const [selectedYear, setSelectedYear] = useState(
+
+        currentDate.getFullYear()
+
+    );
+
+
     const [budget, setBudget] = useState({});
 
     const [history, setHistory] = useState([]);
@@ -37,24 +53,26 @@ export const BudgetPage = () => {
 
             try {
 
-                const budgetData =
-                    await getBudget();
+                const budgetData = await getBudget(
+
+                    selectedMonth,
+
+                    selectedYear
+
+                );
 
 
-
-                const historyData =
-                    await getBudgetHistory();
+                const historyData = await getBudgetHistory();
 
 
+                const insightsData = await getBudgetInsights(
 
-                const insightsData =
-                    await getBudgetInsights();
+                    selectedMonth,
 
-                    console.log(budgetData);
+                    selectedYear
 
-                    console.log(historyData);
+                );
 
-                    console.log(insightsData);
 
                 setBudget(
                     budgetData
@@ -70,7 +88,6 @@ export const BudgetPage = () => {
                     insightsData
                 );
 
-
             }
 
             catch (error) {
@@ -84,8 +101,7 @@ export const BudgetPage = () => {
 
         fetchBudgetData();
 
-    }, []);
-
+    }, [selectedMonth, selectedYear]);
 
 
     return (
@@ -97,6 +113,172 @@ export const BudgetPage = () => {
             p-8
             "
         >
+
+            {/* Heading */}
+
+            <div
+                className="
+                mb-8
+                flex
+                items-center
+                justify-between
+                "
+            >
+
+                <h1
+                    className="
+                    text-3xl
+                    font-bold
+                    text-[#1C2321]
+                    "
+                >
+                    Budget Overview
+                </h1>
+
+
+                <div
+                    className="
+                    flex
+                    gap-4
+                    "
+                >
+
+                    {/* Month */}
+
+                    <select
+
+                        value={selectedMonth}
+
+                        onChange={(e) =>
+
+                            setSelectedMonth(
+
+                                Number(e.target.value)
+
+                            )
+
+                        }
+
+                        className="
+                        rounded-xl
+                        border
+                        border-[#DCD6C7]
+                        bg-white
+                        px-4
+                        py-2
+                        outline-none
+                        "
+                    >
+
+                        {
+
+                            Array.from(
+
+                                { length: 12 },
+
+                                (_, index) => (
+
+                                    <option
+
+                                        key={index + 1}
+
+                                        value={index + 1}
+
+                                    >
+
+                                        {
+
+                                            new Date(
+
+                                                0,
+
+                                                index
+
+                                            ).toLocaleString(
+
+                                                "default",
+
+                                                {
+
+                                                    month: "long",
+
+                                                }
+
+                                            )
+
+                                        }
+
+                                    </option>
+
+                                )
+
+                            )
+
+                        }
+
+                    </select>
+
+
+
+                    {/* Year */}
+
+                    <select
+
+                        value={selectedYear}
+
+                        onChange={(e) =>
+
+                            setSelectedYear(
+
+                                Number(e.target.value)
+
+                            )
+
+                        }
+
+                        className="
+                        rounded-xl
+                        border
+                        border-[#DCD6C7]
+                        bg-white
+                        px-4
+                        py-2
+                        outline-none
+                        "
+                    >
+
+                        {
+
+                            Array.from(
+
+                                { length: 6 },
+
+                                (_, index) => (
+
+                                    <option
+
+                                        key={2025 + index}
+
+                                        value={2025 + index}
+
+                                    >
+
+                                        {2025 + index}
+
+                                    </option>
+
+                                )
+
+                            )
+
+                        }
+
+                    </select>
+
+                </div>
+
+            </div>
+
 
             {/* Summary Cards */}
 
@@ -136,9 +318,7 @@ export const BudgetPage = () => {
             </div>
 
 
-
             {/* Category + History */}
-
 
             <div
                 className="
@@ -155,7 +335,7 @@ export const BudgetPage = () => {
                     categoryBudgets={
 
                         budgetInsights
-                        .categoryBudgets
+                            .categoryBudgets
 
                     }
 
@@ -171,9 +351,7 @@ export const BudgetPage = () => {
             </div>
 
 
-
             {/* Top Categories + Status */}
-
 
             <div
                 className="
@@ -190,7 +368,7 @@ export const BudgetPage = () => {
                     topCategories={
 
                         budgetInsights
-                        .topCategories
+                            .topCategories
 
                     }
 
@@ -199,19 +377,19 @@ export const BudgetPage = () => {
 
                 <BudgetStatus
 
-    budgetStatus={
-        budget.budgetStatus
-    }
+                    budgetStatus={
+                        budget.budgetStatus
+                    }
 
-    budgetUsedPercentage={
-        budget.budgetUsedPercentage
-    }
+                    budgetUsedPercentage={
+                        budget.budgetUsedPercentage
+                    }
 
-    remainingBudget={
-        budget.remainingBudget
-    }
+                    remainingBudget={
+                        budget.remainingBudget
+                    }
 
-/>
+                />
 
             </div>
 

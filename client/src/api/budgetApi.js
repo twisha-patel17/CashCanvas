@@ -1,7 +1,17 @@
 import api from "./axios";
 
 
-export const getBudget = async () => {
+export const getBudget = async (
+
+    month,
+
+    year
+
+) => {
+
+    console.log(
+    localStorage.getItem("token")
+);
 
     const response = await api.get(
 
@@ -9,10 +19,18 @@ export const getBudget = async () => {
 
         {
 
+            params: {
+
+                month,
+
+                year,
+
+            },
+
             headers: {
 
                 Authorization:
-                `Bearer ${localStorage.getItem("token")}`,
+                    `Bearer ${localStorage.getItem("token")}`,
 
             },
 
@@ -37,7 +55,7 @@ export const getBudgetHistory = async () => {
             headers: {
 
                 Authorization:
-                `Bearer ${localStorage.getItem("token")}`,
+                    `Bearer ${localStorage.getItem("token")}`,
 
             },
 
@@ -51,7 +69,13 @@ export const getBudgetHistory = async () => {
 
 
 
-export const getBudgetInsights = async () => {
+export const getBudgetInsights = async (
+
+    month,
+
+    year
+
+) => {
 
     const response = await api.get(
 
@@ -59,10 +83,18 @@ export const getBudgetInsights = async () => {
 
         {
 
+            params: {
+
+                month,
+
+                year,
+
+            },
+
             headers: {
 
                 Authorization:
-                `Bearer ${localStorage.getItem("token")}`,
+                    `Bearer ${localStorage.getItem("token")}`,
 
             },
 
