@@ -6,8 +6,8 @@ export const SettingsPage = () => {
       <div
         className="
           rounded-2xl
-          border border-[#DCD6C7]
-          bg-white
+          border border-[#DCD6C7] dark:border-[#3A3A3A]
+          bg-white dark:bg-[#1F1F1F]
           p-6
         "
       >
@@ -15,7 +15,7 @@ export const SettingsPage = () => {
           className="
             text-xl
             font-semibold
-            text-[#1C2321]
+            text-[#1C2321] dark:text-white
           "
         >
           Appearance
@@ -32,11 +32,11 @@ export const SettingsPage = () => {
         >
 
           <div>
-            <p className="font-medium text-[#1C2321]">
+            <p className="font-medium text-[#1C2321] dark:text-white">
               Dark Mode
             </p>
 
-            <p className="text-sm text-[#7A7A7A]">
+            <p className="text-sm text-[#7A7A7A] dark:text-[#B0B0B0]">
               Switch between light and dark theme
             </p>
           </div>
@@ -47,7 +47,7 @@ export const SettingsPage = () => {
               h-7
               w-14
               rounded-full
-              bg-[#2D5A4A]
+              bg-[#2D5A4A] dark:bg-[#3A3A3A]
               p-1
             "
           >
@@ -71,8 +71,8 @@ export const SettingsPage = () => {
       <div
         className="
           rounded-2xl
-          border border-[#DCD6C7]
-          bg-white
+          border border-[#DCD6C7] dark:border-[#3A3A3A]
+          bg-white dark:bg-[#1F1F1F]
           p-6
         "
       >
@@ -81,7 +81,7 @@ export const SettingsPage = () => {
           className="
             text-xl
             font-semibold
-            text-[#1C2321]
+            text-[#1C2321] dark:text-white
           "
         >
           Currency
@@ -93,11 +93,11 @@ export const SettingsPage = () => {
             mt-4
             rounded-xl
             border
-            border-[#DCD6C7]
-            bg-white
+            border-[#DCD6C7] dark:border-[#3A3A3A]
+            bg-white dark:bg-[#2A2A2A]
             px-4
             py-3
-            text-[#1C2321]
+            text-[#1C2321] dark:text-white
             outline-none
           "
         >
@@ -114,8 +114,8 @@ export const SettingsPage = () => {
       <div
         className="
           rounded-2xl
-          border border-[#DCD6C7]
-          bg-white
+          border border-[#DCD6C7] dark:border-[#3A3A3A]
+          bg-white dark:bg-[#1F1F1F]
           p-6
         "
       >
@@ -124,7 +124,7 @@ export const SettingsPage = () => {
           className="
             text-xl
             font-semibold
-            text-[#1C2321]
+            text-[#1C2321] dark:text-white
           "
         >
           About CashCanvas
@@ -135,7 +135,7 @@ export const SettingsPage = () => {
           className="
             mt-4
             leading-relaxed
-            text-[#5B6360]
+            text-[#5B6360] dark:text-[#B0B0B0]
           "
         >
           CashCanvas is a simple and powerful expense
@@ -149,7 +149,7 @@ export const SettingsPage = () => {
           className="
             mt-4
             leading-relaxed
-            text-[#5B6360]
+            text-[#5B6360] dark:text-[#B0B0B0]
           "
         >
           Thank you for using CashCanvas. We hope it helps
@@ -162,7 +162,7 @@ export const SettingsPage = () => {
           className="
             mt-5
             text-sm
-            text-[#7A7A7A]
+            text-[#7A7A7A] dark:text-[#8C8C8C]
           "
         >
           Version 1.0.0
@@ -174,8 +174,8 @@ export const SettingsPage = () => {
 <div
   className="
     rounded-2xl
-    border border-red-200
-    bg-white
+    border border-red-200 dark:border-[#5B2323]
+    bg-white dark:bg-[#1F1F1F]
     p-6
   "
 >
@@ -194,7 +194,7 @@ export const SettingsPage = () => {
   <p
     className="
       mt-3
-      text-[#7A7A7A]
+      text-[#7A7A7A] dark:text-[#B0B0B0]
     "
   >
     Deleting your account will permanently remove your
@@ -211,8 +211,9 @@ export const SettingsPage = () => {
       py-3
       font-medium
       text-white
-      transition
-      hover:opacity-90
+      transition-all
+      duration-200
+      hover:bg-[#9E4B2A]
     "
   >
     Delete Account

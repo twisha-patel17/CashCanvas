@@ -19,6 +19,7 @@ export const ProfilePage = () => {
 
     loadProfile();
   }, []);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -27,7 +28,7 @@ export const ProfilePage = () => {
 
   if (!user) {
     return (
-      <div className="p-8 text-center text-[#7A7A7A]">
+      <div className="p-8 text-center text-[#7A7A7A] dark:text-[#B0B0B0]">
         Loading...
       </div>
     );
@@ -36,18 +37,18 @@ export const ProfilePage = () => {
   return (
     <div className="space-y-6 p-8">
       {/* Profile Header */}
-      <div className="rounded-2xl border border-[#DCD6C7] bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
         <div className="flex items-center gap-5">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#2D5A4A] text-3xl font-semibold text-white">
             {user.name.charAt(0).toUpperCase()}
           </div>
 
           <div>
-            <h1 className="text-3xl font-semibold text-[#1C2321]">
+            <h1 className="text-3xl font-semibold text-[#1C2321] dark:text-white">
               {user.name}
             </h1>
 
-            <p className="mt-1 text-[#7A7A7A]">
+            <p className="mt-1 text-[#7A7A7A] dark:text-[#B0B0B0]">
               {user.email}
             </p>
           </div>
@@ -55,8 +56,8 @@ export const ProfilePage = () => {
       </div> 
 
       {/* Account Information */}
-      <div className="rounded-2xl border border-[#DCD6C7] bg-white p-6 shadow-sm">
-        <h2 className="mb-6 text-2xl font-semibold text-[#1C2321]">
+      <div className="rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] bg-white p-6 shadow-sm">
+        <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
           Account Information
         </h2>
 
@@ -66,27 +67,27 @@ export const ProfilePage = () => {
               Name
             </p>
 
-            <p className="mt-1 text-lg text-[#1C2321]">
+            <p className="mt-1 text-lg text-[#1C2321]  dark:text-white">
               {user.name}
             </p>
           </div>
 
           <div>
-            <p className="text-sm font-medium text-[#7A7A7A]">
+            <p className="text-sm font-medium text-[#7A7A7A] dark:text-[#B0B0B0]">
               Email
             </p>
 
-            <p className="mt-1 text-lg text-[#1C2321]">
+            <p className="mt-1 text-lg text-[#1C2321]  dark:text-white">
               {user.email}
             </p>
           </div>
 
           <div>
-            <p className="text-sm font-medium text-[#7A7A7A]">
+            <p className="text-sm font-medium text-[#7A7A7A] dark:text-[#B0B0B0]">
               Joined On
             </p>
 
-            <p className="mt-1 text-lg text-[#1C2321]">
+            <p className="mt-1 text-lg text-[#1C2321]  dark:text-white">
               {new Date(user.createdAt).toDateString()}
             </p>
           </div>
@@ -96,7 +97,7 @@ export const ProfilePage = () => {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="rounded-xl bg-[#C1633D] px-6 py-3 font-medium text-white transition hover:opacity-90"
+        className="rounded-xl bg-[#C1633D] px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-[#A94F2B]"
       >
         Logout
       </button>

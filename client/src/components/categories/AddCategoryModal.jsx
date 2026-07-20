@@ -66,9 +66,9 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-115 rounded-3xl bg-white p-6 shadow-2xl">
+      <div className="w-115 rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-2xl">
 
-        <h2 className="text-2xl font-bold text-[#1C2321]">
+        <h2 className="text-2xl font-bold text-[#1C2321] dark:text-white">
           Add Category
         </h2>
 
@@ -76,7 +76,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
           {/* Category Name */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-[#1C2321]">
+            <label className="mb-2 block text-sm font-medium text-[#1C2321] dark:text-white border-[#DCD6C7]">
               Category Name
             </label>
 
@@ -85,13 +85,26 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
               placeholder="e.g. Food"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-              className="w-full rounded-xl border border-[#DCD6C7] px-4 py-2.5 outline-none focus:border-[#2D5A4A]"
+              className="w-full
+rounded-xl
+border
+border-[#DCD6C7]
+dark:border-[#3A3A3A]
+bg-white
+dark:bg-[#2A2A2A]
+text-[#1C2321]
+dark:text-white
+placeholder:text-[#8C8C8C]
+px-4
+py-2.5
+outline-none
+focus:border-[#2D5A4A]"
             />
           </div>
 
           {/* Emoji */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-[#1C2321]">
+            <label className="mb-2 block text-sm font-medium text-[#1C2321] dark:text-white">
               Emoji
             </label>
 
@@ -101,7 +114,22 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
             <button
               type="button"
               onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-              className="flex h-12 w-full items-center justify-center rounded-xl border border-[#DCD6C7] text-2xl transition hover:border-[#2D5A4A]"
+              className="flex
+h-12
+w-full
+items-center
+justify-center
+rounded-xl
+border
+border-[#DCD6C7]
+dark:border-[#3A3A3A]
+bg-white
+dark:bg-[#2A2A2A]
+text-[#1C2321]
+dark:text-white
+text-2xl
+transition
+hover:border-[#2D5A4A]"
             >
               {selectedEmoji || "😊 Choose Emoji"}
             </button>
@@ -122,7 +150,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
           {/* Colors */}
           <div>
-            <label className="mb-3 block text-sm font-medium text-[#1C2321]">
+            <label className="mb-3 block text-sm font-medium text-[#1C2321] dark:text-white">
               Color
             </label>
 
@@ -134,7 +162,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
                   onClick={() => setSelectedColor(color)}
                   className={`h-8 w-8 rounded-full ${
                     selectedColor === color
-                      ? "ring-2 ring-offset-2 ring-[#1C2321]"
+                      ? "ring-2 ring-offset-2 dark:ring-offset-[#1F1F1F] ring-[#1C2321] dark:ring-white"
                       : ""
                   }`}
                   style={{ backgroundColor: color }}
@@ -145,7 +173,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
           {/* Type */}
           <div>
-            <label className="mb-3 block text-sm font-medium text-[#1C2321]">
+            <label className="mb-3 block text-sm font-medium text-[#1C2321] dark:text-white">
               Type
             </label>
 
@@ -169,7 +197,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
                 className={`flex-1 rounded-xl py-2.5 font-medium ${
                   categoryType === "income"
                     ? "bg-[#2D5A4A] text-white"
-                    : "border border-[#DCD6C7] text-[#1C2321]"
+                    : "border border-[#DCD6C7] text-[#1C2321] dark:border-[#3A3A3A] dark:text-white dark:bg-[#2A2A2A]"
                 }`}
               >
                 Income
@@ -180,7 +208,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
 
           {/* Budget */}
           <div>
-            <label className="mb-2 block text-sm font-medium text-[#1C2321]">
+            <label className="mb-2 block text-sm font-medium text-[#1C2321] dark:text-white">
               Monthly Budget
             </label>
 
@@ -189,7 +217,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
               placeholder="₹ 10,000"
               value={budget}
               onChange={(e) => setBudget(e.target.value)}
-              className="w-full rounded-xl border border-[#DCD6C7] px-4 py-3 outline-none focus:border-[#2D5A4A]"
+              className="w-full rounded-xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#2A2A2A] text-[#1C2321] dark:text-white placeholder:text-[#8C8C8C] px-4 py-3 outline-none focus:border-[#2D5A4A]"
             />
           </div>
 
@@ -199,14 +227,14 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-[#DCD6C7] px-6 py-2.5 font-medium text-[#1C2321] hover:bg-gray-50"
+              className="rounded-xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#2A2A2A] px-6 py-2.5 font-medium text-[#1C2321] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2F2F2F]"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="rounded-xl bg-[#2D5A4A] px-6 py-2.5 font-medium text-white hover:bg-[#23483A]"
+              className="rounded-xl bg-[#2D5A4A] px-6 py-2.5 font-medium text-white  hover:bg-[#23483A]"
             >
               Save Category
             </button>

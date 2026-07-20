@@ -118,11 +118,11 @@ navigate("/login");
 
   return (
     <div className="w-full max-w-md">
-      <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321]">
+      <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] dark:text-white">
         Create your account
       </h2>
 
-      <p className="mt-2 mb-8 text-[#5B6360] text-[15px] leading-6">
+      <p className="mt-2 mb-8 text-[#5B6360] dark:text-[#B0B0B0] text-[15px] leading-6">
         Takes less than a minute. No card required.
       </p>
 
@@ -131,7 +131,7 @@ navigate("/login");
         <div>
           <label
             htmlFor="name"
-            className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+            className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
           >
             Name
           </label>
@@ -146,8 +146,9 @@ navigate("/login");
               setName(e.target.value);
               setNameError("");
             }}
-            className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]
-         ${nameError ? "border-red-500" : "border-[#DCD6C7]"}`}
+            className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 text-[14px] text-[#1C2321] dark:text-white outline-none focus:border-[#2D5A4A] placeholder:text-[#9CA3AF]
+dark:placeholder:text-[#808080]
+         ${nameError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
           />
           {nameError && (
      <p className="text-sm text-red-500 mt-1">{nameError}</p>
@@ -158,7 +159,7 @@ navigate("/login");
         <div>
           <label
             htmlFor="email"
-            className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+            className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
           >
             Email
           </label>
@@ -173,8 +174,10 @@ navigate("/login");
               setEmail(e.target.value);
               setEmailError("");
             }}
-            className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]
-${emailError ? "border-red-500" : "border-[#DCD6C7]"}`}
+            className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 text-[14px] text-[#1C2321] dark:text-white placeholder:text-[#9CA3AF]
+dark:placeholder:text-[#808080]
+ outline-none focus:border-[#2D5A4A]
+${emailError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
           />
           {emailError && (
      <p className="text-sm text-red-500 mt-1">{emailError}</p>
@@ -187,7 +190,7 @@ ${emailError ? "border-red-500" : "border-[#DCD6C7]"}`}
           <div>
             <label
               htmlFor="password"
-              className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+              className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
             >
               Password
             </label>
@@ -203,13 +206,14 @@ ${emailError ? "border-red-500" : "border-[#DCD6C7]"}`}
                 setPassword(e.target.value);
                 setPasswordError("");
               }}
-              className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]
-${passwordError ? "border-red-500" : "border-[#DCD6C7]"}`}
+              className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] dark:text-white outline-none focus:border-[#2D5A4A] placeholder:text-[#9CA3AF]
+dark:placeholder:text-[#808080]
+${passwordError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
             />
             <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] hover:text-[#2D5A4A]"
+                  className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] dark:text-[#B0B0B0] hover:text-[#2D5A4A]"
                 >
                   {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                 </button>
@@ -227,7 +231,7 @@ ${passwordError ? "border-red-500" : "border-[#DCD6C7]"}`}
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+              className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
             >
               Confirm Password
             </label>
@@ -243,18 +247,19 @@ ${passwordError ? "border-red-500" : "border-[#DCD6C7]"}`}
                 setConfirmPassword(e.target.value);
                 setConfirmPasswordError("");
               }}
-              className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A]
+              className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] dark:text-white outline-none focus:border-[#2D5A4A] placeholder:text-[#9CA3AF]
+dark:placeholder:text-[#808080]
 ${
   confirmPasswordError
     ? "border-red-500"
-    : "border-[#DCD6C7]"
+    : "border-[#DCD6C7] dark:border-[#3A3A3A]"
 }`}
             />
 
             <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] hover:text-[#2D5A4A]"
+                  className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] dark:text-[#B0B0B0] hover:text-[#2D5A4A]"
                 >
                   {showConfirmPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                 </button>

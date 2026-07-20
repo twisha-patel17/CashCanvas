@@ -7,7 +7,7 @@ export const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="w-full pt-22.5 px-[6%] pb-17.5 bg-[repeating-linear-gradient(180deg,#F7F5EF,#F7F5EF_27px,#DCD6C7_28px)]">
+    <section className="w-full pt-22.5 px-[6%] pb-17.5 bg-[repeating-linear-gradient(180deg,#F7F5EF,#F7F5EF_27px,#DCD6C7_28px)] dark:bg-[repeating-linear-gradient(180deg,#121212,#121212_27px,#262626_28px)]">
         <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto' }}>
   <p style={{
     fontFamily: 'IBM Plex Mono, monospace',
@@ -16,7 +16,7 @@ export const Hero = () => {
     textTransform: 'uppercase',
     color: '#2D5A4A',
     margin: '0 0 14px'
-  }}>
+  }} className=" dark:text-[#3E8E7E]">
     Personal finance, kept honestly
   </p>
 
@@ -27,8 +27,8 @@ export const Hero = () => {
     lineHeight: 1.12,
     color: '#1C2321',
     margin: '0 0 18px'
-  }}>
-    Know exactly where <em style={{ color: '#2D5A4A' }}>every rupee</em> goes.
+  }} className="dark:text-white">
+    Know exactly where <em style={{ color: '#2D5A4A' }} className=" dark:text-[#3E8E7E]">every rupee</em> goes.
   </h1>
 
   <p style={{
@@ -37,7 +37,7 @@ export const Hero = () => {
     color: '#5B6360',
     maxWidth: '480px',
     margin: '0 auto'
-  }}>
+  }} className="dark:text-[#B0B0B0]">
     Track income, expenses, and budgets in one plain, paper-simple ledger — no spreadsheets required.
   </p>
 </div>
@@ -54,6 +54,9 @@ export const Hero = () => {
     rounded-[3px]
     hover:bg-[#23483b]
     transition-colors
+    dark:bg-[#3E8E7E]
+     dark:text-white
+     dark:hover:bg-[#34796C]
   "
   onClick={() => navigate("/signup")}
 >

@@ -73,7 +73,7 @@ export const CategoriesPage = () => {
         />
 
         {filteredCategories.length > 0 ? (
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-3 gap-5 ">
             {filteredCategories.map((category) => (
               <CategoryCard
                 key={category._id}
@@ -83,7 +83,7 @@ export const CategoriesPage = () => {
             ))}
           </div>
         ) : (
-          <p className="py-10 text-center text-[#7A7A7A]">
+          <p className="py-10 text-center text-[#7A7A7A] dark:text-[#B0B0B0]">
             No categories found.
           </p>
         )}

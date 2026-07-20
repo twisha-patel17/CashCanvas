@@ -45,11 +45,11 @@ export const ForgotPasswordForm = () => {
 
   return (
     <div className="w-full max-w-md">
-      <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321]">
+      <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold dark:text-white text-[#1C2321]">
         Forgot password?
       </h2>
 
-      <p className="mt-2 mb-8 text-[#5B6360] text-[15px] leading-6">
+      <p className="mt-2 mb-8 text-[#5B6360] dark:text-[#B0B0B0] text-[15px] leading-6">
         Enter the email on your account and we'll send a link to reset it.
       </p>
 
@@ -60,7 +60,7 @@ export const ForgotPasswordForm = () => {
         <div>
           <label
             htmlFor="email"
-            className="block mb-2 text-[12px] font-semibold text-[#5B6360]"
+            className="block mb-2 text-[12px] font-semibold text-[#5B6360] dark:text-[#B0B0B0]"
           >
             Email
           </label>
@@ -74,7 +74,7 @@ export const ForgotPasswordForm = () => {
               setEmail(e.target.value);
               setEmailError("");
             }}
-            className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-3 outline-none focus:border-[#2D5A4A] ${
+            className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] dark:text-white  px-3 py-3 outline-none dark:border-[#3A3A3A] focus:border-[#2D5A4A] ${
               emailError ? "border-red-500" : "border-[#DCD6C7]"
             }`}
           />
@@ -89,7 +89,7 @@ export const ForgotPasswordForm = () => {
         {/* Success */}
 
         {successMessage && (
-          <p className="text-sm text-green-700">
+          <p className="text-sm text-green-700 dark:text-[#34D399]">
             {successMessage}
           </p>
         )}
@@ -110,11 +110,11 @@ export const ForgotPasswordForm = () => {
 
       </form>
 
-      <p className="mt-8 text-center text-[14px] text-[#5B6360]">
+      <p className="mt-8 text-center text-[14px] text-[#5B6360] dark:text-[#B0B0B0]">
         Remembered it after all?{" "}
         <Link
           to="/login"
-          className="font-semibold text-[#2D5A4A] hover:underline"
+          className="font-semibold text-[#2D5A4A] hover:underline dark:text-[#3E8E7E]"
         >
           Back to login
         </Link>

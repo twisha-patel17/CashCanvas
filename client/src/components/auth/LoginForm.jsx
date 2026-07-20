@@ -87,14 +87,14 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F5EF] flex items-center justify-center flex-col px-6 lg:px-0 py-12 lg:py-0">
+    <div className="min-h-screen bg-[#F7F5EF] dark:bg-[#121212] flex items-center justify-center flex-col px-6 lg:px-0 py-12 lg:py-0">
       <div className="w-full max-w-97.5">
 
-        <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] mb-1.5">
+        <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] dark:text-white mb-1.5">
           Welcome back
         </h2>
 
-        <p className="text-[15px] text-[#5B6360] mb-8">
+        <p className="text-[15px] text-[#5B6360] dark:text-[#B0B0B0] mb-8">
           Log in to pick up your ledger where you left it.
         </p>
       </div>
@@ -105,7 +105,7 @@ export const LoginForm = () => {
   <div>
     <label
       htmlFor="email"
-      className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+      className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
     >
       Email
     </label>
@@ -119,8 +119,8 @@ export const LoginForm = () => {
       onChange={(e) => {setEmail(e.target.value);
         setEmailError("");
       }}
-      className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A] ${
-  emailError ? "border-red-500" : "border-[#DCD6C7]"
+      className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] dark:text-white dark:placeholder:text-[#8A8A8A] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A] ${
+  emailError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"
 }`}
 />
    {emailError && (
@@ -133,7 +133,7 @@ export const LoginForm = () => {
 <div>
   <label
     htmlFor="password"
-    className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360]"
+    className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
   >
     Password
   </label>
@@ -149,14 +149,14 @@ export const LoginForm = () => {
         setPassword(e.target.value);
         setPasswordError("");
       }}
-      className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 pr-10 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A] ${
-  passwordError ? "border-red-500" : "border-[#DCD6C7]"
+      className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] dark:text-white dark:placeholder:text-[#8A8A8A] px-3 pr-10 py-2.75 text-[14px] text-[#1C2321] outline-none focus:border-[#2D5A4A] ${
+  passwordError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"
 }`}
 />
     <button
       type="button"
       onClick={() => setShowPassword(!showPassword)}
-      className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] hover:text-[#2D5A4A]"
+      className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] dark:text-[#B0B0B0] hover:text-[#2D5A4A]"
     >
       {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
     </button>
@@ -179,14 +179,14 @@ export const LoginForm = () => {
       onChange={(e) => setRememberMe(e.target.checked)}
       className="h-4 w-4 accent-[#2D5A4A]"
     />
-    <span className="text-sm text-[#5B6360]">
+    <span className="text-sm text-[#5B6360] dark:text-[#B0B0B0]">
       Remember me
     </span>
   </label>
 
   <Link
     to="/forgot-password"
-    className="text-sm font-medium text-[#2D5A4A] hover:underline"
+    className="text-sm font-medium text-[#2D5A4A] dark:text-[#3E8E7E] hover:underline"
   >
     Forgot Password?
   </Link>
@@ -209,11 +209,11 @@ export const LoginForm = () => {
 
 {/* Footer */}
 
-<div className="mt-5.5 text-center text-[13px] text-[#5B6360]">
+<div className="mt-5.5 text-center text-[13px] text-[#5B6360] dark:text-[#B0B0B0]">
   Don't have an account?{" "}
   <Link
     to="/signup"
-    className="font-semibold text-[#2D5A4A] hover:underline"
+    className="font-semibold text-[#2D5A4A] dark:text-[#3E8E7E] hover:underline"
   >
     Sign up
   </Link>
