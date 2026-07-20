@@ -22,7 +22,7 @@ const navItems = [
 
 export const Sidebar = () => {
   return (
-    <aside className="w-65 h-screen fixed left-0 top-0 bg-[#1F3F34] px-4.5 py-6.5">
+    <aside className="w-65 h-screen fixed left-0 top-0 bg-[#1F3F34] dark:bg-[#121212] px-4.5 py-6.5">
       <div className="flex items-center gap-3 mb-14">
       <img
       src={logo}
@@ -30,7 +30,7 @@ export const Sidebar = () => {
       className="w-10 h-10"
       />
 
-      <h1 className="text-[#F3F0E6] text-[30px] font-semibold">
+      <h1 className="text-[#F3F0E6] dark:text-white text-[30px] font-semibold">
        CashCanvas
       </h1>
     </div>
@@ -44,7 +44,7 @@ export const Sidebar = () => {
               `flex items-center gap-3 rounded-lg px-4 py-3 text-[15px] font-medium transition-all duration-200 ${
                 isActive
                   ? "bg-white/10 text-white"
-                  : "text-[#CBD8D2] hover:bg-white/5 hover:text-white"
+                  : "text-[#CBD8D2] dark:text-[#B4B4B4] hover:bg-white/5 hover:text-white"
               }`
             }
           >

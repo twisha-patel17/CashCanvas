@@ -53,6 +53,7 @@ export const BudgetStatus = ({
             className="
             rounded-2xl
             bg-white
+            dark:bg-[#1F1F1F]
             p-5
             shadow-sm
             "
@@ -63,6 +64,7 @@ export const BudgetStatus = ({
                 text-xl
                 font-semibold
                 text-[#1C2321]
+                dark:text-white
                 "
             >
                 Budget Status
@@ -91,6 +93,7 @@ export const BudgetStatus = ({
                 text-center
                 text-sm
                 text-[#5B6360]
+                dark:text-[#B0B0B0]
                 "
             >
                 {statusMessage[budgetStatus]}
@@ -105,6 +108,7 @@ export const BudgetStatus = ({
                 mt-6
                 rounded-xl
                 bg-[#F7F5EF]
+                dark:bg-[#2A2A2A]
                 p-4
                 "
             >
@@ -114,6 +118,7 @@ export const BudgetStatus = ({
                     text-sm
                     font-medium
                     text-[#5B6360]
+                    dark:text-[#B0B0B0]
                     "
                 >
                     Monthly Health
@@ -126,6 +131,7 @@ export const BudgetStatus = ({
                     text-2xl
                     font-bold
                     text-[#1C2321]
+                    dark:text-white
                     "
                 >
                     {budgetUsedPercentage}% Used
@@ -142,6 +148,7 @@ export const BudgetStatus = ({
                 mt-4
                 rounded-xl
                 bg-[#F7F5EF]
+                dark:bg-[#2A2A2A]
                 p-4
                 "
             >
@@ -151,6 +158,7 @@ export const BudgetStatus = ({
                     text-sm
                     font-medium
                     text-[#5B6360]
+                    dark:text-[#B0B0B0]
                     "
                 >
                     {
@@ -197,6 +205,7 @@ export const BudgetStatus = ({
                 mt-4
                 rounded-xl
                 bg-[#F7F5EF]
+                dark:bg-[#2A2A2A]
                 p-4
                 "
             >
@@ -206,6 +215,7 @@ export const BudgetStatus = ({
                     text-sm
                     font-medium
                     text-[#5B6360]
+                    dark:text-[#B0B0B0]
                     "
                 >
                     Budget Advice
@@ -217,6 +227,7 @@ export const BudgetStatus = ({
                     mt-1
                     text-sm
                     text-[#1C2321]
+                    dark:text-white
                     "
                 >
                     {budgetAdvice[budgetStatus]}

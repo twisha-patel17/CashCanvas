@@ -56,7 +56,9 @@ export const MonthlyExpenseChart = ({
             rounded-2xl
             border
             border-[#DCD6C7]
+            dark:border-[#3A3A3A]
             bg-white
+            dark:bg-[#1F1F1F]
             p-5
             "
         >
@@ -72,6 +74,7 @@ export const MonthlyExpenseChart = ({
                     text-[15px]
                     font-semibold
                     text-[#1C2321]
+                    dark:text-white
                     "
                 >
                     Monthly Expense
@@ -83,6 +86,7 @@ export const MonthlyExpenseChart = ({
                     mt-1
                     text-xs
                     text-[#5B6360]
+                    dark:text-[#A1A1AA]
                     "
                 >
                     Last 7 Days • {currentMonth}

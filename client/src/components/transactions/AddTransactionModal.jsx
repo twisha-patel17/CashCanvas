@@ -57,11 +57,11 @@ export const AddTransactionModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="mx-4 w-full max-w-4xl rounded-2xl bg-white p-8 shadow-xl">
+      <div className="mx-4 w-full max-w-4xl rounded-2xl bg-white dark:bg-[#1F1F1F] p-8 shadow-xl">
         {/* Header */}
 
         <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-3xl font-bold text-[#1C2321]">
+          <h2 className="text-3xl font-bold text-[#1C2321] dark:text-white">
             {mode === "add"
               ? "Add Transaction"
               : "Edit Transaction"}
@@ -70,7 +70,7 @@ export const AddTransactionModal = ({
           <button onClick={onClose}>
             <FiX
               size={28}
-              className="text-[#5B6360] transition hover:text-black"
+              className="text-[#5B6360] dark:text-[#A1A1AA] transition hover:text-black dark:hover:text-white"
             />
           </button>
         </div>
@@ -91,7 +91,10 @@ export const AddTransactionModal = ({
             w-full
             rounded-xl
             border
+            dark:text-white
+           text-[#1C2321]
             border-[#DCD6C7]
+            dark:border-[#3A3A3A]
             px-4
             py-3
             outline-none
@@ -109,9 +112,12 @@ export const AddTransactionModal = ({
                 value={formData.type}
                 onChange={handleChange}
                 className="
+                dark:text-white
+                text-[#1C2321]
                 rounded-xl
                 border
                 border-[#DCD6C7]
+                dark:border-[#3A3A3A]
                 px-4
                 py-3
                 outline-none
@@ -139,7 +145,10 @@ export const AddTransactionModal = ({
                 rounded-xl
                 border
                 border-[#DCD6C7]
+                dark:border-[#3A3A3A]
                 bg-gray-100
+               dark:text-white
+              text-[#1C2321]
                 px-4
                 py-3
                 "
@@ -155,6 +164,7 @@ export const AddTransactionModal = ({
               rounded-xl
               border
               border-[#DCD6C7]
+              dark:border-[#3A3A3A]
               px-4
               py-3
               outline-none
@@ -176,6 +186,7 @@ export const AddTransactionModal = ({
               rounded-xl
               border
               border-[#DCD6C7]
+              dark:border-[#3A3A3A]
               px-4
               py-3
               outline-none
@@ -204,6 +215,7 @@ export const AddTransactionModal = ({
               rounded-xl
               border
               border-[#DCD6C7]
+              dark:border-[#3A3A3A]
               px-4
               py-3
               outline-none
@@ -249,6 +261,7 @@ export const AddTransactionModal = ({
               rounded-xl
               border
               border-[#DCD6C7]
+              dark:border-[#3A3A3A]
               px-4
               py-3
               "
@@ -268,6 +281,7 @@ export const AddTransactionModal = ({
             rounded-xl
             border
             border-[#DCD6C7]
+            dark:border-[#3A3A3A]
             px-4
             py-3
             outline-none
@@ -287,6 +301,7 @@ export const AddTransactionModal = ({
             rounded-xl
             border
             border-[#DCD6C7]
+            dark:border-[#3A3A3A]
             px-6
             py-3
             transition

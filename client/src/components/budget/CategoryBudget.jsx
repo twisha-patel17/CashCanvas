@@ -9,7 +9,7 @@ export const CategoryBudget = ({
         <div
             className="
             rounded-2xl
-            bg-white
+            bg-white dark:bg-[#1F1F1F]
             p-5
             shadow-sm
             "
@@ -20,7 +20,7 @@ export const CategoryBudget = ({
                 mb-5
                 text-xl
                 font-semibold
-                text-[#1C2321]
+               text-[#1C2321] dark:text-white
                 "
             >
                 Category Budgets
@@ -88,7 +88,7 @@ export const CategoryBudget = ({
                                         className="
                                         text-sm
                                         font-medium
-                                        text-[#1C2321]
+                                        text-[#1C2321] dark:text-white
                                         "
                                     >
                                         {category.category}
@@ -100,7 +100,7 @@ export const CategoryBudget = ({
                                 <p
                                     className="
                                     text-sm
-                                    text-[#5B6360]
+                                    text-[#5B6360] dark:text-[#B0B0B0]
                                     "
                                 >
                                     ₹
@@ -126,7 +126,7 @@ export const CategoryBudget = ({
                                 w-full
                                 overflow-hidden
                                 rounded-full
-                                bg-[#DCD6C7]
+                                bg-[#DCD6C7] dark:bg-[#3A3A3A]
                                 "
                             >
 

@@ -110,6 +110,7 @@ export const BudgetPage = () => {
             className="
             min-h-screen
             bg-[#F7F5EF]
+            dark:bg-[#121212]
             p-8
             "
         >
@@ -130,6 +131,7 @@ export const BudgetPage = () => {
                     text-3xl
                     font-bold
                     text-[#1C2321]
+                    dark:text-white
                     "
                 >
                     Budget Overview
@@ -163,7 +165,11 @@ export const BudgetPage = () => {
                         rounded-xl
                         border
                         border-[#DCD6C7]
+                        dark:border-[#3A3A3A]
                         bg-white
+                        dark:bg-[#1F1F1F]
+                        text-[#1C2321]
+                        dark:text-white
                         px-4
                         py-2
                         outline-none
@@ -240,6 +246,10 @@ export const BudgetPage = () => {
                         rounded-xl
                         border
                         border-[#DCD6C7]
+                        dark:border-[#3A3A3A]
+                        text-[#1C2321]
+                        dark:text-white
+                        dark:bg-[#1F1F1F]
                         bg-white
                         px-4
                         py-2

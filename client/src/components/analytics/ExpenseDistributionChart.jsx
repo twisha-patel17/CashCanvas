@@ -41,11 +41,38 @@ export const ExpenseDistributionChart = ({ data }) => {
 
 
                     <Tooltip
-                         formatter={(value, name) => [
-                         `₹${value}`,
-                          name,
-                        ]}
-                     />
+
+contentStyle={{
+
+    backgroundColor:"#1F1F1F",
+
+    border:"1px solid #3A3A3A",
+
+    borderRadius:"12px",
+
+}}
+
+labelStyle={{
+
+    color:"#FFFFFF",
+
+}}
+
+itemStyle={{
+
+    color:"#FFFFFF",
+
+}}
+
+formatter={(value,name)=>([
+
+    `₹${value}`,
+
+    name,
+
+])}
+
+/>
 
                 </PieChart>
 

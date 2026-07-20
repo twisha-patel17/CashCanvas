@@ -25,6 +25,7 @@ export const BudgetSummaryCards = ({
                 className="
                 rounded-2xl
                 bg-white
+                dark:bg-[#1F1F1F]
                 p-5
                 shadow-sm
                 "
@@ -35,6 +36,7 @@ export const BudgetSummaryCards = ({
                     text-base
                     font-medium
                     text-[#5B6360]
+                    dark:text-[#B0B0B0]
                     "
                 >
                     Total Budget
@@ -47,6 +49,7 @@ export const BudgetSummaryCards = ({
                     text-3xl
                     font-bold
                     text-[#1C2321]
+                    dark:text-white
                     "
                 >
                     ₹{totalBudget.toLocaleString()}
@@ -58,6 +61,7 @@ export const BudgetSummaryCards = ({
                     mt-2
                     text-sm
                     text-[#5B6360]
+                    dark:text-[#B0B0B0]
                     "
                 >
                     This month's budget
@@ -73,6 +77,7 @@ export const BudgetSummaryCards = ({
                 className="
                 rounded-2xl
                 bg-white
+                dark:bg-[#1F1F1F]
                 p-5
                 shadow-sm
                 "
@@ -83,6 +88,7 @@ export const BudgetSummaryCards = ({
                     text-base
                     font-medium
                     text-[#5B6360]
+                    dark:text-[#B0B0B0]
                     "
                 >
                     Remaining Budget
@@ -119,7 +125,7 @@ export const BudgetSummaryCards = ({
 
                             ? "text-[#C1633D]"
 
-                            : "text-[#5B6360]"
+                            : "text-[#5B6360] dark:text-[#B0B0B0]"
                     }
                     `}
                 >

@@ -31,6 +31,9 @@ export const TransactionFilters = ({selectedType,
         py-3
         text-sm
         text-[#1C2321]
+        dark:border-[#3A3A3A]
+        dark:bg-[#1F1F1F]
+        dark:text-white
         outline-none
         transition
         focus:border-[#2D5A4A]
@@ -55,6 +58,9 @@ export const TransactionFilters = ({selectedType,
         py-3
         text-sm
         text-[#1C2321]
+        dark:border-[#3A3A3A]
+       dark:bg-[#1F1F1F]
+        dark:text-white
         outline-none
         transition
         focus:border-[#2D5A4A]
@@ -109,6 +115,9 @@ border-[#DCD6C7]
 bg-white
 px-4
 py-3
+dark:border-[#3A3A3A]
+dark:bg-[#1F1F1F]
+dark:text-white
 text-sm
 text-[#1C2321]
 outline-none
@@ -166,6 +175,9 @@ Debit Card
         border
         border-[#DCD6C7]
         bg-white
+        dark:border-[#3A3A3A]
+        dark:bg-[#1F1F1F]
+        dark:text-white
         px-4
         py-3
         text-sm

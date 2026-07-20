@@ -9,7 +9,7 @@ export const TopBudgetCategories = ({
         <div
             className="
             rounded-2xl
-            bg-white
+            bg-white dark:bg-[#1F1F1F]
             p-5
             shadow-sm
             "
@@ -20,7 +20,7 @@ export const TopBudgetCategories = ({
                 mb-5
                 text-xl
                 font-semibold
-                text-[#1C2321]
+                text-[#1C2321] dark:text-white
                 "
             >
                 Top Spending Categories
@@ -45,7 +45,7 @@ export const TopBudgetCategories = ({
 
                             className="
                             border-b
-                            border-[#DCD6C7]
+                            border-[#DCD6C7] dark:border-[#3A3A3A]
                             pb-3
                             last:border-none
                             last:pb-0
@@ -57,7 +57,7 @@ export const TopBudgetCategories = ({
                                 mb-2
                                 text-xs
                                 font-semibold
-                                text-[#5B6360]
+                                text-[#5B6360] dark:text-[#B0B0B0]
                                 "
                             >
                                 #{index + 1}
@@ -95,7 +95,7 @@ export const TopBudgetCategories = ({
                                         className="
                                         text-sm
                                         font-medium
-                                        text-[#1C2321]
+                                        text-[#1C2321] dark:text-white
                                         "
                                     >
                                         {category.category}

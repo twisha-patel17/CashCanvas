@@ -324,7 +324,7 @@ a.amount-b.amount
 
   return (
 
-    <div className="min-h-screen bg-[#F7F5EF]">
+    <div className="min-h-screen bg-[#F7F5EF] dark:bg-[#121212]">
 
       {/* Topbar */}
 

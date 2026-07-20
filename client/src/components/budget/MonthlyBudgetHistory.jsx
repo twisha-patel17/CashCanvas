@@ -9,7 +9,7 @@ export const MonthlyBudgetHistory = ({
         <div
             className="
             rounded-2xl
-            bg-white
+            bg-white dark:bg-[#1F1F1F]
             p-5
             shadow-sm
             "
@@ -20,7 +20,7 @@ export const MonthlyBudgetHistory = ({
                 mb-5
                 text-xl
                 font-semibold
-                text-[#1C2321]
+                text-[#1C2321] dark:text-white
                 "
             >
                 Monthly History
@@ -41,7 +41,7 @@ export const MonthlyBudgetHistory = ({
 
                         className="
                         border-b
-                        border-[#DCD6C7]
+                        border-[#DCD6C7] dark:border-[#3A3A3A]
                         pb-4
                         last:border-none
                         last:pb-0
@@ -54,7 +54,7 @@ export const MonthlyBudgetHistory = ({
                             className="
                             text-lg
                             font-semibold
-                            text-[#1C2321]
+                            text-[#1C2321] dark:text-white
                             "
                         >
                             {month.month}
@@ -74,7 +74,7 @@ export const MonthlyBudgetHistory = ({
 
                             <p
                                 className="
-                                text-[#5B6360]
+                                text-[#5B6360] dark:text-[#B0B0B0]
                                 "
                             >
                                 Budget :
@@ -86,7 +86,7 @@ export const MonthlyBudgetHistory = ({
 
                             <p
                                 className="
-                                text-[#5B6360]
+                                text-[#5B6360] dark:text-[#B0B0B0]
                                 "
                             >
                                 Expense :

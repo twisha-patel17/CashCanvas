@@ -1,43 +1,16 @@
-export const ViewReceiptModal = ({
-
-receipt,
-
-onClose,
-
-})=>{
-
-
+export const ViewReceiptModal = ({receipt,onClose})=>{
 return(
-
+<div
+className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
 <div
 className="
-fixed
-inset-0
-z-50
-flex
-items-center
-justify-center
-bg-black/40
-"
->
-
-
-<div
-className="
-w-full
-max-w-2xl
-rounded-2xl
-bg-white
-p-6
-shadow-xl
-"
->
-
+w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl">
 <h2
 className="
 text-2xl
 font-bold
 text-[#1C2321]
+dark:text-white
 "
 >
 
@@ -81,6 +54,8 @@ bg-[#2D5A4A]
 px-6
 py-3
 text-white
+transition
+hover:bg-[#23483A]
 "
 
 >

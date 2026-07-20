@@ -23,8 +23,8 @@ export const ExpenseChart = ({
             className="
             rounded-2xl
             border
-            border-[#DCD6C7]
-            bg-white
+            border-[#DCD6C7] dark:border-[#3A3A3A]
+            bg-white dark:bg-[#1F1F1F]
             p-5
             "
         >
@@ -33,7 +33,7 @@ export const ExpenseChart = ({
                 className="
                 text-[15px]
                 font-semibold
-                text-[#1C2321]
+                text-[#1C2321] dark:text-[#FFFFFF]
                 "
             >
                 Expense by Category
@@ -125,7 +125,7 @@ export const ExpenseChart = ({
                             className="
                             text-xl
                             font-bold
-                            text-[#1C2321]
+                            text-[#1C2321] dark:text-[#FFFFFF]
                             "
                         >
                             ₹
@@ -136,7 +136,7 @@ export const ExpenseChart = ({
                         <p
                             className="
                             text-xs
-                            text-[#5B6360]
+                            text-[#5B6360] dark:text-[#A1A1AA]
                             "
                         >
                             This Month
@@ -200,7 +200,7 @@ export const ExpenseChart = ({
                                             className="
                                             text-sm
                                             font-medium
-                                            text-[#1C2321]
+                                            text-[#1C2321] dark:text-[#FFFFFF]
                                             "
                                         >
                                             {category.name}
@@ -228,6 +228,7 @@ export const ExpenseChart = ({
                                     className="
                                     font-medium
                                     text-[#1C2321]
+                                    dark:text-[#FFFFFF]
                                     "
                                 >
                                     {category.percentage}%

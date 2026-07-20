@@ -6,9 +6,9 @@ export const TopSpendingCategories = ({
 
     return (
 
-        <div className="rounded-2xl border border-[#DCD6C7] bg-white p-5">
+        <div className="rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] p-5">
 
-            <h2 className="text-[15px] font-semibold text-[#1C2321]">
+            <h2 className="text-[15px] font-semibold text-[#1C2321] dark:text-white">
                 Top Spending Categories
             </h2>
 
@@ -34,7 +34,7 @@ export const TopSpendingCategories = ({
                                     }}
                                 />
 
-                                <span className="text-sm font-medium text-[#1C2321]">
+                                <span className="text-sm font-medium text-[#1C2321] dark:text-white">
 
                                     {category.category}
 
@@ -43,7 +43,7 @@ export const TopSpendingCategories = ({
                             </div>
 
 
-                            <span className="text-sm text-[#1C2321]">
+                            <span className="text-sm text-[#1C2321] dark:text-white">
 
                                 ₹
                                 {category.amount.toLocaleString()}

@@ -17,6 +17,8 @@ export const SummaryCard = ({
             border
             border-[#DCD6C7]
             bg-white
+            dark:border-[#3A3A3A]
+            dark:bg-[#1F1F1F]
             p-5
             transition-all
             duration-300
@@ -39,6 +41,7 @@ export const SummaryCard = ({
                     uppercase
                     tracking-[0.12em]
                     text-[#2D5A4A]
+                    dark:text-[#7BC3AF]
                     "
                 >
                     {label}
@@ -97,6 +100,7 @@ export const SummaryCard = ({
                 mt-1
                 text-sm
                 text-[#5B6360]
+                dark:text-[#A1A1AA]
                 "
             >
                 {subtitle}

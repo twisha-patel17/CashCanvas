@@ -4,11 +4,11 @@ export const TransactionTable = ({
 
   return (
 
-    <div className="overflow-hidden rounded-2xl border border-[#DCD6C7] bg-white shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] shadow-sm">
 
       {/* Table Header */}
 
-      <div className="grid grid-cols-6 border-b border-[#DCD6C7] bg-[#FAF9F5] px-6 py-4 text-sm font-semibold text-[#5B6360]">
+      <div className="grid grid-cols-6 border-b border-[#DCD6C7] dark:border-[#3A3A3A] bg-[#FAF9F5] dark:bg-[#292929] px-6 py-4 text-sm font-semibold text-[#5B6360]">
 
         <p>Date</p>
         <p>Category</p>
@@ -26,7 +26,7 @@ export const TransactionTable = ({
 
         <div
           key={transaction._id}
-          className="grid grid-cols-6 items-center border-b border-[#F1EEE6] px-6 py-5 text-[#1C2321]"
+          className="grid grid-cols-6 items-center border-b border-[#F1EEE6] dark:border-[#303030] px-6 py-5 text-[#1C2321] dark:text-white"
         >
 
           {/* Date */}
@@ -83,6 +83,7 @@ export const TransactionTable = ({
             text-sm
             italic
             text-[#5B6360]
+            dark:text-[#A1A1AA]
             "
             >
 
@@ -151,6 +152,7 @@ className="
 text-sm
 font-medium
 text-[#2D5A4A]
+dark:text-[#6FB7A1]
 transition
 hover:underline
 "
@@ -167,7 +169,7 @@ View
         )
     }
 
-              className="text-sm font-medium text-[#2D5A4A] transition hover:underline"
+              className="text-sm font-medium text-[#2D5A4A] dark:text-[#6FB7A1] transition hover:underline"
             >
               Edit
             </button>
@@ -180,6 +182,7 @@ View
     text-sm
     font-medium
     text-[#C1633D]
+    dark:text-[#E07A5F]
     transition
     hover:underline
     "

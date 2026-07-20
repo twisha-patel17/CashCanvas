@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom";
+
 export const RecentTransactions = ({ transactions = []}) => {
   return(
-    <div className="rounded-2xl border border-[#DCD6C7] bg-white p-5">
+    <div className="rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] p-5">
   {/* Header */}
   <div className="flex items-center justify-between">
-    <h2 className="text-[15px] font-semibold text-[#1C2321]">
+    <h2 className="text-[15px] font-semibold text-[#1C2321] dark:text-white">
       Recent Transactions
     </h2>
 
-    <button className="text-sm font-medium text-[#2D5A4A] hover:underline">
+    <Link  to="/transactions" className="text-sm font-medium text-[#2D5A4A] dark:text-[#7BC3AF] hover:underline">
       View All →
-    </button>
+    </Link>
   </div>
 
   {/* Transactions */}
@@ -18,23 +20,23 @@ export const RecentTransactions = ({ transactions = []}) => {
     {transactions.map((transaction) => (
       <div
         key={transaction._id}
-        className="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-[#F8F6F2]"
+        className="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-[#F8F6F2] dark:hover:bg-[#292929]"
       >
         {/* Left */}
         <div className="flex items-center gap-4">
 
           {/* Emoji */}
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F5F5F5] text-xl">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F5F5F5] dark:bg-[#303030] text-xl">
             {transaction.category.emoji}
           </div>
 
           {/* Title + Date */}
           <div>
-            <h3 className="text-[14px] font-medium text-[#1C2321]">
+            <h3 className="text-[14px] font-medium text-[#1C2321] dark:text-white">
               {transaction.category?.name || "Unknown Category"}
             </h3>
 
-            <p className="mt-1 text-xs text-[#201f1f]">
+            <p className="mt-1 text-xs text-[#201f1f] dark:text-[#A1A1AA]">
               {
                 new Date(transaction.createdAt).toLocaleDateString("en-IN", {
                   day: "numeric",

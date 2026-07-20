@@ -97,16 +97,17 @@ export const AnalyticsPage = () => {
     <AnalyticsTopbar />
  
 
-    <section className="min-h-screen bg-[#F7F5EF] p-8">
+    <section className="min-h-screen bg-[#F7F5EF] dark:bg-[#121212] p-8">
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 
 
             {/* Monthly Expenses */}
 
-            <div className="rounded-3xl bg-white p-6 shadow-sm">
+            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
 
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321]">
+                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white
+">
                     Monthly Expenses
                 </h2>
 
@@ -120,9 +121,9 @@ export const AnalyticsPage = () => {
 
             {/* Income Vs Expense */}
 
-            <div className="rounded-3xl bg-white p-6 shadow-sm">
+            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
 
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321]">
+                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
                     Income Vs Expense
                 </h2>
 
@@ -136,9 +137,9 @@ export const AnalyticsPage = () => {
 
             {/* Expense Distribution */}
 
-            <div className="rounded-3xl bg-white p-6 shadow-sm">
+            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
 
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321]">
+                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
                     Expense Distribution
                 </h2>
 
@@ -152,9 +153,9 @@ export const AnalyticsPage = () => {
 
             {/* Top Spending Categories */}
 
-            <div className="rounded-3xl bg-white p-6 shadow-sm">
+            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
 
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321]">
+                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
                     Top Spending Categories
                 </h2>
 
