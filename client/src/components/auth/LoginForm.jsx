@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../api/axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 export const LoginForm = () => {
 
@@ -44,6 +45,7 @@ export const LoginForm = () => {
     if (!isValid) return;
 
     setIsLoading(true);
+    const toastId = toast.loading("Logging in...");
 
     try {
 
@@ -56,14 +58,14 @@ export const LoginForm = () => {
   localStorage.setItem("accessToken", response.data.accessToken);
   localStorage.setItem("refreshToken", response.data.refreshToken);
 
-  alert("Login successful!");
+  toast.success("Login successful!", { id: toastId });
 
   navigate("/dashboard");
 
 } catch (error) {
 
   if (error.response) {
-    alert(error.response.data.message);
+    toast.error(error.response.data.message, { id: toastId });
   } else {
     alert("Something went wrong");
   }

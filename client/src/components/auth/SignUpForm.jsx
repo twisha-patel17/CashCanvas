@@ -1,23 +1,24 @@
 import api from "../../api/axios";
-import { useState } from "react"
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 export const SignUpForm = () => {
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,16 +27,17 @@ export const SignUpForm = () => {
 
   const validatePassword = (password) => {
     const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
     return passwordRegex.test(password);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setNameError("");
     setEmailError("");
     setPasswordError("");
-    setNameError("");
     setConfirmPasswordError("");
 
     let isValid = true;
@@ -43,13 +45,13 @@ export const SignUpForm = () => {
     if (!name.trim()) {
       setNameError("Name is required");
       isValid = false;
-    }else if (name.trim().length < 3) {
-  setNameError("Name must be at least 3 characters");
-  isValid = false;
-} else if (name.trim().length > 30) {
-  setNameError("Name must not exceed 30 characters");
-  isValid = false;
-}
+    } else if (name.trim().length < 3) {
+      setNameError("Name must be at least 3 characters");
+      isValid = false;
+    } else if (name.trim().length > 30) {
+      setNameError("Name must not exceed 30 characters");
+      isValid = false;
+    }
 
     if (!email.trim()) {
       setEmailError("Email is required");
@@ -64,8 +66,8 @@ export const SignUpForm = () => {
       isValid = false;
     } else if (!validatePassword(password.trim())) {
       setPasswordError(
-  "Password must be at least 8 characters and include an uppercase letter, lowercase letter, number, and special character."
-);
+        "Password must be at least 8 characters and include an uppercase letter, lowercase letter, number, and special character."
+      );
       isValid = false;
     }
 
@@ -77,43 +79,31 @@ export const SignUpForm = () => {
       isValid = false;
     }
 
-    if (!isValid) {
-  return;
-}
+    if (!isValid) return;
 
     setIsLoading(true);
+    const toastId = toast.loading("Creating account...");
 
-try {
+    try {
+      await api.post("/auth/register", { name, email, password });
 
-  await api.post("/auth/register", {
-    name,
-    email,
-    password,
-  });
+      toast.success("Account created successfully!", { id: toastId });
 
-  alert("Account created successfully!");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
 
-  setName("");
-setEmail("");
-setPassword("");
-setConfirmPassword("");
-
-navigate("/login");
-
-} catch (error) {
-
-  if (error.response) {
-    alert(error.response.data.message);
-  } else {
-    alert("Something went wrong");
-  }
-
-} finally {
-
-  setIsLoading(false);
-
-}
-
+      navigate("/login");
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message, { id: toastId });
+      } else {
+        toast.error("Something went wrong", { id: toastId });
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -122,7 +112,7 @@ navigate("/login");
         Create your account
       </h2>
 
-      <p className="mt-2 mb-8 text-[#5B6360] dark:text-[#B0B0B0] text-[15px] leading-6">
+      <p className="mt-2 mb-8 text-[15px] leading-6 text-[#5B6360] dark:text-[#B0B0B0]">
         Takes less than a minute. No card required.
       </p>
 
@@ -131,7 +121,7 @@ navigate("/login");
         <div>
           <label
             htmlFor="name"
-            className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
+            className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
           >
             Name
           </label>
@@ -146,20 +136,21 @@ navigate("/login");
               setName(e.target.value);
               setNameError("");
             }}
-            className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 text-[14px] text-[#1C2321] dark:text-white outline-none focus:border-[#2D5A4A] placeholder:text-[#9CA3AF]
-dark:placeholder:text-[#808080]
-         ${nameError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
+            className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none placeholder:text-[#9CA3AF] focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white dark:placeholder:text-[#808080] ${
+              nameError ? "border-red-500" : "border-[#DCD6C7]"
+            }`}
           />
+
           {nameError && (
-     <p className="text-sm text-red-500 mt-1">{nameError}</p>
-   )}
+            <p className="mt-1 text-sm text-red-500">{nameError}</p>
+          )}
         </div>
 
         {/* Email */}
         <div>
           <label
             htmlFor="email"
-            className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
+            className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
           >
             Email
           </label>
@@ -174,14 +165,14 @@ dark:placeholder:text-[#808080]
               setEmail(e.target.value);
               setEmailError("");
             }}
-            className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 text-[14px] text-[#1C2321] dark:text-white placeholder:text-[#9CA3AF]
-dark:placeholder:text-[#808080]
- outline-none focus:border-[#2D5A4A]
-${emailError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
+            className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 text-[14px] text-[#1C2321] outline-none placeholder:text-[#9CA3AF] focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white dark:placeholder:text-[#808080] ${
+              emailError ? "border-red-500" : "border-[#DCD6C7]"
+            }`}
           />
+
           {emailError && (
-     <p className="text-sm text-red-500 mt-1">{emailError}</p>
-   )}
+            <p className="mt-1 text-sm text-red-500">{emailError}</p>
+          )}
         </div>
 
         {/* Passwords */}
@@ -190,106 +181,110 @@ ${emailError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
           <div>
             <label
               htmlFor="password"
-              className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
+              className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
             >
               Password
             </label>
 
             <div className="relative">
-               <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              autoComplete="new-password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setPasswordError("");
-              }}
-              className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] dark:text-white outline-none focus:border-[#2D5A4A] placeholder:text-[#9CA3AF]
-dark:placeholder:text-[#808080]
-${passwordError ? "border-red-500" : "border-[#DCD6C7] dark:border-[#3A3A3A]"}`}
-            />
-            <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] dark:text-[#B0B0B0] hover:text-[#2D5A4A]"
-                >
-                  {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-                </button>
+              <input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError("");
+                }}
+                className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] outline-none placeholder:text-[#9CA3AF] focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white dark:placeholder:text-[#808080] ${
+                  passwordError ? "border-red-500" : "border-[#DCD6C7]"
+                }`}
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] hover:text-[#2D5A4A] dark:text-[#B0B0B0]"
+              >
+                {showPassword ? (
+                  <FiEyeOff size={18} />
+                ) : (
+                  <FiEye size={18} />
+                )}
+              </button>
             </div>
 
             {passwordError && (
-    <p className="mt-1 text-sm text-red-500">
-      {passwordError}
-    </p>
-  )}
-
+              <p className="mt-1 text-sm text-red-500">
+                {passwordError}
+              </p>
+            )}
           </div>
 
           {/* Confirm Password */}
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block mb-1.5 text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
+              className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] text-[#5B6360] dark:text-[#B0B0B0]"
             >
               Confirm Password
             </label>
 
             <div className="relative">
               <input
-              id="confirmPassword"
-              type={showConfirmPassword ? "text" : "password"}
-              autoComplete="new-password"
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-                setConfirmPasswordError("");
-              }}
-              className={`w-full rounded-[3px] border bg-[#FDFCF9] dark:bg-[#262626] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] dark:text-white outline-none focus:border-[#2D5A4A] placeholder:text-[#9CA3AF]
-dark:placeholder:text-[#808080]
-${
-  confirmPasswordError
-    ? "border-red-500"
-    : "border-[#DCD6C7] dark:border-[#3A3A3A]"
-}`}
-            />
+                id="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setConfirmPasswordError("");
+                }}
+                className={`w-full rounded-[3px] border bg-[#FDFCF9] px-3 py-2.75 pr-10 text-[14px] text-[#1C2321] outline-none placeholder:text-[#9CA3AF] focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white dark:placeholder:text-[#808080] ${
+                  confirmPasswordError
+                    ? "border-red-500"
+                    : "border-[#DCD6C7]"
+                }`}
+              />
 
-            <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] dark:text-[#B0B0B0] hover:text-[#2D5A4A]"
-                >
-                  {showConfirmPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-                </button>
-
+              <button
+                type="button"
+                onClick={() =>
+                  setShowConfirmPassword(!showConfirmPassword)
+                }
+                className="absolute inset-y-0 right-3 flex items-center text-[#5B6360] hover:text-[#2D5A4A] dark:text-[#B0B0B0]"
+              >
+                {showConfirmPassword ? (
+                  <FiEyeOff size={18} />
+                ) : (
+                  <FiEye size={18} />
+                )}
+              </button>
             </div>
 
             {confirmPasswordError && (
-    <p className="mt-1 text-sm text-red-500">
-      {confirmPasswordError}
-    </p>
-  )}
+              <p className="mt-1 text-sm text-red-500">
+                {confirmPasswordError}
+              </p>
+            )}
           </div>
         </div>
 
-        {/* Button */}
         <button
           type="submit"
-          className={`w-full rounded-[3px] py-3 text-[14px] font-semibold text-[#F3F0E6] transition-colors
-${
-  isLoading
-    ? "bg-[#6B8A7A] cursor-not-allowed"
-    : "bg-[#2D5A4A] hover:bg-[#23483b]"
-}`}
           disabled={isLoading}
+          className={`w-full rounded-[3px] py-3 text-[14px] font-semibold text-[#F3F0E6] transition-colors ${
+            isLoading
+              ? "cursor-not-allowed bg-[#6B8A7A]"
+              : "bg-[#2D5A4A] hover:bg-[#23483b]"
+          }`}
         >
           {isLoading ? "Creating account..." : "Create account"}
         </button>
       </form>
 
-      {/* Footer */}
       <div className="mt-6 text-center text-[14px] text-[#5B6360]">
         Already have an account?{" "}
         <Link

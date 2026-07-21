@@ -1,7 +1,7 @@
 import { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 
-export const AddCategoryModal = ({onClose, onAddCategory}) => {
+export const AddCategoryModal = ({ onClose, onAddCategory }) => {
   const colors = [
     "#2D5A4A",
     "#3E8E7E",
@@ -41,9 +41,9 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
     }
 
     if (Number(budget) < 0) {
-   alert("Budget cannot be negative");
-   return;
-}
+      alert("Budget cannot be negative");
+      return;
+    }
 
     const category = {
       name: categoryName,
@@ -67,13 +67,11 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="w-115 rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-2xl">
-
         <h2 className="text-2xl font-bold text-[#1C2321] dark:text-white">
           Add Category
         </h2>
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
-
           {/* Category Name */}
           <div>
             <label className="mb-2 block text-sm font-medium text-[#1C2321] dark:text-white border-[#DCD6C7]">
@@ -85,20 +83,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
               placeholder="e.g. Food"
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
-              className="w-full
-rounded-xl
-border
-border-[#DCD6C7]
-dark:border-[#3A3A3A]
-bg-white
-dark:bg-[#2A2A2A]
-text-[#1C2321]
-dark:text-white
-placeholder:text-[#8C8C8C]
-px-4
-py-2.5
-outline-none
-focus:border-[#2D5A4A]"
+              className="w-full rounded-xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#2A2A2A] text-[#1C2321] dark:text-white placeholder:text-[#8C8C8C] px-4 py-2.5 outline-none focus:border-[#2D5A4A]"
             />
           </div>
 
@@ -108,44 +93,26 @@ focus:border-[#2D5A4A]"
               Emoji
             </label>
 
-          <div className="relative">
-            
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                className="flex h-12 w-full items-center justify-center rounded-xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#2A2A2A] text-[#1C2321] dark:text-white text-2xl transition hover:border-[#2D5A4A]"
+              >
+                {selectedEmoji || "😊 Choose Emoji"}
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-              className="flex
-h-12
-w-full
-items-center
-justify-center
-rounded-xl
-border
-border-[#DCD6C7]
-dark:border-[#3A3A3A]
-bg-white
-dark:bg-[#2A2A2A]
-text-[#1C2321]
-dark:text-white
-text-2xl
-transition
-hover:border-[#2D5A4A]"
-            >
-              {selectedEmoji || "😊 Choose Emoji"}
-            </button>
-
-            {showEmojiPicker && (
-              <div className="absolute z-50 mt-2">
-                <EmojiPicker
-                  onEmojiClick={(emoji) => {
-                    setSelectedEmoji(emoji.emoji);
-                    setShowEmojiPicker(false);
-                  }}
+              {showEmojiPicker && (
+                <div className="absolute z-50 mt-2">
+                  <EmojiPicker
+                    onEmojiClick={(emoji) => {
+                      setSelectedEmoji(emoji.emoji);
+                      setShowEmojiPicker(false);
+                    }}
                   />
-                  </div>
-            )}
-          </div>  
-
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Colors */}
@@ -178,14 +145,13 @@ hover:border-[#2D5A4A]"
             </label>
 
             <div className="flex gap-3">
-
               <button
                 type="button"
                 onClick={() => setCategoryType("expense")}
                 className={`flex-1 rounded-xl py-2.5 font-medium ${
                   categoryType === "expense"
                     ? "bg-[#2D5A4A] text-white"
-                    : "border border-[#DCD6C7] text-[#1C2321]"
+                    : "border border-[#DCD6C7] text-[#1C2321] dark:border-[#3A3A3A] dark:text-white dark:bg-[#2A2A2A]"
                 }`}
               >
                 Expense
@@ -202,7 +168,6 @@ hover:border-[#2D5A4A]"
               >
                 Income
               </button>
-
             </div>
           </div>
 
@@ -223,7 +188,6 @@ hover:border-[#2D5A4A]"
 
           {/* Footer */}
           <div className="mt-6 flex justify-end gap-3">
-
             <button
               type="button"
               onClick={onClose}
@@ -238,9 +202,7 @@ hover:border-[#2D5A4A]"
             >
               Save Category
             </button>
-
           </div>
-
         </form>
       </div>
     </div>

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { getDashboard } from "../api/dashboardApi";
-import { getWeeklyExpenses } from "../api/dashboardApi";
+import {
+  getDashboard,
+  getWeeklyExpenses,
+} from "../api/dashboardApi";
 
 import { DashboardTopbar } from "../components/dashboard/DashboardTopbar";
 import { ExpenseChart } from "../components/dashboard/ExpenseChart";
@@ -12,246 +14,132 @@ import { TopSpendingCategories } from "../components/dashboard/TopSpendingCatego
 import { RecentTransactions } from "../components/dashboard/RecentTransactions";
 
 import {
-
-    FiCreditCard,
-    FiTrendingUp,
-    FiTrendingDown,
-    FiTarget,
-
+  FiCreditCard,
+  FiTrendingUp,
+  FiTrendingDown,
+  FiTarget,
 } from "react-icons/fi";
 
-
 export const DashboardPage = () => {
+  const [dashboard, setDashboard] = useState({});
+  const [weeklyExpenses, setWeeklyExpenses] =
+    useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const [dashboard, setDashboard] = useState({});
+  console.log(dashboard);
 
-    const [weeklyExpenses, setWeeklyExpenses] = useState([]);
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const dashboardData = await getDashboard();
+        const weeklyData =
+          await getWeeklyExpenses();
 
-    const [loading, setLoading] = useState(true);
+        setDashboard(dashboardData);
+        setWeeklyExpenses(weeklyData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    console.log(dashboard);
+    fetchDashboardData();
+  }, []);
 
-
-    useEffect(() => {
-
-        const fetchDashboardData = async () => {
-
-            try {
-
-                const dashboardData =
-                    await getDashboard();
-
-
-                const weeklyData =
-                    await getWeeklyExpenses();
-
-
-                setDashboard(
-                    dashboardData
-                );
-
-
-                setWeeklyExpenses(
-                    weeklyData
-                );
-
-
-            }
-
-            catch (error) {
-
-                console.log(error);
-
-            }
-
-            finally {
-
-                setLoading(false);
-
-            }
-
-        };
-
-
-        fetchDashboardData();
-
-    }, []);
-
-
-    if (loading) {
-
-        return (
-
-            <div className="p-8">
-
-                Loading...
-
-            </div>
-
-        );
-
-    }
-
-
+  if (loading) {
     return (
-
-        <>
-
-            <DashboardTopbar />
-
-
-            {/* Summary Cards */}
-
-            <div className="grid grid-cols-4 gap-4 mt-8">
-
-                <SummaryCard
-
-                    label="BALANCE"
-
-                    value={`₹${dashboard.balance?.toLocaleString()}`}
-
-                    subtitle="Available this month"
-
-                    icon={<FiCreditCard />}
-
-                    valueColor="#1C2321"
-
-                    iconBg="#EDF5F2"
-
-                    iconColor="#2D5A4A"
-
-                />
-
-
-                <SummaryCard
-
-                    label="INCOME"
-
-                    value={`₹${dashboard.totalIncome?.toLocaleString()}`}
-
-                    subtitle="Current month's income"
-
-                    icon={<FiTrendingUp />}
-
-                    valueColor="#3E8E7E"
-
-                    iconBg="#EAF7F3"
-
-                    iconColor="#3E8E7E"
-
-                />
-
-
-                <SummaryCard
-
-                    label="EXPENSE"
-
-                    value={`₹${dashboard.totalExpense?.toLocaleString()}`}
-
-                    subtitle="Spent this month"
-
-                    icon={<FiTrendingDown />}
-
-                    valueColor="#C1633D"
-
-                    iconBg="#FCEFEA"
-
-                    iconColor="#C1633D"
-
-                />
-
-
-                <SummaryCard
-
-                    label="BUDGET LEFT"
-
-                    value={`₹${dashboard.budgetLeft?.toLocaleString()}`}
-
-                    subtitle="Remaining this month"
-
-                    icon={<FiTarget />}
-
-                    valueColor="#1C2321"
-
-                    iconBg="#FBF6EA"
-
-                    iconColor="#B8934A"
-
-                />
-
-            </div>
-
-
-
-            {/* Charts */}
-
-            <div className="grid grid-cols-[1.1fr_1fr] gap-4 mt-6">
-
-                <ExpenseChart
-
-    expenseChart={
-        dashboard.expenseByCategory
-    }
-
-    totalExpense={
-        dashboard.totalExpense
-    }
-
-/>
-
-
-                <MonthlyExpenseChart
-                    weeklyExpenses={weeklyExpenses}
-                />
-
-            </div>
-
-
-
-            {/* Budget & Top Categories */}
-
-            <div className="grid grid-cols-2 gap-4 mt-6">
-
-                <BudgetProgress
-
-                    totalBudget={dashboard.totalBudget}
-    totalExpense={dashboard.totalExpense}
-    remainingBudget={dashboard.budgetLeft}
-    budgetUsedPercentage={dashboard.budgetUsedPercentage}
-    daysLeft={dashboard.daysLeft}
-
-                />
-
-
-                <TopSpendingCategories
-
-    topCategories={
-        dashboard.topCategories
-    }
-
-/>
-
-            </div>
-
-
-
-            {/* Recent Transactions */}
-
-            <div className="mt-6">
-
-                <RecentTransactions
-
-                    transactions={
-                        dashboard.recentTransactions
-                    }
-
-                />
-
-            </div>
-
-        </>
-
+      <div className="p-8">
+        Loading...
+      </div>
     );
+  }
 
+  return (
+    <>
+      <DashboardTopbar />
+
+      {/* Summary Cards */}
+      <div className="mt-8 grid grid-cols-4 gap-4">
+        <SummaryCard
+          label="BALANCE"
+          value={`₹${dashboard.balance?.toLocaleString()}`}
+          subtitle="Available this month"
+          icon={<FiCreditCard />}
+          valueColor="#2D5A4A"
+          iconBg="#EDF5F2"
+          iconColor="#2D5A4A"
+        />
+
+        <SummaryCard
+          label="INCOME"
+          value={`₹${dashboard.totalIncome?.toLocaleString()}`}
+          subtitle="Current month's income"
+          icon={<FiTrendingUp />}
+          valueColor="#3E8E7E"
+          iconBg="#EAF7F3"
+          iconColor="#3E8E7E"
+        />
+
+        <SummaryCard
+          label="EXPENSE"
+          value={`₹${dashboard.totalExpense?.toLocaleString()}`}
+          subtitle="Spent this month"
+          icon={<FiTrendingDown />}
+          valueColor="#C1633D"
+          iconBg="#FCEFEA"
+          iconColor="#C1633D"
+        />
+
+        <SummaryCard
+          label="BUDGET LEFT"
+          value={`₹${dashboard.budgetLeft?.toLocaleString()}`}
+          subtitle="Remaining this month"
+          icon={<FiTarget />}
+          valueColor="#B8934A"
+          iconBg="#FBF6EA"
+          iconColor="#B8934A"
+        />
+      </div>
+
+      {/* Charts */}
+      <div className="mt-6 grid grid-cols-[1.1fr_1fr] gap-4">
+        <ExpenseChart
+          expenseChart={dashboard.expenseByCategory}
+          totalExpense={dashboard.totalExpense}
+        />
+
+        <MonthlyExpenseChart
+          weeklyExpenses={weeklyExpenses}
+        />
+      </div>
+
+      {/* Budget & Top Categories */}
+      <div className="mt-6 grid grid-cols-2 gap-4">
+        <BudgetProgress
+          totalBudget={dashboard.totalBudget}
+          totalExpense={dashboard.totalExpense}
+          remainingBudget={dashboard.budgetLeft}
+          budgetUsedPercentage={
+            dashboard.budgetUsedPercentage
+          }
+          daysLeft={dashboard.daysLeft}
+        />
+
+        <TopSpendingCategories
+          topCategories={dashboard.topCategories}
+        />
+      </div>
+
+      {/* Recent Transactions */}
+      <div className="mt-6">
+        <RecentTransactions
+          transactions={
+            dashboard.recentTransactions
+          }
+        />
+      </div>
+    </>
+  );
 };
  

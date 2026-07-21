@@ -1,36 +1,28 @@
 export const TransactionTable = ({
-  openDeleteModal, openEditModal, transactions, openReceiptModal
+  openDeleteModal,
+  openEditModal,
+  transactions,
+  openReceiptModal,
 }) => {
-
   return (
-
-    <div className="overflow-hidden rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] shadow-sm">
-
+    <div className="overflow-hidden rounded-2xl border border-[#DCD6C7] bg-white shadow-sm dark:border-[#3A3A3A] dark:bg-[#1F1F1F]">
       {/* Table Header */}
-
-      <div className="grid grid-cols-6 border-b border-[#DCD6C7] dark:border-[#3A3A3A] bg-[#FAF9F5] dark:bg-[#292929] px-6 py-4 text-sm font-semibold text-[#5B6360]">
-
+      <div className="grid grid-cols-6 border-b border-[#DCD6C7] bg-[#FAF9F5] px-6 py-4 text-sm font-semibold text-[#5B6360] dark:border-[#3A3A3A] dark:bg-[#292929]">
         <p>Date</p>
         <p>Category</p>
         <p>Amount</p>
         <p>Status</p>
         <p>Payment</p>
         <p className="text-right">Actions</p>
-
       </div>
 
-
       {/* Transaction Rows */}
-
       {transactions.map((transaction) => (
-
         <div
           key={transaction._id}
-          className="grid grid-cols-6 items-center border-b border-[#F1EEE6] dark:border-[#303030] px-6 py-5 text-[#1C2321] dark:text-white"
+          className="grid grid-cols-6 items-center border-b border-[#F1EEE6] px-6 py-5 text-[#1C2321] dark:border-[#303030] dark:text-white"
         >
-
           {/* Date */}
-
           <p>
             {new Date(transaction.date).toLocaleDateString(
               "en-IN",
@@ -42,64 +34,21 @@ export const TransactionTable = ({
             )}
           </p>
 
-
           {/* Category */}
-
           <p className="flex items-center gap-2">
-
-    {
-
-        transaction.category ? (
-
-            <>
-
-            <span>
-
-                {
-                    transaction.category.emoji
-                }
-
-            </span>
-
-
-            <span>
-
-                {
-                    transaction.category.name
-                }
-
-            </span>
-
-            </>
-
-        )
-
-        :
-
-        (
-
-            <span
-            className="
-            text-sm
-            italic
-            text-[#5B6360]
-            dark:text-[#A1A1AA]
-            "
-            >
-
+            {transaction.category ? (
+              <>
+                <span>{transaction.category.emoji}</span>
+                <span>{transaction.category.name}</span>
+              </>
+            ) : (
+              <span className="text-sm italic text-[#5B6360] dark:text-[#A1A1AA]">
                 (Category Deleted)
-
-            </span>
-
-        )
-
-    }
-
-</p>
-
+              </span>
+            )}
+          </p>
 
           {/* Amount */}
-
           <p
             className={`font-semibold ${
               transaction.type === "income"
@@ -111,11 +60,8 @@ export const TransactionTable = ({
             {transaction.amount}
           </p>
 
-
           {/* Status */}
-
           <p>
-
             <span
               className={`rounded-full px-3 py-1 text-xs font-medium ${
                 transaction.status === "cleared"
@@ -127,74 +73,40 @@ export const TransactionTable = ({
             >
               {transaction.status}
             </span>
-
           </p>
-
 
           {/* Payment Method */}
-
-          <p>
-            {transaction.paymentMethod}
-          </p>
-
+          <p>{transaction.paymentMethod}</p>
 
           {/* Actions */}
-
           <div className="flex justify-end gap-3">
+            <button
+              onClick={() =>
+                openReceiptModal(transaction.receipt)
+              }
+              className="text-sm font-medium text-[#2D5A4A] transition hover:underline dark:text-[#6FB7A1]"
+            >
+              View
+            </button>
 
             <button
-
-            onClick={() => {
-              openReceiptModal(transaction.receipt);
-            }}
-
-className="
-text-sm
-font-medium
-text-[#2D5A4A]
-dark:text-[#6FB7A1]
-transition
-hover:underline
-"
-
->
-
-View
-
-</button>
-
-            <button onClick={()=>
-        openEditModal(
-            transaction
-        )
-    }
-
-              className="text-sm font-medium text-[#2D5A4A] dark:text-[#6FB7A1] transition hover:underline"
+              onClick={() => openEditModal(transaction)}
+              className="text-sm font-medium text-[#2D5A4A] transition hover:underline dark:text-[#6FB7A1]"
             >
               Edit
             </button>
 
             <button
-    onClick={() =>
-        openDeleteModal(transaction._id)
-    }
-    className="
-    text-sm
-    font-medium
-    text-[#C1633D]
-    dark:text-[#E07A5F]
-    transition
-    hover:underline
-    "
->
-  Delete
-</button>
+              onClick={() =>
+                openDeleteModal(transaction._id)
+              }
+              className="text-sm font-medium text-[#C1633D] transition hover:underline dark:text-[#E07A5F]"
+            >
+              Delete
+            </button>
           </div>
-
         </div>
-
       ))}
-
     </div>
   );
 };

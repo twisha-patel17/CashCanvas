@@ -1,10 +1,8 @@
 import {
-    FiSearch,
     FiMoon,
     FiSun,
-    FiBell,
 } from "react-icons/fi";
-
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../contexts/ThemeContext";
 
 export const DashboardTopbar = () => {
@@ -14,56 +12,16 @@ export const DashboardTopbar = () => {
         toggleTheme,
     } = useTheme();
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const avatarLetter = user?.name
+    ? user.name.charAt(0).toUpperCase()
+    : "U";
+
+    const navigate = useNavigate();
     return (
 
-        <div className="flex items-center justify-between mb-8">
-
-            {/* Search Bar */}
-
-            <div className="relative w-[320px]">
-
-                <FiSearch
-                    className="
-                    absolute
-                    left-3
-                    top-1/2
-                    -translate-y-1/2
-                    text-gray-400
-                    text-lg
-                    "
-                />
-
-                <input
-
-                    type="text"
-
-                    placeholder="Search transactions..."
-
-                    className="
-                    w-full
-                    rounded-lg
-                    border
-                    border-[#DCD6C7]
-                    dark:border-[#3A3A3A]
-                    bg-[#FDFCF9]
-                    dark:bg-[#2A2A2A]
-                    py-2.5
-                    pl-10
-                    pr-4
-                    text-sm
-                    text-[#1C2321]
-                    dark:text-white
-                    shadow-sm
-                    outline-none
-                    focus:border-[#2D5A4A]
-                    focus:ring-2
-                    focus:ring-[#2D5A4A]/20
-                    "
-
-                />
-
-            </div>
-
+        <div className="flex items-center justify-end mb-8">
 
             {/* Right Side */}
 
@@ -87,39 +45,21 @@ export const DashboardTopbar = () => {
                 >
 
                     {
-
                         theme === "light"
 
                             ? <FiMoon />
 
                             : <FiSun />
-
                     }
 
                 </button>
 
-
-                {/* Notification */}
-
-                <button
-                    className="
-                    text-[#B8934A]
-                    text-xl
-                    transition-all
-                    duration-200
-                    hover:scale-110
-                    hover:text-[#D4AF37]
-                    "
-                >
-
-                    <FiBell />
-
-                </button>
-
-
                 {/* Profile */}
 
                 <button
+
+                    onClick={() => navigate("/profile")}
+
                     className="
                     flex
                     h-9
@@ -134,11 +74,13 @@ export const DashboardTopbar = () => {
                     hover:scale-105
                     transition
                     "
+
                 >
 
-                    TP
+                    {avatarLetter}
 
                 </button>
+
 
             </div>
 

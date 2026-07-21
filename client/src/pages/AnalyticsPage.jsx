@@ -6,172 +6,95 @@ import { ExpenseDistributionChart } from "../components/analytics/ExpenseDistrib
 import { TopSpendingCategories } from "../components/analytics/TopSpendingCategories";
 
 import {
-
-    getMonthlyExpenses,
-    getIncomeVsExpense,
-    getExpenseDistribution,
-    getTopSpendingCategories,
-
+  getMonthlyExpenses,
+  getIncomeVsExpense,
+  getExpenseDistribution,
+  getTopSpendingCategories,
 } from "../api/analyticsApi";
 
-
 export const AnalyticsPage = () => {
+  const [monthlyExpenses, setMonthlyExpenses] = useState([]);
+  const [incomeVsExpense, setIncomeVsExpense] = useState([]);
+  const [expenseDistribution, setExpenseDistribution] = useState([]);
+  const [topCategories, setTopCategories] = useState([]);
 
-    const [monthlyExpenses, setMonthlyExpenses] = useState([]);
+  console.log(expenseDistribution);
 
-    const [incomeVsExpense, setIncomeVsExpense] = useState([]);
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-    const [expenseDistribution, setExpenseDistribution] = useState([]);
+        const monthlyData = await getMonthlyExpenses(token);
+        const incomeData = await getIncomeVsExpense(token);
+        const expenseData = await getExpenseDistribution(token);
+        const topData = await getTopSpendingCategories(token);
 
-    console.log(
-    expenseDistribution
-);
+        setMonthlyExpenses(monthlyData.monthlyExpense);
+        setIncomeVsExpense(incomeData.incomeVsExpense);
+        setExpenseDistribution(
+          expenseData.expenseDistribution
+        );
+        setTopCategories(topData.topSpendingCategories);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    const [topCategories, setTopCategories] = useState([]);
+    fetchAnalytics();
+  }, []);
 
+  return (
+    <div>
+      <AnalyticsTopbar />
 
-    useEffect(() => {
-
-        const fetchAnalytics = async () => {
-
-            try {
-
-                const token = localStorage.getItem("token");
-
-
-                const monthlyData =
-                    await getMonthlyExpenses(token);
-
-
-                const incomeData =
-                    await getIncomeVsExpense(token);
-
-
-                const expenseData =
-                    await getExpenseDistribution(token);
-
-
-                const topData =
-                    await getTopSpendingCategories(token);
-
-
-
-                setMonthlyExpenses(
-                    monthlyData.monthlyExpense
-                );
-
-
-                setIncomeVsExpense(
-                    incomeData.incomeVsExpense
-                );
-
-
-                setExpenseDistribution(
-                    expenseData.expenseDistribution
-                );
-
-
-                setTopCategories(
-                    topData.topSpendingCategories
-                );
-
-
-            } catch (error) {
-
-                console.error(error);
-
-            }
-
-        };
-
-
-        fetchAnalytics();
-
-    }, []);
-
-
-   return (
-
-<div>
-
-    <AnalyticsTopbar />
- 
-
-    <section className="min-h-screen bg-[#F7F5EF] dark:bg-[#121212] p-8">
-
+      <section className="min-h-screen bg-[#F7F5EF] p-8 dark:bg-[#121212]">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {/* Monthly Expenses */}
+          <div className="rounded-3xl bg-white p-6 shadow-sm dark:bg-[#1F1F1F]">
+            <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
+              Monthly Expenses
+            </h2>
 
+            <MonthlyExpenseChart
+              data={monthlyExpenses}
+            />
+          </div>
 
-            {/* Monthly Expenses */}
+          {/* Income Vs Expense */}
+          <div className="rounded-3xl bg-white p-6 shadow-sm dark:bg-[#1F1F1F]">
+            <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
+              Income Vs Expense
+            </h2>
 
-            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
+            <IncomeExpenseChart
+              data={incomeVsExpense}
+            />
+          </div>
 
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white
-">
-                    Monthly Expenses
-                </h2>
+          {/* Expense Distribution */}
+          <div className="rounded-3xl bg-white p-6 shadow-sm dark:bg-[#1F1F1F]">
+            <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
+              Expense Distribution
+            </h2>
 
-              <MonthlyExpenseChart
-      data={monthlyExpenses}
-/>
+            <ExpenseDistributionChart
+              data={expenseDistribution}
+            />
+          </div>
 
-            </div>
+          {/* Top Spending Categories */}
+          <div className="rounded-3xl bg-white p-6 shadow-sm dark:bg-[#1F1F1F]">
+            <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
+              Top Spending Categories
+            </h2>
 
-
-
-            {/* Income Vs Expense */}
-
-            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
-
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
-                    Income Vs Expense
-                </h2>
-
-                <IncomeExpenseChart
-    data={incomeVsExpense}
-/>
-
-            </div>
-
-
-
-            {/* Expense Distribution */}
-
-            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
-
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
-                    Expense Distribution
-                </h2>
-
-                <ExpenseDistributionChart
-        data={expenseDistribution}
-    />
-
-            </div>
-
-
-
-            {/* Top Spending Categories */}
-
-            <div className="rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
-
-                <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
-                    Top Spending Categories
-                </h2>
-
-                <TopSpendingCategories
-    data={topCategories}
-/>
-
-            </div>
-
-
+            <TopSpendingCategories
+              data={topCategories}
+            />
+          </div>
         </div>
-
-    </section>
-
-
-</div>
-
-);
+      </section>
+    </div>
+  );
 };

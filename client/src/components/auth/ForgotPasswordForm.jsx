@@ -1,22 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { forgotPassword } from "../../api/authApi";
+import toast from "react-hot-toast";
 
 export const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     setEmailError("");
-    setSuccessMessage("");
+  
 
     let isValid = true;
 
@@ -30,18 +32,40 @@ export const ForgotPasswordForm = () => {
 
     if (!isValid) return;
 
+
     setIsLoading(true);
+    const toastId = toast.loading("Sending reset link...");
 
-    // Fake API call
-    setTimeout(() => {
-      setIsLoading(false);
-      setSuccessMessage(
-        "A password reset link has been sent to your email."
-      );
+    try {
 
-      console.log(email);
-    }, 1500);
-  };
+        const response = await forgotPassword(email);
+
+        toast.success(response.message, { id: toastId });
+        setEmail("");
+
+
+    } catch (error) {
+
+        if (error.response) {
+          toast.error(error.response.data.message, { id: toastId });
+
+        }
+
+        else {
+
+            toast.error("Something went wrong", { id: toastId });
+
+        }
+
+    }
+
+    finally {
+
+        setIsLoading(false);
+
+    }
+
+};
 
   return (
     <div className="w-full max-w-md">
@@ -85,14 +109,6 @@ export const ForgotPasswordForm = () => {
             </p>
           )}
         </div>
-
-        {/* Success */}
-
-        {successMessage && (
-          <p className="text-sm text-green-700 dark:text-[#34D399]">
-            {successMessage}
-          </p>
-        )}
 
         {/* Button */}
 

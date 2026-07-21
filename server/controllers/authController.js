@@ -1,10 +1,14 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import {
     generateAccessToken,
     generateRefreshToken,
 } from "../utils/generateTokens.js";
+import Transaction from "../models/Transaction.js";
+import Category from "../models/Category.js";
+
 
 export const registerUser = async (req, res) => {
   try {
@@ -194,6 +198,196 @@ export const logoutUser = async (req,res) => {
             "Something went wrong",
         });
     }
+};
+export const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({
+                message: "Email is required",
+            });
+        }
+        const user = await User.findOne({
+            email,
+        });
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+            });
+        }
+        const resetToken = crypto
+            .randomBytes(32)
+            .toString("hex");
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpires =
+            Date.now() + 15 * 60 * 1000;
+        await user.save();
+        return res.status(200).json({
+            message:
+                "Password reset link generated successfully.",
+            resetLink:
+                `http://localhost:5173/reset-password/${resetToken}`,
+
+        });
+    }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message:
+                "Something went wrong",
+        });
+    }
+};
+export const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password, confirmPassword } = req.body;
+    if (!password || !confirmPassword) {
+      return res.status(400).json({
+        message: "Please enter all required fields.",
+      });
+    }
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        message: "Passwords do not match.",
+      });
+    }
+    const user = await User.findOne({
+      resetPasswordToken: token,
+    });
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid reset token.",
+      });
+    }
+    if (user.resetPasswordExpires < Date.now()) {
+      return res.status(400).json({
+        message: "Reset token has expired.",
+      });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      salt
+    );
+    user.password = hashedPassword;
+    user.refreshToken = null;
+    user.resetPasswordToken = null;
+    user.resetPasswordExpires = null;
+    await user.save();
+    return res.status(200).json({
+      message: "Password updated successfully.",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Something went wrong.",
+    });
+  }
+};
+export const changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(
+      currentPassword,
+      user.password
+    );
+
+    if (!isMatch) {
+      return res.status(401).json({
+        message: "Current password is incorrect",
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+
+    const hashedPassword = await bcrypt.hash(
+      newPassword,
+      salt
+    );
+
+    user.password = hashedPassword;
+    user.refreshToken = null;
+
+    await user.save();
+
+    return res.status(200).json({
+      message:
+        "Password changed successfully. Please login again.",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+};
+
+export const deleteAccount = async (req, res) => {
+  try {
+    const { password } = req.body;
+
+    if (!password) {
+      return res.status(400).json({
+        message: "Password is required.",
+      });
+    }
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found.",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isMatch) {
+      return res.status(401).json({
+        message: "Incorrect password.",
+      });
+    }
+
+    await Transaction.deleteMany({
+      user: req.user.id,
+    });
+
+    await Category.deleteMany({
+      user: req.user.id,
+    });
+
+    await User.findByIdAndDelete(req.user.id);
+
+    return res.status(200).json({
+      message: "Account deleted successfully.",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Something went wrong.",
+    });
+  }
 };
 
  

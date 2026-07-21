@@ -1,57 +1,38 @@
-import { deleteTransaction } from "../../api/transactionApi";
 import { useState } from "react";
+import { deleteTransaction } from "../../api/transactionApi";
 
-export const DeleteTransactionModal = ({transactionId,
-    onClose, onDelete}) => {
+export const DeleteTransactionModal = ({
+  transactionId,
+  onClose,
+  onDelete,
+}) => {
+  const [isDeleting, setIsDeleting] = useState(false);
 
-      const [isDeleting,setIsDeleting] = useState(false);
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
 
-   const handleDelete = async()=>{
+      await deleteTransaction(transactionId);
+      await onDelete();
 
-    try{
-
-        setIsDeleting(true);
-
-        await deleteTransaction(
-            transactionId
-        );
-
-        await onDelete();
-
-        onClose();
-
+      onClose();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
     }
-
-    catch(error){
-
-        console.error(error);
-
-    }
-
-    finally{
-
-        setIsDeleting(false);
-
-    }
-
-};
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-
       {/* Modal */}
-
-      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-[#1F1F1F] p-8 shadow-xl">
-
+      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl dark:bg-[#1F1F1F]">
         {/* Heading */}
-
-        <h2 className="text-2xl font-bold text-[#1C2321] dark:text-white text-center">
+        <h2 className="text-center text-2xl font-bold text-[#1C2321] dark:text-white">
           Delete Transaction?
         </h2>
 
-
         {/* Message */}
-
         <p className="mt-4 text-center text-[#5B6360] dark:text-[#A1A1AA]">
           Are you sure you want to delete this transaction?
         </p>
@@ -60,56 +41,23 @@ export const DeleteTransactionModal = ({transactionId,
           This action cannot be undone.
         </p>
 
-
         {/* Buttons */}
-
         <div className="mt-8 flex justify-center gap-4">
-
           <button
             onClick={onClose}
-            className="
-            rounded-xl
-border
-border-[#DCD6C7]
-dark:border-[#3A3A3A]
-bg-white
-dark:bg-[#1F1F1F]
-px-6
-py-3
-text-[#1C2321]
-dark:text-white
-transition
-hover:bg-[#F7F5EF]
-dark:hover:bg-[#292929]
-            "
+            className="rounded-xl border border-[#DCD6C7] bg-white px-6 py-3 text-[#1C2321] transition hover:bg-[#F7F5EF] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white dark:hover:bg-[#292929]"
           >
             Cancel
           </button>
 
-
           <button
-    onClick={handleDelete}
-    className="
-    rounded-xl
-    bg-red-600
-    px-6
-    py-3
-    text-white
-    transition
-    hover:bg-red-700
-    "
->
-
-    {isDeleting
-        ? "Deleting..."
-        : "Delete"}
-
-</button>
-
+            onClick={handleDelete}
+            className="rounded-xl bg-red-600 px-6 py-3 text-white transition hover:bg-red-700"
+          >
+            {isDeleting ? "Deleting..." : "Delete"}
+          </button>
         </div>
-
       </div>
-
     </div>
   );
 };

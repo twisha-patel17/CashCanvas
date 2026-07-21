@@ -14,6 +14,7 @@ export const ProfilePage = () => {
       try {
         const data = await getProfile();
         setUser(data);
+        localStorage.setItem("user", JSON.stringify(data));
       } catch (error) {
         console.log(error);
       }
