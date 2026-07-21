@@ -60,7 +60,7 @@ export const AddCategoryModal = ({onClose, onAddCategory}) => {
     setCategoryName("");
     setSelectedEmoji("");
     setSelectedColor("#2D5A4A");
-    setCategoryType("Expense");
+    setCategoryType("expense");
     setBudget("");
   };
 

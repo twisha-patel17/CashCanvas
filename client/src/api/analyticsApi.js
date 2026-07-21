@@ -1,62 +1,39 @@
-import axios from "axios";
+import api from "./axios";
 
-const API_URL = "http://localhost:5000/api/analytics";
+export const getMonthlyExpenses = async () => {
 
-
-export const getMonthlyExpenses = async (token) => {
-
-    const response = await axios.get(
-        `${API_URL}/monthly-expenses`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
+    const response = await api.get(
+        "/analytics/monthly-expenses"
     );
 
     return response.data;
 };
 
 
-export const getIncomeVsExpense = async (token) => {
+export const getIncomeVsExpense = async () => {
 
-    const response = await axios.get(
-        `${API_URL}/income-vs-expense`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
+    const response = await api.get(
+        "/analytics/income-vs-expense"
     );
 
     return response.data;
 };
 
 
-export const getExpenseDistribution = async (token) => {
+export const getExpenseDistribution = async () => {
 
-    const response = await axios.get(
-        `${API_URL}/expense-distribution`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
+    const response = await api.get(
+        "/analytics/expense-distribution"
     );
 
     return response.data;
 };
 
 
-export const getTopSpendingCategories = async (token) => {
+export const getTopSpendingCategories = async () => {
 
-    const response = await axios.get(
-        `${API_URL}/top-spending-categories`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        }
+    const response = await api.get(
+        "/analytics/top-spending-categories"
     );
 
     return response.data;

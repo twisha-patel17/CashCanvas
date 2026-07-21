@@ -50,9 +50,11 @@ export const LoginForm = () => {
   const response = await api.post("/auth/login", {
     email,
     password,
+    rememberMe
   });
 
-  localStorage.setItem("token", response.data.token);
+  localStorage.setItem("accessToken", response.data.accessToken);
+  localStorage.setItem("refreshToken", response.data.refreshToken);
 
   alert("Login successful!");
 

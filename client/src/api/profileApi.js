@@ -1,16 +1,15 @@
 import api from "./axios";
 
-export const getProfile = async () => {
-  const token = localStorage.getItem("token");
 
-  const response = await api.get(
-    "/auth/profile",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export const getProfile = async()=>{
 
-  return response.data.user;
-}; 
+    const response = await api.get(
+
+        "/auth/profile"
+
+    );
+
+
+    return response.data.user;
+
+};

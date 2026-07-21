@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getProfile } from "../api/profileApi";
 import { useNavigate } from "react-router-dom";
 
+import api from "../api/axios";
+
 export const ProfilePage = () => {
   const [user, setUser] = useState(null);
 
@@ -21,9 +23,17 @@ export const ProfilePage = () => {
   }, []);
   
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+  const handleLogout = async () => {
+    const refreshToken = localStorage.getItem("refreshToken");
+    try{
+      await api.post("/auth/logout", { refreshToken });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      navigate("/login");
+    }
   };
 
   if (!user) {
