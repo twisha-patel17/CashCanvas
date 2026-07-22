@@ -8,6 +8,7 @@ import { Pagination } from "../components/transactions/Pagination";
 import { AddTransactionModal } from "../components/transactions/AddTransactionModal";
 import { DeleteTransactionModal } from "../components/transactions/DeleteTransactionModal";
 import { ViewReceiptModal } from "../components/transactions/ViewReceiptModal";
+import { useOutletContext } from "react-router-dom";
 
 import { getCategories } from "../api/categoryApi";
 
@@ -79,6 +80,9 @@ export const TransactionsPage = () => {
     isReceiptModalOpen,
     setIsReceiptModalOpen,
   ] = useState(false);
+
+  const { setIsSidebarOpen } =
+useOutletContext();
 
   const fetchTransactions = async (
     page = 1
@@ -252,12 +256,13 @@ export const TransactionsPage = () => {
         onAddTransaction={() =>
           setIsModalOpen(true)
         }
+        setIsSidebarOpen={setIsSidebarOpen}
       />
 
       {/* Page Content */}
 
-      <div className="space-y-6 p-8">
-        <div className="flex items-center justify-between gap-4">
+      <div className="space-y-6 p-4 sm:p-6 lg:p-8">
+        <div className="flex flex-col items-center xl:flex-row xl:items-center xl:justify-between gap-4">
           <SearchTransaction
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}

@@ -10,12 +10,12 @@ export const TransactionFilters = ({
   categories,
 }) => {
   return (
-    <div className="flex items-center gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:flex w-full gap-3">
       {/* Type */}
       <select
         value={selectedType}
         onChange={(e) => setSelectedType(e.target.value)}
-        className="rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
+        className="rounded-xl w-full border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
       >
         <option value="all">All Transactions</option>
         <option value="income">Income</option>
@@ -26,9 +26,9 @@ export const TransactionFilters = ({
       <select
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
-        className="rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
+        className="rounded-xl w-full border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
       >
-        <option>All Categories</option>
+        <option value="all">All Categories</option>
 
         {categories.map((category) => (
           <option key={category._id} value={category.name}>
@@ -41,7 +41,7 @@ export const TransactionFilters = ({
       <select
         value={selectedPaymentMethod}
         onChange={(e) => setSelectedPaymentMethod(e.target.value)}
-        className="rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
+        className="rounded-xl w-full border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
       >
         <option value="all">All Methods</option>
         <option value="UPI">UPI</option>
@@ -55,7 +55,7 @@ export const TransactionFilters = ({
       <select
         value={sortBy}
         onChange={(e) => setSortBy(e.target.value)}
-        className="rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
+        className="rounded-xl w-full border border-[#DCD6C7] bg-white px-4 py-3 text-sm text-[#1C2321] outline-none transition focus:border-[#2D5A4A] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
       >
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>

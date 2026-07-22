@@ -5,6 +5,7 @@ import { CategoryTopbar } from "../components/categories/CategoryTopbar";
 import { SearchCategory } from "../components/categories/SearchCategory";
 import { CategoryCard } from "../components/categories/CategoryCard";
 import { AddCategoryModal } from "../components/categories/AddCategoryModal";
+import { useOutletContext } from "react-router-dom";
 
 export const CategoriesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +14,7 @@ export const CategoriesPage = () => {
   const [categories, setCategories] = useState([
     
   ]);
+  const { setIsSidebarOpen } = useOutletContext();
 
   const handleAddCategory = async (newCategory) => {
   try {
@@ -63,9 +65,10 @@ export const CategoriesPage = () => {
     <>
       <CategoryTopbar
         onAddCategory={() => setIsModalOpen(true)}
+        setIsSidebarOpen={setIsSidebarOpen}
       />
 
-      <div className="space-y-6 p-8">
+      <div className="space-y-6 p-4 sm:p-6 lg:p-8">
 
         <SearchCategory
           textSearch={textSearch}
@@ -73,7 +76,7 @@ export const CategoriesPage = () => {
         />
 
         {filteredCategories.length > 0 ? (
-          <div className="grid grid-cols-3 gap-5 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 ">
             {filteredCategories.map((category) => (
               <CategoryCard
                 key={category._id}

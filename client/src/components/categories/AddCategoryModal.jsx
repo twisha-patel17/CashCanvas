@@ -66,7 +66,7 @@ export const AddCategoryModal = ({ onClose, onAddCategory }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-115 rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-2xl">
+      <div className="w-full max-w-lg mx-4 rounded-3xl bg-white dark:bg-[#1F1F1F] p-6 shadow-2xl">
         <h2 className="text-2xl font-bold text-[#1C2321] dark:text-white">
           Add Category
         </h2>
@@ -103,7 +103,7 @@ export const AddCategoryModal = ({ onClose, onAddCategory }) => {
               </button>
 
               {showEmojiPicker && (
-                <div className="absolute z-50 mt-2">
+                <div className="absolute z-50 mt-2 max-h-80 overflow-auto">
                   <EmojiPicker
                     onEmojiClick={(emoji) => {
                       setSelectedEmoji(emoji.emoji);
@@ -121,7 +121,7 @@ export const AddCategoryModal = ({ onClose, onAddCategory }) => {
               Color
             </label>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {colors.map((color) => (
                 <button
                   key={color}
@@ -144,7 +144,7 @@ export const AddCategoryModal = ({ onClose, onAddCategory }) => {
               Type
             </label>
 
-            <div className="flex gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => setCategoryType("expense")}
@@ -187,18 +187,18 @@ export const AddCategoryModal = ({ onClose, onAddCategory }) => {
           </div>
 
           {/* Footer */}
-          <div className="mt-6 flex justify-end gap-3">
+          <div className="mt-6 flex flex-col-reverse sm:flex-row justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#2A2A2A] px-6 py-2.5 font-medium text-[#1C2321] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2F2F2F]"
+              className="w-full sm:w-auto rounded-xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#2A2A2A] px-6 py-2.5 font-medium text-[#1C2321] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2F2F2F]"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="rounded-xl bg-[#2D5A4A] px-6 py-2.5 font-medium text-white  hover:bg-[#23483A]"
+              className="w-full sm:w-auto rounded-xl bg-[#2D5A4A] px-6 py-2.5 font-medium text-white  hover:bg-[#23483A]"
             >
               Save Category
             </button>

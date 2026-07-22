@@ -45,7 +45,7 @@ export const CategoryCard = ({ category, onDelete }) => {
       </p>
 
       {/* Budget */}
-      <div className="mt-4 flex items-center justify-between border-t border-[#ECE7DB] dark:border-[#3A3A3A] pt-4">
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between border-t border-[#ECE7DB] dark:border-[#3A3A3A] pt-4">
         <span className="text-sm text-[#7A7A7A] dark:text-[#B0B0B0]">
           Monthly Budget
         </span>

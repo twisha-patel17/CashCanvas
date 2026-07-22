@@ -34,7 +34,7 @@ export const MonthlyExpenseChart = ({
         </p>
       </div>
 
-      <div className="h-55">
+      <div className="h-48 sm:h-55">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={chartData}>
             <defs>

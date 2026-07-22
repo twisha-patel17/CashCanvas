@@ -12,6 +12,7 @@ import { MonthlyExpenseChart } from "../components/dashboard/MonthlyExpenseChart
 import { BudgetProgress } from "../components/dashboard/BudgetProgess";
 import { TopSpendingCategories } from "../components/dashboard/TopSpendingCategories";
 import { RecentTransactions } from "../components/dashboard/RecentTransactions";
+import { useOutletContext } from "react-router-dom";
 
 import {
   FiCreditCard,
@@ -25,6 +26,7 @@ export const DashboardPage = () => {
   const [weeklyExpenses, setWeeklyExpenses] =
     useState([]);
   const [loading, setLoading] = useState(true);
+  const { setIsSidebarOpen } = useOutletContext();
 
   console.log(dashboard);
 
@@ -57,10 +59,12 @@ export const DashboardPage = () => {
 
   return (
     <>
-      <DashboardTopbar />
+      <DashboardTopbar 
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
 
       {/* Summary Cards */}
-      <div className="mt-8 grid grid-cols-4 gap-4">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         <SummaryCard
           label="BALANCE"
           value={`₹${dashboard.balance?.toLocaleString()}`}
@@ -103,7 +107,7 @@ export const DashboardPage = () => {
       </div>
 
       {/* Charts */}
-      <div className="mt-6 grid grid-cols-[1.1fr_1fr] gap-4">
+      <div className="mt-6 grid grid-cols-1 xl:grid-cols-[1.1fr_1fr] gap-4">
         <ExpenseChart
           expenseChart={dashboard.expenseByCategory}
           totalExpense={dashboard.totalExpense}
@@ -115,7 +119,7 @@ export const DashboardPage = () => {
       </div>
 
       {/* Budget & Top Categories */}
-      <div className="mt-6 grid grid-cols-2 gap-4">
+      <div className="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
         <BudgetProgress
           totalBudget={dashboard.totalBudget}
           totalExpense={dashboard.totalExpense}

@@ -1,14 +1,40 @@
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiMenu } from "react-icons/fi";
 
 export const TransactionsTopbar = ({
-  onAddTransaction,
+  onAddTransaction, setIsSidebarOpen
 }) => {
   return (
-    <div className="flex items-center justify-between border-b border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] px-8 py-5">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-[#DCD6C7] dark:border-[#3A3A3A] gap-4 bg-white dark:bg-[#1F1F1F] px-5 sm:px-8 py-5">
 
-      <h1 className="text-3xl font-bold text-[#1C2321] dark:text-white">
-        Transactions
-      </h1>
+      <div className="flex items-center gap-4">
+
+<button
+onClick={()=>
+setIsSidebarOpen(true)
+}
+className="
+lg:hidden
+text-2xl
+text-[#1C2321]
+dark:text-white
+"
+>
+<FiMenu/>
+</button>
+
+<h1
+className="
+text-2xl
+sm:text-3xl
+font-bold
+text-[#1C2321]
+dark:text-white
+"
+>
+Transactions
+</h1>
+
+</div>
 
       <button
         onClick={onAddTransaction}

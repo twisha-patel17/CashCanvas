@@ -56,7 +56,7 @@ export const AddTransactionModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="mx-4 w-full max-w-4xl rounded-2xl bg-white p-8 shadow-xl dark:bg-[#1F1F1F]">
+      <div className="mx-4 max-h-[90vh] overflow-y-auto w-full max-w-4xl rounded-2xl bg-white p-8 shadow-xl dark:bg-[#1F1F1F]">
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-3xl font-bold text-[#1C2321] dark:text-white">
@@ -84,7 +84,7 @@ export const AddTransactionModal = ({
           />
 
           {/* Type + Date */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {mode === "add" ? (
               <select
                 name="type"

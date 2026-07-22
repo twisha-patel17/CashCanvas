@@ -20,9 +20,10 @@ const navItems = [
   { name: "Settings", path: "/settings", icon: <FiSettings /> },
 ];
 
-export const Sidebar = () => {
+export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
-    <aside className="w-65 h-screen fixed left-0 top-0 bg-[#1F3F34] dark:bg-[#121212] px-4.5 py-6.5">
+    <>
+    <aside className={`w-65 h-screen fixed left-0 top-0 z-50 bg-[#1F3F34] dark:bg-[#121212] px-4.5 py-6.5 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
       <div className="flex items-center gap-3 mb-14">
       <img
       src={logo}
@@ -38,6 +39,11 @@ export const Sidebar = () => {
       <nav className="mt-10 flex flex-col gap-2">
         {navItems.map((item) => (
           <NavLink
+            onClick={() => {
+              if(window.innerWidth < 1024) {
+                setIsSidebarOpen(false);
+              }
+            }}
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
@@ -54,5 +60,12 @@ export const Sidebar = () => {
         ))}
       </nav>
     </aside>
+    { 
+      isSidebarOpen && (
+      <div 
+      onClick={() => setIsSidebarOpen(false)}
+      className="fixed inset-0 z-40 bg-black/50 lg:hidden" />
+    )}
+   </> 
   );
 };

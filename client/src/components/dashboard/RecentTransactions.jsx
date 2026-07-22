@@ -15,12 +15,12 @@ export const RecentTransactions = ({ transactions = []}) => {
   </div>
 
   {/* Transactions */}
-  <div className="mt-6 space-y-4">
+  <div className="mt-6 space-y-4 overflow-x-auto">
 
     {transactions.map((transaction) => (
       <div
         key={transaction._id}
-        className="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-[#F8F6F2] dark:hover:bg-[#292929]"
+        className="min-w-[320px] flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-[#F8F6F2] dark:hover:bg-[#292929]"
       >
         {/* Left */}
         <div className="flex items-center gap-4">

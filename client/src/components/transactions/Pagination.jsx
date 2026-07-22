@@ -4,7 +4,7 @@ export const Pagination = ({
   onPageChange,
 }) => {
   return (
-    <div className="mt-6 flex items-center justify-center gap-3">
+    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
       {/* Previous Button */}
       <button
         disabled={currentPage === 1}

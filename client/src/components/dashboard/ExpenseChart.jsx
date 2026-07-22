@@ -17,7 +17,7 @@ export const ExpenseChart = ({
         Expense by Category
       </h2>
 
-      <div className="mt-8 flex items-center justify-center gap-12">
+      <div className="mt-8 flex flex-col items-center gap-8 lg:flex-row lg:justify-center lg:gap-12">
         {/* Donut Chart */}
 
         <div className="relative h-40 w-40">
@@ -54,9 +54,7 @@ export const ExpenseChart = ({
           </div>
         </div>
 
-        {/* Legends */}
-
-        <div className="space-y-4">
+        <div className="w-full max-w-xs space-y-4">
           {categories.map((category) => (
             <div
               key={category.name}

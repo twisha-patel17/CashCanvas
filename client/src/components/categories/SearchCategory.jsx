@@ -5,7 +5,7 @@ export const SearchCategory = ({
   setTextSearch,
 }) => {
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative w-full">
 
       <FiSearch
         className="
