@@ -1,6 +1,6 @@
 import { FiMenu } from "react-icons/fi";
 
-export const ProfileTopbar = ({ setIsSidebarOpen }) => {
+export const ProfileTopbar = ({ setIsSidebarOpen, }) => {
   return (
     <div
       className="

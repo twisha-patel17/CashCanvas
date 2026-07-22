@@ -35,7 +35,7 @@ export const SettingsPage = () => {
     } finally {
       setIsDeleting(false);
     }
-  };
+  }; 
 
   return (
     <>

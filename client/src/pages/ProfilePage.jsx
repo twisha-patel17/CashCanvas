@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { getProfile } from "../api/profileApi";
 import { useNavigate } from "react-router-dom";
 import { ProfileTopbar } from "../components/profile/ProfileTopbar";
+import { useOutletContext } from "react-router-dom";
 
 import api from "../api/axios";
 
-export const ProfilePage = ({ setIsSidebarOpen }) => {
+export const ProfilePage = () => {
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
+  const { setIsSidebarOpen } = useOutletContext();
 
   useEffect(() => {
     const loadProfile = async () => {

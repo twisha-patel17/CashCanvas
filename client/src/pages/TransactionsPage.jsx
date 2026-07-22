@@ -267,7 +267,7 @@ useOutletContext();
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
           />
-        <div classNmae="flex-1">
+        <div className="flex-1">
           <TransactionFilters
             selectedType={selectedType}
             setSelectedType={setSelectedType}

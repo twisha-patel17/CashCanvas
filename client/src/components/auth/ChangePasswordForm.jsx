@@ -163,13 +163,22 @@ export const ChangePasswordForm = () => {
           <p className="text-sm mt-1 wrap-break-word text-red-500">{error}</p>
         )}
 
-        <button
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => navigate("/settings")}
+            className="w-full rounded-[3px] border border-[#DCD6C7] py-3 font-semibold text-[#1C2321] transition-colors hover:bg-[#ECE8DD] dark:border-[#3A3A3A] dark:text-white dark:hover:bg-[#2A2A2A]">Cancel</button>
+
+
+            <button
           type="submit"
           disabled={isLoading}
-          className="w-full rounded-[3px] bg-[#2D5A4A] py-3 font-semibold text-[14px] text-[#F3F0E6] transition-colors"
+          className={`w-full rounded-[3px] bg-[#2D5A4A] py-3 font-semibold text-[14px] text-[#F3F0E6] transition-colors ${isLoading ? "cursor-not-allowed bg-[#6B8A7A]" : "bg-[#2D5A4A] hover:bg-[#23483B]"}`}
         >
-          {isLoading ? "bg-[#6B8A7A] cursor-not-allowed" : "bg-[#2D5A4A] hover:bg-[#23483b]"}
+          {isLoading ? "Loading..." : "Login"}
         </button>
+
+        </div>
       </form>
     </div>
   );

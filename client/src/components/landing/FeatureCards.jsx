@@ -20,10 +20,10 @@ export const FeatureCards = () => {
                 "Set limits per category and get warned before you overspend."
         },
         {
-            icon: "📈",
-            title: "Reports",
+            icon: "📅",
+            title: "Monthly Insights",
             description:
-                "Export clean statements as CSV or PDF, anytime."
+                "Track your income, expenses, and savings month by month with ease."
         }
     ];
 
