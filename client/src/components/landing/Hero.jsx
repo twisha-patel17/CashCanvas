@@ -2,9 +2,19 @@ import { FeatureCards } from "./FeatureCards"
 import { ReceiptSummary } from "./ReceiptSummary"
 import { useNavigate } from "react-router-dom";
 
+
 export const Hero = () => {
 
   const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      navigate("/dashboard");
+    }else{
+      navigate("/login");
+    }    
+  };
 
   return (
     <section className="w-full pt-16 sm:px-[6%] sm:pt-20 lg:pt-24 pb-14 px-4 bg-[repeating-linear-gradient(180deg,#F7F5EF,#F7F5EF_27px,#DCD6C7_28px)] dark:bg-[repeating-linear-gradient(180deg,#121212,#121212_27px,#262626_28px)]">
@@ -56,7 +66,7 @@ export const Hero = () => {
      dark:text-white
      dark:hover:bg-[#34796C]
   "
-  onClick={() => navigate("/signup")}
+  onClick={handleGetStarted}
 >
   Get started free
 </button>

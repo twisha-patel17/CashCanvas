@@ -5,6 +5,7 @@ import { Link,useNavigate,useParams } from "react-router-dom";
 import { FiEye,FiEyeOff } from "react-icons/fi";
 
 import { resetPassword } from "../../api/authApi";
+import toast from "react-hot-toast";
 
 
 export const ResetPasswordForm = () => {
@@ -108,6 +109,8 @@ export const ResetPasswordForm = () => {
 
     setIsLoading(true);
 
+    const toastId = toast.loading("Resetting password...");
+
 
     try{
 
@@ -119,11 +122,8 @@ export const ResetPasswordForm = () => {
 
         );
 
-
-        alert(response.message || "Password reset successfully.");
-
+        toast.success(response.message || "Password reset successfully.",{id:toastId});
         navigate("/login");
-
 
     }
 
@@ -131,22 +131,13 @@ export const ResetPasswordForm = () => {
 
         if(error.response){
 
-            setPasswordError(
-
-                error.response.data.message
-
-            );
+            toast.error(error.response.data.message,{id:toastId});
 
         }
 
         else{
 
-            setPasswordError(
-
-                "Something went wrong."
-
-            );
-
+            toast.error("Something went wrong.",{id:toastId});
         }
 
     }
@@ -161,13 +152,13 @@ export const ResetPasswordForm = () => {
 
 return (
 
-<div className="w-full max-w-md">
+<div className="w-full max-w-md mx-auto px-4 sm:px-0">
 
-    <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] dark:text-white">
+    <h2 className="font-['Cormorant_Garamond'] text-3xl sm:text-4xl font-bold text-[#1C2321] dark:text-white">
         Reset Password
     </h2>
 
-    <p className="mt-2 mb-8 text-[#5B6360] dark:text-[#B0B0B0] text-[15px] leading-6">
+    <p className="mt-2 mb-8 text-[#5B6360] dark:text-[#B0B0B0] text-sm sm:text-[15px] leading-6">
         Create a new password for your CashCanvas account.
     </p>
 
@@ -239,7 +230,7 @@ return (
 
                 passwordError && (
 
-                    <p className="mt-1 text-sm text-red-500">
+                    <p className="mt-1 text-sm wrap-break-word text-red-500">
 
                         {passwordError}
 
@@ -315,7 +306,7 @@ return (
 
                 confirmPasswordError && (
 
-                    <p className="mt-1 text-sm text-red-500">
+                    <p className="mt-1 text-sm wrap-break-word text-red-500">
 
                         {confirmPasswordError}
 
@@ -327,10 +318,7 @@ return (
 
         </div>
 
-
-
         {/* Button */}
-
 
         <button
             type="submit"
@@ -355,7 +343,7 @@ return (
     </form>
 
 
-    <div className="mt-6 text-center text-[14px] text-[#5B6360] dark:text-[#B0B0B0]">
+    <div className="mt-6 text-center text-sm sm:text-[14px] text-[#5B6360] dark:text-[#B0B0B0]">
 
         Remembered it after all?{" "}
 

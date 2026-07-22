@@ -22,7 +22,7 @@ export const AppRoutes = () => {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
+      <Route path="/" element={<Landing />} />
       <Route path="/login" element={<PublicRoute><LoginPage/></PublicRoute>} />
       <Route path="/forgot-password" element={<PublicRoute><ForgotPasswordPage /></PublicRoute>} />
       <Route path="/reset-password/:token" element={<PublicRoute><ResetPasswordPage /></PublicRoute>}/>

@@ -8,9 +8,11 @@ export const ChangePasswordPage = () => {
       bg-[#F7F5EF]
       dark:bg-[#121212]
       flex
-      items-center
       justify-center
       px-6
+      py-10
+      sm:px-8
+      lg:items-center
       "
     >
       <ChangePasswordForm />

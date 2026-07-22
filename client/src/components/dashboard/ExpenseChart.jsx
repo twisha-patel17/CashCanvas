@@ -20,14 +20,16 @@ export const ExpenseChart = ({
       <div className="mt-8 flex flex-col items-center gap-8 lg:flex-row lg:justify-center lg:gap-12">
         {/* Donut Chart */}
 
-        <div className="relative h-40 w-40">
+        <div className="relative h-48 w-48">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={categories}
                 dataKey="percentage"
-                innerRadius={48}
-                outerRadius={72}
+                cx="50%"
+                cy="50%"
+                innerRadius={40}
+                outerRadius={60}
                 stroke="none"
                 paddingAngle={3}
               >

@@ -67,7 +67,7 @@ export const LoginForm = () => {
   if (error.response) {
     toast.error(error.response.data.message, { id: toastId });
   } else {
-    alert("Something went wrong");
+    toast.error("Something went wrong", { id: toastId });
   }
 
 } finally {
@@ -92,18 +92,18 @@ export const LoginForm = () => {
 
   return (
     <div className="min-h-screen bg-[#F7F5EF] dark:bg-[#121212] flex items-center justify-center flex-col px-6 lg:px-0 py-12 lg:py-0">
-      <div className="w-full max-w-97.5">
+      <div className="w-full max-w-md">
 
-        <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] dark:text-white mb-1.5">
+        <h2 className="font-['Cormorant_Garamond'] text-3xl sm:text-4xl font-bold text-[#1C2321] dark:text-white mb-1.5">
           Welcome back
         </h2>
 
-        <p className="text-[15px] text-[#5B6360] dark:text-[#B0B0B0] mb-8">
+        <p className="text-sm sm:text-[15px] text-[#5B6360] dark:text-[#B0B0B0] mb-8">
           Log in to pick up your ledger where you left it.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5 w-full max-w-97.5">
+      <form onSubmit={handleSubmit} className="space-y-5 w-full max-w-md">
 
   {/* Email */}
   <div>
@@ -128,7 +128,7 @@ export const LoginForm = () => {
 }`}
 />
    {emailError && (
-     <p className="text-sm text-red-500 mt-1">{emailError}</p>
+     <p className="text-sm text-red-500 wrap-break-word mt-1">{emailError}</p>
    )}
 
   </div>
@@ -167,7 +167,7 @@ export const LoginForm = () => {
   </div>
 
   {passwordError && (
-    <p className="mt-1 text-sm text-red-500">
+    <p className="mt-1 text-sm wrap-break-word text-red-500">
       {passwordError}
     </p>
   )}
@@ -175,7 +175,7 @@ export const LoginForm = () => {
 
   {/* Remember Me */}
 
-  <div className="flex items-center justify-between">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
   <label className="flex items-center gap-2 cursor-pointer">
     <input
       type="checkbox"
@@ -213,7 +213,7 @@ export const LoginForm = () => {
 
 {/* Footer */}
 
-<div className="mt-5.5 text-center text-[13px] text-[#5B6360] dark:text-[#B0B0B0]">
+<div className="mt-5.5 text-center text-sm text-[#5B6360] dark:text-[#B0B0B0]">
   Don't have an account?{" "}
   <Link
     to="/signup"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { changePassword } from "../../api/authApi";
+import toast from "react-hot-toast";
 
 export const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export const ChangePasswordForm = () => {
     e.preventDefault();
     setError("");
 
-    if (!currentPassword || !newPassword || !confirmPassword) {
+    if (!currentPassword.trim() || !newPassword.trim() || !confirmPassword.trim()) {
       setError("All fields are required.");
       return;
     }
@@ -46,6 +47,7 @@ export const ChangePasswordForm = () => {
     }
 
     setIsLoading(true);
+    const toastId = toast.loading("Updating password...");
 
     try {
       const response = await changePassword({
@@ -53,7 +55,7 @@ export const ChangePasswordForm = () => {
         newPassword,
       });
 
-      alert(response.message);
+      toast.success(response.message || "Password updated successfully.", { id: toastId });
 
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
@@ -61,9 +63,9 @@ export const ChangePasswordForm = () => {
       navigate("/login");
     } catch (error) {
       if (error.response) {
-        setError(error.response.data.message);
+        toast.error(error.response.data.message, { id: toastId });
       } else {
-        setError("Something went wrong.");
+        toast.error("Something went wrong.", {id:toastId});
       }
     } finally {
       setIsLoading(false);
@@ -72,18 +74,18 @@ export const ChangePasswordForm = () => {
 
   return (
     <div className="w-full max-w-md">
-      <h2 className="text-[40px] font-bold font-['Cormorant_Garamond'] text-[#1C2321] dark:text-white">
+      <h2 className="text-3xl sm:text-4xl font-bold font-['Cormorant_Garamond'] text-[#1C2321] dark:text-white">
         Change Password
       </h2>
 
-      <p className="mt-2 mb-8 text-[15px] text-[#5B6360] dark:text-[#B0B0B0]">
+      <p className="mt-2 mb-8 text-sm leading-6 sm:text-[15px] text-[#5B6360] dark:text-[#B0B0B0]">
         Update your account password securely.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Current Password */}
         <div>
-          <label className="mb-2 block text-sm font-medium dark:text-white">
+          <label className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] dark:text-[#B0B0B0] text-[#5B6360]">
             Current Password
           </label>
 
@@ -92,7 +94,7 @@ export const ChangePasswordForm = () => {
               type={showCurrentPassword ? "text" : "password"}
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              className="w-full rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 pr-10 outline-none dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white"
+              className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9]  px-3 py-2.75 text-[14px] text-[#1C2321] pr-10 outline-none dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white"
             />
 
             <button
@@ -109,7 +111,7 @@ export const ChangePasswordForm = () => {
 
         {/* New Password */}
         <div>
-          <label className="mb-2 block text-sm font-medium dark:text-white">
+          <label className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] dark:text-[#B0B0B0] text-[#5B6360]">
             New Password
           </label>
 
@@ -118,7 +120,7 @@ export const ChangePasswordForm = () => {
               type={showNewPassword ? "text" : "password"}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="w-full rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 pr-10 outline-none dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white"
+              className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9]  px-3 py-2.75 text-[14px] text-[#1C2321] pr-10 outline-none dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white"
             />
 
             <button
@@ -133,7 +135,7 @@ export const ChangePasswordForm = () => {
 
         {/* Confirm Password */}
         <div>
-          <label className="mb-2 block text-sm font-medium dark:text-white">
+          <label className="mb-1.5 block text-[12px] font-semibold tracking-[0.02em] dark:text-[#B0B0B0] text-[#5B6360]">
             Confirm Password
           </label>
 
@@ -142,7 +144,7 @@ export const ChangePasswordForm = () => {
               type={showConfirmPassword ? "text" : "password"}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full rounded-xl border border-[#DCD6C7] bg-white px-4 py-3 pr-10 outline-none dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white"
+              className="w-full rounded-[3px] border border-[#DCD6C7] bg-[#FDFCF9]  px-3 py-2.75 text-[14px] text-[#1C2321] pr-10 outline-none dark:border-[#3A3A3A] dark:bg-[#262626] dark:text-white"
             />
 
             <button
@@ -158,15 +160,15 @@ export const ChangePasswordForm = () => {
         </div>
 
         {error && (
-          <p className="text-sm text-red-500">{error}</p>
+          <p className="text-sm mt-1 wrap-break-word text-red-500">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full rounded-xl bg-[#2D5A4A] py-3 font-semibold text-white transition-all hover:bg-[#23483B]"
+          className="w-full rounded-[3px] bg-[#2D5A4A] py-3 font-semibold text-[14px] text-[#F3F0E6] transition-colors"
         >
-          {isLoading ? "Updating..." : "Change Password"}
+          {isLoading ? "bg-[#6B8A7A] cursor-not-allowed" : "bg-[#2D5A4A] hover:bg-[#23483b]"}
         </button>
       </form>
     </div>

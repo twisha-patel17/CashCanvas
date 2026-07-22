@@ -107,8 +107,8 @@ export const SignUpForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <h2 className="font-['Cormorant_Garamond'] text-[40px] font-bold text-[#1C2321] dark:text-white">
+    <div className="w-full max-w-md mx-auto px-4 sm:px-0">
+      <h2 className="font-['Cormorant_Garamond'] text-3xl sm:text-4xl font-bold text-[#1C2321] dark:text-white">
         Create your account
       </h2>
 
@@ -171,12 +171,12 @@ export const SignUpForm = () => {
           />
 
           {emailError && (
-            <p className="mt-1 text-sm text-red-500">{emailError}</p>
+            <p className="mt-1 text-sm wrap-break-word text-red-500">{emailError}</p>
           )}
         </div>
 
         {/* Passwords */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Password */}
           <div>
             <label
@@ -216,7 +216,7 @@ export const SignUpForm = () => {
             </div>
 
             {passwordError && (
-              <p className="mt-1 text-sm text-red-500">
+              <p className="mt-1 text-sm wrap-break-word text-red-500">
                 {passwordError}
               </p>
             )}
@@ -265,7 +265,7 @@ export const SignUpForm = () => {
             </div>
 
             {confirmPasswordError && (
-              <p className="mt-1 text-sm text-red-500">
+              <p className="mt-1 text-sm wrap-break-word text-red-500">
                 {confirmPasswordError}
               </p>
             )}
@@ -285,7 +285,7 @@ export const SignUpForm = () => {
         </button>
       </form>
 
-      <div className="mt-6 text-center text-[14px] text-[#5B6360]">
+      <div className="mt-6 text-center text-sm sm:text-[14px] text-[#5B6360]">
         Already have an account?{" "}
         <Link
           to="/login"
