@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 export const SearchTransaction = ({ searchTerm, setSearchTerm }) => {
   return (
 
-   <div className="relative flex-1">
+   <div className="relative">
 
     <FiSearch
         className="

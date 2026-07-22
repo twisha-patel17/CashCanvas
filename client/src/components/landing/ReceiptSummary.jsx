@@ -2,9 +2,10 @@ export const ReceiptSummary = () => {
   return (
     <div
       className="
-        max-w-57.5
+        max-w-xs
+        sm:max-x-sm
         mx-auto
-        mt-6
+        mt-8
         bg-white
         border border-[#DCD6C7]
         px-5
@@ -12,12 +13,13 @@ export const ReceiptSummary = () => {
         text-left
         font-['IBM_Plex_Mono']
         text-[12px]
+        rotate-0
+        sm:rotate-[-1.5deg]
         shadow-[0_12px_30px_-12px_rgba(28,35,33,0.25)]
-        rotate-[-1.5deg]
         dark:border-[#323232]
-  dark:bg-[#1A1A1A]
-  dark:text-white
-  dark:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)]
+        dark:bg-[#1A1A1A]
+        dark:text-white
+        dark:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.55)]
       "
     >
       <div className="text-center font-semibold mb-2 font-['Inter'] dark:text-white">

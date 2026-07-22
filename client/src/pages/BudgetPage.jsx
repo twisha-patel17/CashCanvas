@@ -6,6 +6,9 @@ import { BudgetStatus } from "../components/budget/BudgetStatus";
 import { CategoryBudget } from "../components/budget/CategoryBudget";
 import { MonthlyBudgetHistory } from "../components/budget/MonthlyBudgetHistory";
 import { TopBudgetCategories } from "../components/budget/TopBudgetCategories";
+import { BudgetTopbar } from "../components/budget/BudgetTopbar";
+
+import { useOutletContext } from "react-router-dom";
 
 import {
   getBudget,
@@ -31,6 +34,8 @@ export const BudgetPage = () => {
     categoryBudgets: [],
     topCategories: [],
   });
+
+  const { setIsSidebarOpen } = useOutletContext();
 
   useEffect(() => {
     const fetchBudgetData = async () => {
@@ -59,21 +64,22 @@ export const BudgetPage = () => {
   }, [selectedMonth, selectedYear]);
 
   return (
-    <section className="min-h-screen bg-[#F7F5EF] p-8 dark:bg-[#121212]">
+    <>
+      <BudgetTopbar
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
+      <section className="min-h-screen bg-[#F7F5EF] p-4 sm:p-6 lg:p-8 dark:bg-[#121212]">
       {/* Heading */}
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-[#1C2321] dark:text-white">
-          Budget Overview
-        </h1>
+      <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
-        <div className="flex gap-4">
+        <div className="flex w-full sm:w-auto gap-3">
           {/* Month */}
           <select
             value={selectedMonth}
             onChange={(e) =>
               setSelectedMonth(Number(e.target.value))
             }
-            className="rounded-xl border border-[#DCD6C7] bg-white px-4 py-2 text-[#1C2321] outline-none dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
+            className="flex-1 rounded-xl border border-[#DCD6C7] bg-white px-4 py-2 text-[#1C2321] outline-none dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white sm:flex-none"
           >
             {Array.from({ length: 12 }, (_, index) => (
               <option
@@ -94,7 +100,7 @@ export const BudgetPage = () => {
             onChange={(e) =>
               setSelectedYear(Number(e.target.value))
             }
-            className="rounded-xl border border-[#DCD6C7] bg-white px-4 py-2 text-[#1C2321] outline-none dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white"
+            className="flex-1 rounded-xl border border-[#DCD6C7] bg-white px-4 py-2 text-[#1C2321] outline-none dark:border-[#3A3A3A] dark:bg-[#1F1F1F] dark:text-white sm:flex-none"
           >
             {Array.from({ length: 6 }, (_, index) => (
               <option
@@ -151,5 +157,7 @@ export const BudgetPage = () => {
         />
       </div>
     </section>
+    </>
+    
   );
 };

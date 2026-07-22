@@ -23,7 +23,7 @@ const navItems = [
 export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   return (
     <>
-    <aside className={`w-65 h-screen fixed left-0 top-0 z-50 bg-[#1F3F34] dark:bg-[#121212] px-4.5 py-6.5 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
+    <aside className={`w-65 h-screen fixed left-0 top-0 z-50 bg-[#1F3F34] dark:bg-[#162B24] px-4.5 py-6.5 transform transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
       <div className="flex items-center gap-3 mb-14">
       <img
       src={logo}
@@ -34,7 +34,7 @@ export const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
       <h1 className="text-[#F3F0E6] dark:text-white text-[30px] font-semibold">
        CashCanvas
       </h1>
-    </div>
+    </div> 
 
       <nav className="mt-10 flex flex-col gap-2">
         {navItems.map((item) => (

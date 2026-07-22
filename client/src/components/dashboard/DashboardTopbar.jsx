@@ -1,20 +1,15 @@
 import {
-    FiMoon,
-    FiSun,
+   
     FiMenu,
 } from "react-icons/fi";
+import { ThemeButton } from "../common/ThemeButton";
 
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../../contexts/ThemeContext";
 
 export const DashboardTopbar = ({
     setIsSidebarOpen,
 }) => {
 
-    const {
-        theme,
-        toggleTheme,
-    } = useTheme();
 
     const user = JSON.parse(
         localStorage.getItem("user")
@@ -51,27 +46,7 @@ export const DashboardTopbar = ({
 
             <div className="flex items-center gap-3 sm:gap-5 ml-auto">
 
-                {/* Theme Button */}
-
-                <button
-                    onClick={toggleTheme}
-                    className="
-                    text-[#B8934A]
-                    text-xl
-                    transition-all
-                    duration-200
-                    hover:scale-110
-                    hover:text-[#D4AF37]
-                    "
-                >
-
-                    {
-                        theme === "light"
-                            ? <FiMoon />
-                            : <FiSun />
-                    }
-
-                </button>
+                <ThemeButton />
 
                 {/* Profile */}
 

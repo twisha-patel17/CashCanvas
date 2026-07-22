@@ -18,7 +18,7 @@ export const CategoryBudget = ({ categoryBudgets }) => {
             <div key={category.category}>
               {/* Heading */}
 
-              <div className="mb-2 flex items-center justify-between">
+              <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-lg">
                     {category.emoji}
@@ -29,7 +29,7 @@ export const CategoryBudget = ({ categoryBudgets }) => {
                   </p>
                 </div>
 
-                <p className="text-sm text-[#5B6360] dark:text-[#B0B0B0]">
+                <p className="text-xs sm:text-sm text-[#5B6360] dark:text-[#B0B0B0]">
                   ₹{category.spent.toLocaleString()} / ₹
                   {category.budget.toLocaleString()}
                 </p>

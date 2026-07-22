@@ -262,12 +262,12 @@ useOutletContext();
       {/* Page Content */}
 
       <div className="space-y-6 p-4 sm:p-6 lg:p-8">
-        <div className="flex flex-col items-center xl:flex-row xl:items-center xl:justify-between gap-4">
-          <SearchTransaction
+        <div className="flex flex-col  xl:flex-row xl:items-center gap-4">
+          <SearchTransaction 
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
           />
-
+        <div classNmae="flex-1">
           <TransactionFilters
             selectedType={selectedType}
             setSelectedType={setSelectedType}
@@ -287,6 +287,7 @@ useOutletContext();
             setSortBy={setSortBy}
             categories={categories}
           />
+        </div>
         </div>
 
         <TransactionTable

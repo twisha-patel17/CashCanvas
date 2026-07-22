@@ -15,16 +15,16 @@ export const TopSpendingCategories = ({ data }) => {
           "
         >
           <div className="flex items-center gap-3">
-            <span className="text-2xl">
+            <span className="text-xl">
               {category.emoji}
             </span>
 
-            <p className="text-lg font-medium text-[#1C2321] dark:text-white">
+            <p className="text-sm sm:text-lg font-medium text-[#1C2321] dark:text-white">
               {category.category}
             </p>
           </div>
 
-          <p className="text-lg font-semibold text-[#1C2321] dark:text-white">
+          <p className="text-sm sm:text-lg font-semibold text-[#1C2321] dark:text-white">
             ₹{category.amount}
           </p>
         </div>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getProfile } from "../api/profileApi";
 import { useNavigate } from "react-router-dom";
+import { ProfileTopbar } from "../components/profile/ProfileTopbar";
 
 import api from "../api/axios";
 
-export const ProfilePage = () => {
+export const ProfilePage = ({ setIsSidebarOpen }) => {
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
@@ -46,16 +47,19 @@ export const ProfilePage = () => {
   }
 
   return (
-    <div className="space-y-6 p-8">
+    
+    <div className="p-4 sm:p-6 lg:p-8">
+      <ProfileTopbar setIsSidebarOpen={setIsSidebarOpen} />
+      <div className="space-y-6 p-4 sm:p-6 lg:p-8">
       {/* Profile Header */}
       <div className="rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] bg-white dark:bg-[#1F1F1F] p-6 shadow-sm">
-        <div className="flex items-center gap-5">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#2D5A4A] text-3xl font-semibold text-white">
+        <div className="flex flex-col text-center sm:flex-row sm:text-left items-center gap-5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#2D5A4A] text-2xl font-semibold text-white sm:h-20 sm:w-20 sm:text-3xl">
             {user.name.charAt(0).toUpperCase()}
           </div>
 
           <div>
-            <h1 className="text-3xl font-semibold text-[#1C2321] dark:text-white">
+            <h1 className="text-2xl font-semibold text-[#1C2321] dark:text-white sm:text-3xl">
               {user.name}
             </h1>
 
@@ -68,7 +72,7 @@ export const ProfilePage = () => {
 
       {/* Account Information */}
       <div className="rounded-2xl border border-[#DCD6C7] dark:border-[#3A3A3A] dark:bg-[#1F1F1F] bg-white p-6 shadow-sm">
-        <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
+        <h2 className="mb-6 text-xl sm:text-2xl font-semibold text-[#1C2321] dark:text-white">
           Account Information
         </h2>
 
@@ -78,7 +82,7 @@ export const ProfilePage = () => {
               Name
             </p>
 
-            <p className="mt-1 text-lg text-[#1C2321]  dark:text-white">
+            <p className="mt-1 sm:text-lg text-base break-all text-[#1C2321]  dark:text-white">
               {user.name}
             </p>
           </div>
@@ -108,10 +112,11 @@ export const ProfilePage = () => {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="rounded-xl bg-[#C1633D] px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-[#A94F2B]"
+        className="w-full rounded-xl bg-[#C1633D] px-6 py-3 font-medium text-white transition-all duration-200 hover:bg-[#A94F2B] sm:w-auto"
       >
         Logout
       </button>
+    </div>
     </div>
   );
 };

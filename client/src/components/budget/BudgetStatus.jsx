@@ -38,23 +38,23 @@ export const BudgetStatus = ({
         {budgetStatus}
       </h1>
 
-      <p className="mt-3 text-center text-sm text-[#5B6360] dark:text-[#B0B0B0]">
+      <p className="mt-3 text-center text-xs sm:text-sm text-[#5B6360] dark:text-[#B0B0B0]">
         {statusMessage[budgetStatus]}
       </p>
 
       {/* Monthly Health */}
-      <div className="mt-6 rounded-xl bg-[#F7F5EF] p-4 dark:bg-[#2A2A2A]">
+      <div className="mt-6 rounded-xl bg-[#F7F5EF] p-3 sm:p-4 dark:bg-[#2A2A2A]">
         <p className="text-sm font-medium text-[#5B6360] dark:text-[#B0B0B0]">
           Monthly Health
         </p>
 
-        <h3 className="mt-1 text-2xl font-bold text-[#1C2321] dark:text-white">
+        <h3 className="mt-1 text-xl sm:text-2xl font-bold text-[#1C2321] dark:text-white">
           {budgetUsedPercentage}% Used
         </h3>
       </div>
 
       {/* Remaining Budget */}
-      <div className="mt-4 rounded-xl bg-[#F7F5EF] p-4 dark:bg-[#2A2A2A]">
+      <div className="mt-4 rounded-xl bg-[#F7F5EF] sm:p-4 p-3 dark:bg-[#2A2A2A]">
         <p className="text-sm font-medium text-[#5B6360] dark:text-[#B0B0B0]">
           {remainingBudget >= 0
             ? "Remaining Budget"
@@ -62,7 +62,7 @@ export const BudgetStatus = ({
         </p>
 
         <h3
-          className={`mt-1 text-xl font-bold ${
+          className={`mt-1 text-lg sm:text-xl font-bold ${
             remainingBudget >= 0
               ? "text-[#2D5A4A]"
               : "text-[#C1633D]"
@@ -76,12 +76,12 @@ export const BudgetStatus = ({
       </div>
 
       {/* Advice */}
-      <div className="mt-4 rounded-xl bg-[#F7F5EF] p-4 dark:bg-[#2A2A2A]">
+      <div className="mt-4 rounded-xl bg-[#F7F5EF] sm:p-4 p-3 dark:bg-[#2A2A2A]">
         <p className="text-sm font-medium text-[#5B6360] dark:text-[#B0B0B0]">
           Budget Advice
         </p>
 
-        <p className="mt-1 text-sm text-[#1C2321] dark:text-white">
+        <p className="mt-1 text-xs sm:text-sm leading-relaxed text-[#1C2321] dark:text-white">
           {budgetAdvice[budgetStatus]}
         </p>
       </div>

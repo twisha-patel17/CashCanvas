@@ -53,6 +53,7 @@ export const getMonthlyExpenses = async (req, res) => {
     }
 };
 
+
 export const getExpenseDistribution = async (req, res) => {
     try {
 
@@ -73,7 +74,7 @@ export const getExpenseDistribution = async (req, res) => {
             59
         );
 
-        const expense = await Transaction.find({
+        const expenses = await Transaction.find({
             user: req.user.id,
             type: "expense",
             date: {
@@ -82,41 +83,45 @@ export const getExpenseDistribution = async (req, res) => {
             },
         }).populate("category");
 
-        const expenseDistribution = expense.reduce((acc, curr) => {
+        const expenseDistribution = expenses.reduce((acc, curr) => {
 
-    const category = curr.category.name;
+            if (!curr.category) {
+                return acc;
+            }
 
-    if (!acc[category]) {
+            const category = curr.category.name;
 
-        acc[category] = {
+            if (!acc[category]) {
 
-            amount: 0,
+                acc[category] = {
 
-            color: curr.category.color,
+                    amount: 0,
 
-        };
+                    color: curr.category.color,
 
-    }
+                };
 
-    acc[category].amount += curr.amount;
+            }
 
-    return acc;
+            acc[category].amount += curr.amount;
 
-}, {});
+            return acc;
+
+        }, {});
 
         const graphData = Object.entries(
-    expenseDistribution
-).map(
-    ([category, value]) => ({
+            expenseDistribution
+        ).map(
+            ([category, value]) => ({
 
-        category,
+                category,
 
-        amount: value.amount,
+                amount: value.amount,
 
-        color: value.color,
+                color: value.color,
 
-    })
-);
+            })
+        );
 
         res.status(200).json({
             success: true,
@@ -125,14 +130,17 @@ export const getExpenseDistribution = async (req, res) => {
         });
 
     } catch (error) {
+
         console.error(error);
 
         res.status(500).json({
             success: false,
             message: "Something went wrong.",
         });
+
     }
 };
+
 
 export const getIncomeVsExpense = async (req, res) => {
     try {
@@ -225,6 +233,7 @@ export const getIncomeVsExpense = async (req, res) => {
     }
 };
 
+
 export const getTopSpendingCategories = async (req, res) => {
     try {
 
@@ -256,6 +265,10 @@ export const getTopSpendingCategories = async (req, res) => {
 
         const topCategories = transactions.reduce((acc, curr) => {
 
+            if (!curr.category) {
+                return acc;
+            }
+
             const category = curr.category.name;
 
             acc[category] = (acc[category] || 0) + curr.amount;
@@ -284,11 +297,13 @@ export const getTopSpendingCategories = async (req, res) => {
         });
 
     } catch (error) {
+
         console.error(error);
 
         res.status(500).json({
             success: false,
             message: "Something went wrong.",
         });
+
     }
 };

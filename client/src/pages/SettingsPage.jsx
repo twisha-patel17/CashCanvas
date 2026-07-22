@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { deleteAccount } from "../api/authApi";
+import { SettingsTopbar } from "../components/settings/SettingsTopbar";
+import { useOutletContext } from "react-router-dom";
 
 export const SettingsPage = () => {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ export const SettingsPage = () => {
   const [password, setPassword] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
+  const { setIsSidebarOpen } = useOutletContext();
 
   const handleDeleteAccount = async () => {
     try {
@@ -35,10 +38,13 @@ export const SettingsPage = () => {
   };
 
   return (
-    <div className="space-y-6 p-8">
+    <>
+      <SettingsTopbar setIsSidebarOpen={setIsSidebarOpen} />
+       
+      <div className="space-y-6 p-4 sm:p-6 lg:p-8">
       {/* About CashCanvas */}
       <div className="rounded-2xl border border-[#DCD6C7] bg-white p-6 dark:border-[#3A3A3A] dark:bg-[#1F1F1F]">
-        <h2 className="text-xl font-semibold text-[#1C2321] dark:text-white">
+        <h2 className="text-lg sm:text-xl font-semibold text-[#1C2321] dark:text-white">
           About CashCanvas
         </h2>
 
@@ -60,11 +66,11 @@ export const SettingsPage = () => {
 
       {/* Security */}
       <div className="rounded-2xl border border-[#DCD6C7] bg-white p-6 dark:border-[#3A3A3A] dark:bg-[#1F1F1F]">
-        <h2 className="text-xl font-semibold text-[#1C2321] dark:text-white">
+        <h2 className="sm:text-xl text-lg font-semibold text-[#1C2321] dark:text-white">
           Security
         </h2>
 
-        <div className="mt-5 flex items-center justify-between">
+        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-medium text-[#1C2321] dark:text-white">
               Change Password
@@ -77,7 +83,7 @@ export const SettingsPage = () => {
 
           <button
             onClick={() => navigate("/settings/change-password")}
-            className="rounded-xl bg-[#2D5A4A] px-5 py-3 font-medium text-white transition-all duration-200 hover:bg-[#23483B]"
+            className="w-full sm:w-auto rounded-xl bg-[#2D5A4A] px-5 py-3 font-medium text-white transition-all duration-200 hover:bg-[#23483B]"
           >
             Change Password
           </button>
@@ -86,7 +92,7 @@ export const SettingsPage = () => {
 
       {/* Danger Zone */}
       <div className="rounded-2xl border border-red-200 bg-white p-6 dark:border-[#5B2323] dark:bg-[#1F1F1F]">
-        <h2 className="text-xl font-semibold text-[#C1633D]">
+        <h2 className="sm:text-xl text-lg font-semibold text-[#C1633D]">
           Danger Zone
         </h2>
 
@@ -97,7 +103,7 @@ export const SettingsPage = () => {
 
         <button
           onClick={() => setShowDeleteModal(true)}
-          className="mt-5 rounded-xl bg-[#c13d3d] px-5 py-3 font-medium text-white transition-all duration-200 hover:bg-[#9E4B2A]"
+          className="mt-5 w-full am:w-auto rounded-xl bg-[#c13d3d] px-5 py-3 font-medium text-white transition-all duration-200 hover:bg-[#9E4B2A]"
         >
           Delete Account
         </button>
@@ -105,7 +111,7 @@ export const SettingsPage = () => {
 
       {showDeleteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-[#1F1F1F]">
+          <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 dark:bg-[#1F1F1F]">
             <h2 className="text-2xl font-semibold text-red-500">
               Delete Account
             </h2>
@@ -129,14 +135,14 @@ export const SettingsPage = () => {
               <p className="mt-2 text-sm text-red-500">{error}</p>
             )}
 
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
               <button
                 onClick={() => {
                   setShowDeleteModal(false);
                   setPassword("");
                   setError("");
                 }}
-                className="rounded-xl border px-4 py-2"
+                className="w-full sm:w-auto rounded-xl border px-4 py-2"
               >
                 Cancel
               </button>
@@ -144,7 +150,7 @@ export const SettingsPage = () => {
               <button
                 onClick={handleDeleteAccount}
                 disabled={isDeleting}
-                className="rounded-xl bg-red-500 px-4 py-2 text-white"
+                className="w-full sm:w-autorounded-xl bg-red-500 px-4 py-2 text-white"
               >
                 {isDeleting ? "Deleting..." : "Delete"}
               </button>
@@ -153,5 +159,6 @@ export const SettingsPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };

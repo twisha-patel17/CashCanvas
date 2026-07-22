@@ -10,7 +10,7 @@ export const BudgetSummaryCards = ({
       grid
       grid-cols-1
       gap-6
-      md:grid-cols-2
+      sm:grid-cols-2
       "
     >
       {/* Total Budget */}
@@ -38,7 +38,8 @@ export const BudgetSummaryCards = ({
         <h1
           className="
           mt-2
-          text-3xl
+          text-2xl
+          sm:text-3xl
           font-bold
           text-[#1C2321]
           dark:text-white
@@ -84,7 +85,8 @@ export const BudgetSummaryCards = ({
         <h1
           className={`
           mt-2
-          text-3xl
+          text-2xl
+          sm:text-3xl
           font-bold
 
           ${

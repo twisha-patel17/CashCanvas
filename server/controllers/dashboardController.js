@@ -138,7 +138,7 @@ expenseCategories.forEach((category) => {
 
         .filter(
 
-            (expense) =>
+            (expense) => expense.category &&
 
                 expense.category?._id.toString() ===
 
@@ -265,6 +265,21 @@ const topCategories = Object.entries(
         (totalExpense / totalBudget) * 100
     );
 
+        const safeRecentTransactions =
+recentTransactions.map((transaction)=>({
+
+    ...transaction.toObject(),
+
+    category:
+    transaction.category || {
+
+        name:"Deleted Category",
+        emoji:"❌"
+
+    }
+
+}));
+
         res.status(200).json({
             success: true,
             message: "Dashboard fetched successfully.",
@@ -279,7 +294,7 @@ const topCategories = Object.entries(
             daysLeft,
             expenseByCategory,
             topCategories,
-            recentTransactions
+            recentTransactions:safeRecentTransactions
         });
 
     } catch (error) {

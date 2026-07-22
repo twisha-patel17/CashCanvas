@@ -4,6 +4,7 @@ import { MonthlyExpenseChart } from "../components/analytics/MonthlyExpenseChart
 import { IncomeExpenseChart } from "../components/analytics/IncomeExpenseChart";
 import { ExpenseDistributionChart } from "../components/analytics/ExpenseDistributionChart";
 import { TopSpendingCategories } from "../components/analytics/TopSpendingCategories";
+import { useOutletContext } from "react-router-dom";
 
 import {
   getMonthlyExpenses,
@@ -17,6 +18,7 @@ export const AnalyticsPage = () => {
   const [incomeVsExpense, setIncomeVsExpense] = useState([]);
   const [expenseDistribution, setExpenseDistribution] = useState([]);
   const [topCategories, setTopCategories] = useState([]);
+  const { setIsSidebarOpen } = useOutletContext();
 
   console.log(expenseDistribution);
 
@@ -45,14 +47,16 @@ export const AnalyticsPage = () => {
   }, []);
 
   return (
-    <div>
-      <AnalyticsTopbar />
+    <div className="min-h-screen">
+      <AnalyticsTopbar
+       setIsSidebarOpen={setIsSidebarOpen} 
+      />
 
-      <section className="min-h-screen bg-[#F7F5EF] p-8 dark:bg-[#121212]">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <section className="min-h-screen bg-[#F7F5EF] p-4 sm:p-6 lg:p-8 dark:bg-[#121212]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Monthly Expenses */}
-          <div className="rounded-3xl bg-white p-6 shadow-sm dark:bg-[#1F1F1F]">
-            <h2 className="mb-6 text-2xl font-semibold text-[#1C2321] dark:text-white">
+          <div className="rounded-3xl bg-white p-4 sm:p-6 shadow-sm dark:bg-[#1F1F1F]">
+            <h2 className="mb-6 text-xl sm:text-2xl font-semibold text-[#1C2321] dark:text-white">
               Monthly Expenses
             </h2>
 

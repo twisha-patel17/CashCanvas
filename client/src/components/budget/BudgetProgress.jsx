@@ -9,7 +9,7 @@ export const BudgetProgress = ({
         Budget Progress
       </h2>
 
-      <h1 className="mt-5 text-center text-4xl font-bold text-[#2D5A4A] dark:text-[#4F9D85]">
+      <h1 className="mt-5 text-center text-3xl sm:text-4xl font-bold text-[#2D5A4A] dark:text-[#4F9D85]">
         {budgetUsedPercentage}%
       </h1>
 
@@ -32,7 +32,7 @@ export const BudgetProgress = ({
         />
       </div>
 
-      <p className="mt-3 text-center text-base text-[#5B6360] dark:text-[#B0B0B0]">
+      <p className="mt-3 text-center text-sm sm:text-base text-[#5B6360] dark:text-[#B0B0B0]">
         ₹{totalExpense.toLocaleString()} {" / "}₹
         {totalBudget.toLocaleString()}
       </p>

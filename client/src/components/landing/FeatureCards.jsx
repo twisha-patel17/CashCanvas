@@ -31,10 +31,13 @@ export const FeatureCards = () => {
         <section
             className="
             grid
-            grid-cols-4
-            gap-5.5
-            px-[6%]
-            py-17.5
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-4
+            gap-5
+            sm:px-[6%]
+            py-14
+            px-4
             "
         >
             {cardsFeatures.map((feature, index) => (
@@ -48,7 +51,8 @@ export const FeatureCards = () => {
                     dark:border-[#3A3A3A]
                     bg-white
                     dark:bg-[#1F1F1F]
-                    p-6
+                    sm:p-6
+                    p-5
                     shadow-[0_1px_0_rgba(28,35,33,0.06)]
                     transition-all
                     duration-200
@@ -85,7 +89,8 @@ export const FeatureCards = () => {
                     <h3
                         className="
                         mb-1.5
-                        text-[16px]
+                        text-[15px]
+                        sm:text-[16px]
                         font-semibold
                         text-[#1C2321]
                         dark:text-white
@@ -96,7 +101,7 @@ export const FeatureCards = () => {
 
                     <p
                         className="
-                        text-[13px]
+                        text-sm
                         leading-normal
                         text-[#5B6360]
                         dark:text-[#B0B0B0]

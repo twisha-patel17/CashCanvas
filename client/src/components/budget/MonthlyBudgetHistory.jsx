@@ -13,7 +13,7 @@ export const MonthlyBudgetHistory = ({ history }) => {
           >
             {/* Month */}
 
-            <h3 className="text-lg font-semibold text-[#1C2321] dark:text-white">
+            <h3 className="text-base sm:text-lg font-semibold text-[#1C2321] dark:text-white">
               {month.month}
             </h3>
 

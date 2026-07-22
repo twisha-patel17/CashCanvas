@@ -15,7 +15,7 @@ export const TopBudgetCategories = ({ topCategories }) => {
               #{index + 1}
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               {/* Category */}
 
               <div className="flex items-center gap-2">
@@ -23,7 +23,7 @@ export const TopBudgetCategories = ({ topCategories }) => {
                   {category.emoji}
                 </span>
 
-                <h3 className="text-sm font-medium text-[#1C2321] dark:text-white">
+                <h3 className="text-xs sm:text-sm font-medium text-[#1C2321] dark:text-white">
                   {category.category}
                 </h3>
               </div>
@@ -32,7 +32,7 @@ export const TopBudgetCategories = ({ topCategories }) => {
 
               <p
                 style={{ color: category.color }}
-                className="text-base font-semibold"
+                className="text-ms sm:text-base font-semibold"
               >
                 ₹{category.amount.toLocaleString()}
               </p>

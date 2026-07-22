@@ -10,7 +10,7 @@ import {
 
 export const IncomeExpenseChart = ({ data }) => {
   return (
-    <div className="h-72">
+    <div className="h-64 sm:h-72">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
           <CartesianGrid

@@ -8,14 +8,14 @@ import {
 
 export const ExpenseDistributionChart = ({ data }) => {
   return (
-    <div className="h-72">
+    <div className="h-64 sm:h-72">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
             dataKey="amount"
             nameKey="category"
-            outerRadius={90}
+            outerRadius={80}
             fill="#2D5A4A"
           >
             {data.map((entry, index) => (
