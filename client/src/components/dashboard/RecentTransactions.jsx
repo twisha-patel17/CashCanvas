@@ -38,7 +38,7 @@ export const RecentTransactions = ({ transactions = []}) => {
 
             <p className="mt-1 text-xs text-[#201f1f] dark:text-[#A1A1AA]">
               {
-                new Date(transaction.createdAt).toLocaleDateString("en-IN", {
+                new Date(transaction.date).toLocaleDateString("en-IN", {
                   day: "numeric",
                   month: "short",
                   year: "numeric",
