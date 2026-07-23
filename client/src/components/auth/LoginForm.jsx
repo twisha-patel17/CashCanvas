@@ -187,13 +187,6 @@ export const LoginForm = () => {
       Remember me
     </span>
   </label>
-
-  <Link
-    to="/forgot-password"
-    className="text-sm font-medium text-[#2D5A4A] dark:text-[#3E8E7E] hover:underline"
-  >
-    Forgot Password?
-  </Link>
 </div>
 
   {/* Login Button */}

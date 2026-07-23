@@ -64,32 +64,6 @@ export const SettingsPage = () => {
         </p>
       </div>
 
-      {/* Security */}
-      <div className="rounded-2xl border border-[#DCD6C7] bg-white p-6 dark:border-[#3A3A3A] dark:bg-[#1F1F1F]">
-        <h2 className="sm:text-xl text-lg font-semibold text-[#1C2321] dark:text-white">
-          Security
-        </h2>
-
-        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="font-medium text-[#1C2321] dark:text-white">
-              Change Password
-            </p>
-
-            <p className="text-sm text-[#7A7A7A] dark:text-[#B0B0B0]">
-              Update your account password securely.
-            </p>
-          </div>
-
-          <button
-            onClick={() => navigate("/settings/change-password")}
-            className="w-full sm:w-auto rounded-xl bg-[#2D5A4A] px-5 py-3 font-medium text-white transition-all duration-200 hover:bg-[#23483B]"
-          >
-            Change Password
-          </button>
-        </div>
-      </div>
-
       {/* Danger Zone */}
       <div className="rounded-2xl border border-red-200 bg-white p-6 dark:border-[#5B2323] dark:bg-[#1F1F1F]">
         <h2 className="sm:text-xl text-lg font-semibold text-[#C1633D]">
