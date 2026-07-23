@@ -1,7 +1,31 @@
 import Transaction from "../models/Transaction.js";
 import cloudinary from "../config/cloudinary.js";
+import streamifier from "streamifier";
 
-import fs from "fs";
+const uploadToCloudinary = (buffer)=>{
+    return new Promise(
+        (resolve,reject)=>{
+            const stream =
+            cloudinary.uploader.upload_stream(
+                {
+                    folder:
+                    "cashcanvas/receipts",
+                },
+                (error,result)=>{
+                    if(error){
+                        reject(error);
+                    }
+                    else{
+                        resolve(result);
+                    }
+                }
+            );
+            streamifier
+            .createReadStream(buffer)
+            .pipe(stream);
+        }
+    );
+};
 
 export const createTransaction = async (req, res) => {
     try {
@@ -9,25 +33,18 @@ export const createTransaction = async (req, res) => {
 
         let receipt = "";
 
-     if (req.file) {
+        if(req.file){
 
     const result =
 
-    await cloudinary.uploader.upload(
+    await uploadToCloudinary(
 
-        req.file.path,
-
-        {
-
-            folder:"cashcanvas/receipts",
-
-        }
+        req.file.buffer
 
     );
 
-    receipt = result.secure_url;
-
-    fs.unlinkSync(req.file.path);
+    receipt =
+    result.secure_url;
 
 }
 
