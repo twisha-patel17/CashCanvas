@@ -226,7 +226,7 @@ export const forgotPassword = async (req, res) => {
         await user.save();
 
         await transporter.sendMail({
-            from: `"CashCanvas" <${process.env.EMAIL_USER}>`,
+            from: `"CashCanvas" <twipatel2006@gmail.com>`,
             to: user.email,
             subject: "Reset your CashCanvas password",
             html: `

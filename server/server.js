@@ -1,8 +1,7 @@
-import dns from "dns";
-dns.setDefaultResultOrder("ipv4first");
+import "dotenv/config";
+
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 
 import authRoutes from "./routes/authRoutes.js";
@@ -11,8 +10,6 @@ import transactionRoutes from "./routes/transactionRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
 import budgetRoutes from "./routes/budgetRoutes.js";
-
-dotenv.config();
 
 
 const app = express();
