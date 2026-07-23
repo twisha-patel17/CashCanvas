@@ -54,7 +54,7 @@ export const getDashboard = async (req, res) => {
                 user: req.user.id
             })
                 .populate("category")
-                .sort({ createdAt: -1 })
+                .sort({ date: -1 })
                 .limit(5)
 
         ]);
