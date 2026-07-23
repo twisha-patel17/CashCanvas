@@ -3,13 +3,13 @@ import nodemailer from "nodemailer";
 
 dotenv.config();
 
-console.log("EMAIL =",process.env.EMAIL_USER);
-
-console.log("PASSWORD =",process.env.EMAIL_PASS);
-
 const transporter = nodemailer.createTransport({
 
     service:"gmail",
+
+    port:587,
+
+    secure:false,
 
     auth:{
 
