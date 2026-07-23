@@ -6,6 +6,7 @@ import {
     generateAccessToken,
     generateRefreshToken,
 } from "../utils/generateTokens.js";
+import transporter from "../utils/mail.js";
 import Transaction from "../models/Transaction.js";
 import Category from "../models/Category.js";
 
@@ -221,13 +222,25 @@ export const forgotPassword = async (req, res) => {
         user.resetPasswordToken = resetToken;
         user.resetPasswordExpires =
             Date.now() + 15 * 60 * 1000;
+        const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
         await user.save();
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: user.email,
+          subject: "CashCanvas Password Reset",
+          html: `
+            <h2>Reset your password</h2>
+            <p>Click the link below to reset your password.</p>
+            <a href="${resetLink}">Reset Password</a>
+
+            <br>
+            <br>
+            <p>This link will expire in 15 minutes.</p>
+            `,
+        });
         return res.status(200).json({
             message:
-                "Password reset link generated successfully.",
-            resetLink:
-                `http://localhost:5173/reset-password/${resetToken}`,
-
+                "Password reset link sent successfully.",
         });
     }
     catch (error) {
