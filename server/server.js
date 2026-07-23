@@ -12,10 +12,14 @@ import budgetRoutes from "./routes/budgetRoutes.js";
 
 dotenv.config();
 
+console.log("EMAIL =",process.env.EMAIL_USER);
+
+console.log("PASSWORD =",process.env.EMAIL_PASS);
+
 const app = express();
 
 connectDB();
-
+ 
 app.use(
     cors({
         origin: [
