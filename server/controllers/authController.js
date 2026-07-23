@@ -6,7 +6,7 @@ import {
     generateAccessToken,
     generateRefreshToken,
 } from "../utils/generateTokens.js";
-import transporter from "../utils/mail.js";
+import transporter from "../utils/mailer.js";
 import Transaction from "../models/Transaction.js";
 import Category from "../models/Category.js";
 
@@ -212,8 +212,8 @@ export const forgotPassword = async (req, res) => {
             email,
         });
         if (!user) {
-            return res.status(404).json({
-                message: "User not found",
+            return res.status(200).json({
+                message: "If that email exists, a reset link has been sent.",
             });
         }
         const resetToken = crypto
@@ -224,20 +224,19 @@ export const forgotPassword = async (req, res) => {
             Date.now() + 15 * 60 * 1000;
         const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
         await user.save();
-        await transporter.sendMail({
-          from: process.env.EMAIL_USER,
-          to: user.email,
-          subject: "CashCanvas Password Reset",
-          html: `
-            <h2>Reset your password</h2>
-            <p>Click the link below to reset your password.</p>
-            <a href="${resetLink}">Reset Password</a>
 
-            <br>
-            <br>
-            <p>This link will expire in 15 minutes.</p>
+        await transporter.sendMail({
+            from: `"CashCanvas" <${process.env.EMAIL_USER}>`,
+            to: user.email,
+            subject: "Reset your CashCanvas password",
+            html: `
+                <p>Hi ${user.name},</p>
+                <p>Click the link below to reset your password. This link expires in 15 minutes.</p>
+                <p><a href="${resetLink}">${resetLink}</a></p>
+                <p>If you didn't request this, you can safely ignore this email.</p>
             `,
         });
+
         return res.status(200).json({
             message:
                 "Password reset link sent successfully.",
@@ -259,6 +258,11 @@ export const resetPassword = async (req, res) => {
       return res.status(400).json({
         message: "Please enter all required fields.",
       });
+    }
+    if(!token) {
+      return res.status(400).json({
+        message: "Reset Token is required.",
+      })
     }
     if (password !== confirmPassword) {
       return res.status(400).json({
